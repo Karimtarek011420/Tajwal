@@ -1,0 +1,16 @@
+.phone {
+  background-image: url("../../../assets//images/background.svg");
+  background-position: 100% 100%;
+  background-size: cover;
+}
+.phone .headphone {
+  font-size: 24px !important;
+  font-weight: 700;
+  color: #626e7b !important;
+}
+.phone .phoneusepra {
+  font-size: 18px !important;
+  font-weight: 700;
+  color: #626E7B !important;
+  
+}

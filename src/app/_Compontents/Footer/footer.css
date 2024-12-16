@@ -1,0 +1,22 @@
+.footer {
+  background-color: #d9dee44d;
+  color: #575050;
+}
+.footer .tajwalh {
+  font-size: 12px !important;
+  font-weight: 600;
+}
+.footer .tajwalp {
+  font-size: 10px !important;
+  font-weight: 300;
+}
+.allfooter {
+  background-color: #626e7b;
+}
+.allfooter .tajwalall {
+  font-size: 10px !important;
+  font-weight: 300 !important;
+}
+.allfooter span {
+  border-bottom: 1px solid white;
+}

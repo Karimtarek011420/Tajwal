@@ -1,0 +1,27 @@
+.resgister {
+  background-color: #336279 !important;
+  padding: 8px 13px !important;
+  border-radius: 10px;
+}
+li a.nav-link {
+    font-size: 20px !important;
+    font-weight: 300 !important;
+}
+@media screen and (max-width: 700px) {
+  .resgister {
+    width: fit-content !important;
+    font-size: 14px !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .navbar-brand .logo {
+    width: 100px !important;
+    height: 50px !important;
+  }
+  nav.navbar {
+    margin: 10px 2px !important;
+    padding: 10px 2px !important ;
+  }
+}
+
+
