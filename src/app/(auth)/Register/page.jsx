@@ -83,10 +83,32 @@ export default function RegisterPage() {
       email: "",
     },
     onSubmit: apiRegister,
-    validate:(values)=>{
-      let errors={};
+    validate: (values) => {
+      let errors = {};
+      const regexName = /^[\u0600-\u06FFa-zA-Z\s]{2,}$/;
+      const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      const PHONE_REGEX = /\+\d{11,15}/;
 
-    }
+      if (!regexName.test(values.first_name)) {
+        errors.first_name = "الرجاء إدخال الاسم بشكل صحيح";
+      }
+      if (!regexEmail.test(values.email)) {
+        errors.email = "الرجاء إدخال البريد الإلكتروني بشكل صحيح";
+      }
+      if (!PHONE_REGEX.test(values.phone_number)) {
+        errors.phone_number = "الرجاء إدخال رقم الجوال بشكل صحيح";
+      }
+      if (!regexPassword.test(values.password)) {
+        errors.password =
+          "يجب أن يحتوي الرقم السري على 8 أحرف على الأقل، وحرف كبير وصغير ورقم.";
+      }
+      if (values.repassword !== values.password) {
+        errors.repassword = "الرجاء تأكيد الرقم السري بشكل صحيح";
+      }
+
+      return errors;
+    },
   });
 
   const handlePhoneNumberChange = (value) => {
@@ -111,17 +133,23 @@ export default function RegisterPage() {
               type="text"
               value={handleForm.values.first_name}
               onChange={handleForm.handleChange}
+              onBlur={handleForm.handleBlur}
               className="form-control"
               id="first_name"
               placeholder="الاسم"
-              required
               aria-label="first_name"
             />
+            {handleForm.errors.first_name && handleForm.touched.first_name ? (
+              <div className="alert alert-danger my-2" role="alert">
+                {handleForm.errors.first_name}
+              </div>
+            ) : null}
           </div>
           <div className="mb-4">
             <input
               value={handleForm.values.email}
               onChange={handleForm.handleChange}
+              onBlur={handleForm.handleBlur}
               type="email"
               className="form-control"
               id="email"
@@ -129,23 +157,36 @@ export default function RegisterPage() {
               aria-label="Email"
               required
             />
+            {handleForm.errors.email && handleForm.touched.email ? (
+              <div className="alert alert-danger my-2" role="alert">
+                {handleForm.errors.email}
+              </div>
+            ) : null}
           </div>
           <div className="mb-4" dir="ltr">
             <PhoneInput
               defaultCountry="sa"
               value={handleForm.values.phone_number}
               onChange={handlePhoneNumberChange}
+              onBlur={handleForm.handleBlur}
               placeholder="رقم الجوال"
               className="phone-input-field"
               aria-label="phone_number"
               required
             />
+            {handleForm.errors.phone_number &&
+            handleForm.touched.phone_number ? (
+              <div className="alert alert-danger my-2" dir="rtl" role="alert">
+                {handleForm.errors.phone_number}
+              </div>
+            ) : null}
           </div>
           <div className="mb-4 position-relative">
             <input
               type={showPassword ? "text" : "password"}
               value={handleForm.values.password}
               onChange={handleForm.handleChange}
+              onBlur={handleForm.handleBlur}
               className="form-control"
               id="password"
               placeholder="الرقم السرى"
@@ -164,12 +205,18 @@ export default function RegisterPage() {
                 color: "#aaa",
               }}
             ></i>
+            {handleForm.errors.password && handleForm.touched.password ? (
+              <div className="alert alert-danger my-2" role="alert">
+                {handleForm.errors.password}
+              </div>
+            ) : null}
           </div>
           <div className="mb-4 position-relative">
             <input
               type={showrePassword ? "text" : "password"}
               value={handleForm.values.repassword}
               onChange={handleForm.handleChange}
+              onBlur={handleForm.handleBlur}
               className="form-control"
               id="repassword"
               placeholder="تأكيد الرقم السرى"
@@ -191,6 +238,11 @@ export default function RegisterPage() {
               }}
             ></i>
           </div>
+          {handleForm.errors.repassword && handleForm.touched.repassword ? (
+            <div className="alert alert-danger my-4" role="alert">
+              {handleForm.errors.repassword}
+            </div>
+          ) : null}
           <div>
             <p className=" px-3 text-danger">{errorMessage}</p>
           </div>
