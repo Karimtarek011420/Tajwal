@@ -247,7 +247,7 @@ export default function RegisterPage() {
             <p className=" px-3 text-danger">{errorMessage}</p>
           </div>
           <div className="d-flex justify-content-center align-items-center">
-            <button type="submit" className="follow mt-3">
+            <button disabled={!handleForm.dirty || !handleForm.isValid} type="submit" className="follow mt-3">
               {loading ? (
                 <TailSpin
                   visible={true}
