@@ -205,12 +205,12 @@ export default function RegisterPage() {
                 color: "#aaa",
               }}
             ></i>
+          </div>
             {handleForm.errors.password && handleForm.touched.password ? (
               <div className="alert alert-danger my-2" role="alert">
                 {handleForm.errors.password}
               </div>
             ) : null}
-          </div>
           <div className="mb-4 position-relative">
             <input
               type={showrePassword ? "text" : "password"}
