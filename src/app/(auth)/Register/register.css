@@ -1,0 +1,57 @@
+input[type="tel"] {
+  direction: rtl; /* يجعل النص يبدأ من اليمين */
+  text-align: right; /* يحاذي النص placeholder إلى اليمين */
+}
+.register input {
+    background-color: #F9F9F9 !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 15px 20px !important;
+}
+.register input::placeholder{
+    font-size: 12px !important;
+    font-weight: 400 !important;
+}
+.register input:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 0 transparent !important;
+}
+.register button {
+    background-color: #4B87A4 !important;
+    padding: 10px 120px;
+    border: none !important;
+    color:#F1F3F6;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+.register .p_register p {
+    color: #626E7B !important;
+    font-size: 12px !important;
+    font-weight: 400 !important ;
+}
+@media screen and (max-width: 1300px) {
+    .register {
+      width: 75% !important;
+    }
+  }
+@media screen and (max-width:700px) {
+    .register {
+      width: 100% !important;
+    }
+    .register input {
+        background-color: #F9F9F9 !important;
+        border: none !important;
+        border-radius: 5px !important;
+        padding: 5px 10px !important;
+    }
+    .register button {
+        background-color: #4B87A4 !important;
+        padding: 10px 70px;
+        border: none !important;
+        color:#F1F3F6;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 5px;
+    }
+  }
