@@ -1,58 +1,69 @@
+/* General Styles */
+.register {
+  width: 100%;
+  max-width: 500px; /* Limit max-width for large screens */
+  margin: 0 auto; /* Center the container */
+}
 .register .phone-input-field {
   width: 100% !important;
-  padding: 28px, 19px, 28px, 19px !important; 
-}
-
-.register input , .register .phone-input-field {
-    background-color: #F9F9F9 !important;
-    border: none !important;
-    border-radius: 5px !important;
-    padding: 15px 20px !important;
-}
-.register input::placeholder{
-    font-size: 12px !important;
-    font-weight: 400 !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  background-color: #f9f9f9 !important;
+  border-radius: 5px !important;
+  padding: 10px 12px !important;
 }
 .register input:focus {
-    outline: none !important;
-    box-shadow: 0 0 0 0 transparent !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+.register input {
+  background-color: #f9f9f9 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 15px 20px !important;
+}
+.register input::placeholder {
+  font-size: 12px !important;
 }
 .register button.follow {
-    background-color: #4B87A4 !important;
-    padding: 10px 120px;
-    border: none !important;
-    color:#F1F3F6;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 5px;
+  background-color: #4b87a4 !important;
+  padding: 10px 100px; /* Adjust button padding */
+  color: #f1f3f6;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 5px;
+  border: none;
 }
 .register .p_register p {
-    color: #626E7B !important;
-    font-size: 12px !important;
-    font-weight: 400 !important ;
+  color: #626e7b !important;
+  font-size: 12px;
 }
-@media screen and (max-width: 1300px) {
-    .register {
-      width: 75% !important;
-    }
+
+/* Responsive Adjustments */
+@media screen and (max-width: 992px) {
+  .register {
+    padding: 0 15px;
   }
-@media screen and (max-width:700px) {
-    .register {
-      width: 100% !important;
-    }
-    .register input {
-        background-color: #F9F9F9 !important;
-        border: none !important;
-        border-radius: 5px !important;
-        padding: 5px 10px !important;
-    }
-    .register button {
-        background-color: #4B87A4 !important;
-        padding: 10px 70px;
-        border: none !important;
-        color:#F1F3F6;
-        font-size: 13px;
-        font-weight: 700;
-        border-radius: 5px;
-    }
+  .register button.follow {
+    padding: 10px 50px;
   }
+}
+
+@media screen and (max-width: 576px) {
+  .register input,
+  .register .phone-input-field {
+    padding: 10px 12px !important;
+  }
+  .register button.follow {
+    font-size: 12px;
+    padding: 10px 40px;
+  }
+  .register .p_register p {
+    font-size: 11px;
+  }
+  .register img {
+    max-width: 100%;
+    height: auto;
+  }
+}

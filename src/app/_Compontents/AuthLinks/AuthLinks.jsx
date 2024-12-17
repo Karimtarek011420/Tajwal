@@ -16,7 +16,7 @@ const AuthLinks = () => {
       </div>
 
       <div className="mb-4 d-flex justify-content-center gap-3">
-        <Link href="#" aria-label="Sign in with Twitter">
+        <Link href="#" aria-label="Sign in with Twitter" className=" ms-3">
           <Image
             src={xauth}
             width={46}
@@ -24,7 +24,7 @@ const AuthLinks = () => {
             alt="Sign in with Twitter account"
           />
         </Link>
-        <Link href="#" aria-label="Sign in with google">
+        <Link href="#" aria-label="Sign in with google" className=" ms-3">
           <Image
             src={google}
             width={46}
