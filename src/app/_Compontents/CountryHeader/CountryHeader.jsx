@@ -42,7 +42,7 @@ export default function CountryHeader() {
         </ul>
       </div>
       <div className="px-5">
-        <div className="row  gy-4">
+        <div className="row gy-4">
           {list1.map((country, index) => {
             return (
               <div key={index} className="col-md-3">
@@ -56,7 +56,7 @@ export default function CountryHeader() {
                           height={40}
                           alt="img-country"
                         />
-                        <p className="text-black mb-0 ms-4 px-2 countryname">
+                        <p className="text-black mb-0 ms-lg-4 px-lg-2 countryname">
                           {" "}
                           {country.name}
                         </p>

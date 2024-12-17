@@ -1,8 +1,9 @@
-input[type="tel"] {
-  direction: rtl; /* يجعل النص يبدأ من اليمين */
-  text-align: right; /* يحاذي النص placeholder إلى اليمين */
+.register .phone-input-field {
+  width: 100% !important;
+  padding: 28px, 19px, 28px, 19px !important; 
 }
-.register input {
+
+.register input , .register .phone-input-field {
     background-color: #F9F9F9 !important;
     border: none !important;
     border-radius: 5px !important;
@@ -16,7 +17,7 @@ input[type="tel"] {
     outline: none !important;
     box-shadow: 0 0 0 0 transparent !important;
 }
-.register button {
+.register button.follow {
     background-color: #4B87A4 !important;
     padding: 10px 120px;
     border: none !important;
