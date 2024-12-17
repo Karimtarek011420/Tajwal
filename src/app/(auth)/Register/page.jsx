@@ -251,8 +251,8 @@ export default function RegisterPage() {
               {loading ? (
                 <TailSpin
                   visible={true}
-                  height="40"
-                  width="40"
+                  height="35"
+                  width="35"
                   color="#fff"
                   ariaLabel="tail-spin-loading"
                   radius="1"
