@@ -98,7 +98,7 @@ export default function Navbar() {
                   <Link
                     className="nav-link  text-white"
                     aria-current="page"
-                    href="/login"
+                    href="/Login"
                   >
                     الدخول
                   </Link>
