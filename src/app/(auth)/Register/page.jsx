@@ -83,6 +83,10 @@ export default function RegisterPage() {
       email: "",
     },
     onSubmit: apiRegister,
+    validate:(values)=>{
+      let errors={};
+
+    }
   });
 
   const handlePhoneNumberChange = (value) => {
