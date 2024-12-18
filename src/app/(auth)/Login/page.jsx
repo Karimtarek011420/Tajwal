@@ -10,6 +10,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { TailSpin } from "react-loader-spinner";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -49,7 +50,7 @@ export default function LoginPage() {
     }
     if (!regexPassword.test(password)) {
       setErrorMessage(
-        "يجب أن يحتوي الرقم السري على 8 أحرف على الأقل، وحرف كبير وصغير ورقم."
+        "الرقم السرى غير صحيح"
       );
       return;
     }
@@ -104,7 +105,7 @@ export default function LoginPage() {
                 required
               />
             </div>
-            {errorMessage && <p className="px-3 text-danger">{errorMessage}</p>}
+            {errorMessage && <p className="px-3 text-danger text-center">{errorMessage}</p>}
             <div className="d-flex justify-content-center align-items-center my-5">
               <button onClick={handlePhoneSubmit} className="follow mt-3">
                 متابعة
@@ -115,6 +116,9 @@ export default function LoginPage() {
         )}
         {step === 2 && (
           <form onSubmit={handleLoginSubmit}>
+            <div className="p-login text-center py-3">
+              <p>ادخل الرقم السري للمتابعة</p>
+            </div>
             <div className="mb-4 position-relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -144,6 +148,11 @@ export default function LoginPage() {
             {errorMessage && (
               <p className="px-3 text-danger text-center">{errorMessage}</p>
             )}
+            <div className=" d-flex justify-content-end">
+              <Link href="#">
+              <p className="loginpass"> نسيت الرقم السرى ؟</p>
+              </Link>
+            </div>
             <div className="d-flex justify-content-center align-items-center my-5">
               <button type="submit" className="follow mt-3" disabled={loading}>
                 {loading ? (

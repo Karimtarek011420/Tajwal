@@ -30,6 +30,12 @@
 .login input::placeholder {
   font-size: 12px !important;
 }
+.login .loginpass{
+  color: #4B87A4;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  border-bottom: 1px solid #4B87A4;
+}
 .login button.follow {
   background-color: #4b87a4 !important;
   padding: 10px 100px; /* Adjust button padding */
@@ -39,9 +45,9 @@
   border-radius: 5px;
   border: none;
 }
-.login .p_register p {
+.login .p-login p {
   color: #626e7b !important;
-  font-size: 12px;
+  font-size: 12px !important;
 }
 
 /* Responsive Adjustments */
@@ -63,7 +69,7 @@
     font-size: 12px;
     padding: 10px 40px;
   }
-  .login .p_register p {
+  .login .p-login p {
     font-size: 11px;
   }
   .login img {
