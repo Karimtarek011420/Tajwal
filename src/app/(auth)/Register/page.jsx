@@ -49,8 +49,9 @@ export default function RegisterPage() {
           },
         });
       }
+      localStorage.setItem("emailotp", values.email);
       setTimeout(() => {
-        router.push("/Login");
+        router.push("/Register/Otp");
       }, 1000);
     } catch (error) {
       console.log(error);
@@ -121,8 +122,7 @@ export default function RegisterPage() {
         <Image
           src={RegisterUser}
           layout="responsive"
-          width={260}
-          height={215}
+          className="imageregister"
           alt="Register User"
         />
       </div>
@@ -206,11 +206,11 @@ export default function RegisterPage() {
               }}
             ></i>
           </div>
-            {handleForm.errors.password && handleForm.touched.password ? (
-              <div className="alert alert-danger my-2" role="alert">
-                {handleForm.errors.password}
-              </div>
-            ) : null}
+          {handleForm.errors.password && handleForm.touched.password ? (
+            <div className="alert alert-danger my-2" role="alert">
+              {handleForm.errors.password}
+            </div>
+          ) : null}
           <div className="mb-4 position-relative">
             <input
               type={showrePassword ? "text" : "password"}
@@ -247,7 +247,11 @@ export default function RegisterPage() {
             <p className=" px-3 text-danger">{errorMessage}</p>
           </div>
           <div className="d-flex justify-content-center align-items-center">
-            <button disabled={!handleForm.dirty || !handleForm.isValid} type="submit" className="follow mt-3">
+            <button
+              disabled={!handleForm.dirty || !handleForm.isValid}
+              type="submit"
+              className="follow mt-3"
+            >
               {loading ? (
                 <TailSpin
                   visible={true}

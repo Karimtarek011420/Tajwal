@@ -19,26 +19,15 @@ const AuthLinks = () => {
         <Link href="#" aria-label="Sign in with Twitter" className=" ms-3">
           <Image
             src={xauth}
-            width={46}
-            height={46}
+            className="authlinksicon"
             alt="Sign in with Twitter account"
           />
         </Link>
         <Link href="#" aria-label="Sign in with google" className=" ms-3">
-          <Image
-            src={google}
-            width={46}
-            height={46}
-            alt="Sign in with google account"
-          />
+          <Image src={google} alt="Sign in with google account" />
         </Link>
         <Link href="#" aria-label="Sign in with appleauth">
-          <Image
-            src={appleauth}
-            width={46}
-            height={46}
-            alt="Sign in with appleauth account"
-          />
+          <Image src={appleauth} alt="Sign in with appleauth account" />
         </Link>
       </div>
     </>
