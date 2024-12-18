@@ -105,7 +105,7 @@ export default function Navbar() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className="nav-link  text-white resgister px-3"
+                    className="nav-link  text-white resgister"
                     href="/Register"
                   >
                     تسجيل
