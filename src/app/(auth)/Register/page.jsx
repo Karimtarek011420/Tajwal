@@ -49,6 +49,7 @@ export default function RegisterPage() {
           },
         });
       }
+      console.log(data)
       localStorage.setItem("emailotp", values.email);
       setTimeout(() => {
         router.push("/Register/Otp");

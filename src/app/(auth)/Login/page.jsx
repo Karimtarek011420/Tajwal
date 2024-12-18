@@ -6,7 +6,6 @@ import AuthLinks from "@/app/_Compontents/AuthLinks/AuthLinks";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import "./login.css";
-import { useFormik } from "formik";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -19,17 +18,15 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handlePhoneNumberChange = (value) => {
-    handleForm.setFieldValue("phone_number", value);
-  };
   const handlePhoneSubmit = () => {
-    if (!phoneNumber) {
+    setLoading(true);
+    if (phoneNumber.length === 0) {
       setErrorMessage("يرجى إدخال رقم الهاتف.");
       return;
     }
@@ -38,9 +35,11 @@ export default function LoginPage() {
       return;
     }
 
-    setErrorMessage(false);
-    setStep(2); // الانتقال إلى الخطوة الثانية
+    setErrorMessage("");
+    setStep(2);
+    setLoading(false);
   };
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -48,23 +47,36 @@ export default function LoginPage() {
       setErrorMessage("يرجى إدخال كلمة المرور.");
       return;
     }
-    if (!regexPassword.test(values.password)) {
+    if (!regexPassword.test(password)) {
       setErrorMessage(
         "يجب أن يحتوي الرقم السري على 8 أحرف على الأقل، وحرف كبير وصغير ورقم."
       );
+      return;
     }
 
     try {
-      setErrorMessage(false);
+      setLoading(true);
+      setErrorMessage("");
       const { data } = await axios.post("https://api.tajwal.co/api/v1/login", {
         phone_number: phoneNumber,
-        password: password,
+        password,
       });
-
-      console.log("Login successful:", response.data);
-      alert("تم تسجيل الدخول بنجاح!");
+      console.log(data);
+      if (data.success) {
+        toast.success("تم تسجيل الدخول بنجاح!", {
+          duration: 1500,
+          style: { backgroundColor: "#4b87a4", color: "white" },
+        });
+        localStorage.setItem("token", data.token); // Store the token properly
+        setTimeout(() => router.push("/"), 1000);
+      } else {
+        setErrorMessage(data.message || "فشل تسجيل الدخول. حاول مرة أخرى.");
+      }
     } catch (error) {
+      console.log(error);
       setErrorMessage("فشل تسجيل الدخول. تأكد من البيانات وحاول مرة أخرى.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,76 +91,77 @@ export default function LoginPage() {
         />
       </div>
       <div className="bg-white shadow-lg rounded-4 px-4 py-5">
-        <div>
-          <div className="mb-4" dir="ltr">
-            <PhoneInput
-              defaultCountry="sa"
-              placeholder="رقم الجوال"
-              className="phone-input-field"
-              aria-label="phone_number"
-              required
-            />
-          </div>
+        {step === 1 && (
           <div>
-            <p className=" px-3 text-danger">{errorMessage}</p>
-          </div>
-          <div className="d-flex justify-content-center align-items-center my-5">
-            <button type="submit" className="follow mt-3">
-              متابعة
-            </button>
-          </div>
-          <div>
+            <div className="mb-4" dir="ltr">
+              <PhoneInput
+                defaultCountry="sa"
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                placeholder="رقم الجوال"
+                className="phone-input-field"
+                aria-label="phone_number"
+                required
+              />
+            </div>
+            {errorMessage && <p className="px-3 text-danger">{errorMessage}</p>}
+            <div className="d-flex justify-content-center align-items-center my-5">
+              <button onClick={handlePhoneSubmit} className="follow mt-3">
+                متابعة
+              </button>
+            </div>
             <AuthLinks />
           </div>
-        </div>
-        <form>
-          <div className="mb-4 position-relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              className="form-control"
-              id="password"
-              placeholder="الرقم السرى"
-              aria-label="Password"
-              required
-            />
-            <i
-              className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
-              onClick={togglePasswordVisibility}
-              style={{
-                position: "absolute",
-                left: "10px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                cursor: "pointer",
-                color: "#aaa",
-              }}
-            ></i>
-          </div>
-          <div>
-            <p className=" px-3 text-danger text-center">{errorMessage}</p>
-          </div>
-          <div className="d-flex justify-content-center align-items-center my-5">
-            <button type="submit" className="follow mt-3">
-              {loading ? (
-                <TailSpin
-                  visible={true}
-                  height="35"
-                  width="35"
-                  color="#fff"
-                  ariaLabel="tail-spin-loading"
-                  radius="1"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                />
-              ) : (
-                "متابعة"
-              )}
-            </button>
-          </div>
-          <div>
+        )}
+        {step === 2 && (
+          <form onSubmit={handleLoginSubmit}>
+            <div className="mb-4 position-relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control"
+                id="password"
+                placeholder="الرقم السرى"
+                aria-label="Password"
+                required
+              />
+              <i
+                className={`fa-solid ${
+                  showPassword ? "fa-eye-slash" : "fa-eye"
+                }`}
+                onClick={togglePasswordVisibility}
+                style={{
+                  position: "absolute",
+                  left: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                  color: "#aaa",
+                }}
+              ></i>
+            </div>
+            {errorMessage && (
+              <p className="px-3 text-danger text-center">{errorMessage}</p>
+            )}
+            <div className="d-flex justify-content-center align-items-center my-5">
+              <button type="submit" className="follow mt-3" disabled={loading}>
+                {loading ? (
+                  <TailSpin
+                    visible={true}
+                    height="35"
+                    width="35"
+                    color="#fff"
+                    ariaLabel="tail-spin-loading"
+                  />
+                ) : (
+                  "متابعة"
+                )}
+              </button>
+            </div>
             <AuthLinks />
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </div>
   );
