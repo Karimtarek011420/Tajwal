@@ -100,7 +100,7 @@ export default function Navbar() {
                     aria-current="page"
                     href="/Login"
                   >
-                    الدخول
+                    دخول
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -108,7 +108,7 @@ export default function Navbar() {
                     className="nav-link  text-white resgister px-3"
                     href="/Register"
                   >
-                    تسجيل الدخول
+                    تسجيل
                   </Link>
                 </li>
               </ul>
