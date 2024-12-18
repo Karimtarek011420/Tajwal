@@ -63,39 +63,24 @@ export default function RegisterOtpPage() {
               required
             />
           </div>
-          {/* <div>
-            <p className=" px-3 text-danger">{errorMessage}</p>
-          </div> */}
+
           <div className="p_registerOtp pt-3 pb-3">
             <p className="text-center   font-light">
               بامكانك اعادة ارسال الرمز بعد {counter} ثانية
             </p>
             <div className="d-flex justify-content-center align-items-center">
-              <button onClick={resendOTP} className="btnsendback" disabled={disabled}>
+              <button
+                onClick={resendOTP}
+                className="btnsendback"
+                disabled={disabled}
+              >
                 اعادة ارسال الرمز
               </button>
             </div>
           </div>
           <div className="d-flex justify-content-center align-items-center">
-            <button
-              //   disabled={!handleForm.dirty || !handleForm.isValid}
-              type="submit"
-              className="follow mt-3"
-            >
-              {loading ? (
-                <TailSpin
-                  visible={true}
-                  height="35"
-                  width="35"
-                  color="#fff"
-                  ariaLabel="tail-spin-loading"
-                  radius="1"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                />
-              ) : (
-                "متابعة"
-              )}
+            <button type="submit" className="follow mt-3">
+              متابعة
             </button>
           </div>
           <div className="d-flex justify-content-center align-items-center">
