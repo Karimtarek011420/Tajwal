@@ -89,7 +89,7 @@ export default function RegisterPage() {
       let errors = {};
       const regexName = /^[\u0600-\u06FFa-zA-Z\s]{2,}$/;
       const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      const regexPassword = /^.{8,}$/;
       const PHONE_REGEX = /\+\d{11,15}/;
 
       if (!regexName.test(values.first_name)) {
@@ -103,7 +103,7 @@ export default function RegisterPage() {
       }
       if (!regexPassword.test(values.password)) {
         errors.password =
-          "يجب أن يحتوي الرقم السري على 8 أحرف على الأقل، وحرف كبير وصغير ورقم.";
+          "يجب أن يحتوي الرقم السري على 8 أحرف على الأقل.";
       }
       if (values.repassword !== values.password) {
         errors.repassword = "الرجاء تأكيد الرقم السري بشكل صحيح";

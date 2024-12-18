@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { TailSpin } from "react-loader-spinner";
 import Link from "next/link";
 
-export default function LoginPage() {
+const LoginPage = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
@@ -21,18 +21,20 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handlePhoneSubmit = () => {
     setLoading(true);
+
     if (phoneNumber.length === 0) {
       setErrorMessage("يرجى إدخال رقم الهاتف.");
+      setLoading(false);
       return;
     }
+
     if (!/\+\d{11,15}/.test(phoneNumber)) {
       setErrorMessage("يرجى إدخال رقم هاتف صالح.");
+      setLoading(false);
       return;
     }
 
@@ -43,15 +45,15 @@ export default function LoginPage() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const regexPassword = /^.{8,}$/;
+
     if (!password) {
       setErrorMessage("يرجى إدخال كلمة المرور.");
       return;
     }
+
     if (!regexPassword.test(password)) {
-      setErrorMessage(
-        "الرقم السرى غير صحيح"
-      );
+      setErrorMessage("الرقم السرى غير صحيح");
       return;
     }
 
@@ -62,7 +64,7 @@ export default function LoginPage() {
         phone_number: phoneNumber,
         password,
       });
-      console.log(data);
+
       if (data.success) {
         toast.success("تم تسجيل الدخول بنجاح!", {
           duration: 1500,
@@ -74,7 +76,6 @@ export default function LoginPage() {
         setErrorMessage(data.message || "فشل تسجيل الدخول. حاول مرة أخرى.");
       }
     } catch (error) {
-      console.log(error);
       setErrorMessage("فشل تسجيل الدخول. تأكد من البيانات وحاول مرة أخرى.");
     } finally {
       setLoading(false);
@@ -93,7 +94,7 @@ export default function LoginPage() {
       </div>
       <div className="bg-white shadow-lg rounded-4 px-4 py-5">
         {step === 1 && (
-          <div>
+          <>
             <div className="mb-4" dir="ltr">
               <PhoneInput
                 defaultCountry="sa"
@@ -105,15 +106,18 @@ export default function LoginPage() {
                 required
               />
             </div>
-            {errorMessage && <p className="px-3 text-danger text-center">{errorMessage}</p>}
+            {errorMessage && (
+              <p className="px-3 text-danger text-center">{errorMessage}</p>
+            )}
             <div className="d-flex justify-content-center align-items-center my-5">
               <button onClick={handlePhoneSubmit} className="follow mt-3">
                 متابعة
               </button>
             </div>
             <AuthLinks />
-          </div>
+          </>
         )}
+
         {step === 2 && (
           <form onSubmit={handleLoginSubmit}>
             <div className="p-login text-center py-3">
@@ -148,9 +152,9 @@ export default function LoginPage() {
             {errorMessage && (
               <p className="px-3 text-danger text-center">{errorMessage}</p>
             )}
-            <div className=" d-flex justify-content-end">
+            <div className="d-flex justify-content-end">
               <Link href="#">
-              <p className="loginpass"> نسيت الرقم السرى ؟</p>
+                <p className="loginpass"> نسيت الرقم السرى ؟</p>
               </Link>
             </div>
             <div className="d-flex justify-content-center align-items-center my-5">
@@ -174,4 +178,6 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
+};
+
+export default LoginPage;
