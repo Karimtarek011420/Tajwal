@@ -5,9 +5,6 @@ import RegisterOtp from "../../../../assets/images/registerOtp.svg";
 import AuthLinks from "@/app/_Compontents/AuthLinks/AuthLinks";
 import "react-international-phone/style.css";
 import "./otpregister.css";
-import { useFormik } from "formik";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { TailSpin } from "react-loader-spinner";
 
