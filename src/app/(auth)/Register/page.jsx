@@ -244,7 +244,7 @@ export default function RegisterPage() {
             </div>
           ) : null}
           <div>
-            <p className=" px-3 text-danger">{errorMessage}</p>
+            <p className=" px-3 text-danger text-center">{errorMessage}</p>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             <button

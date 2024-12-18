@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import RegisterOtp from "../../../../assets/images/registerOtp.svg";
 import AuthLinks from "@/app/_Compontents/AuthLinks/AuthLinks";
@@ -14,9 +14,29 @@ import { TailSpin } from "react-loader-spinner";
 export default function RegisterOtpPage() {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
+  const [counter, setCounter] = useState(30);
+  const [disabled, setDisabled] = useState(false);
   const [loading, setloading] = useState(false);
   const email = localStorage.getItem("emailotp");
-  console.log(email);
+  useEffect(() => {
+    let timer;
+
+    if (counter > 0) {
+      timer = setTimeout(() => {
+        setCounter(counter - 1);
+      }, 1000);
+    } else {
+      setDisabled(false);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [counter]);
+  const resendOTP = async () => {
+    setCounter(30);
+    setDisabled(true);
+  };
 
   return (
     <div className="container registerotp pt-5 pb-4">
@@ -38,23 +58,26 @@ export default function RegisterOtpPage() {
         <form>
           <div className="mb-4">
             <input
-              type="email"
+              type="text"
               className="form-control"
-              id="email"
-              placeholder="البريد الإلكتروني"
-              aria-label="Email"
+              id="otp"
+              placeholder="رمز التحقق"
+              aria-label="otp"
               required
             />
           </div>
           {/* <div>
             <p className=" px-3 text-danger">{errorMessage}</p>
           </div> */}
-          <div className="p_registerOtp pt-5 pb-3">
-            <p>
-              بالتسجيل للحصول على حساب في “تجوال”، فأنك توافق على الشروط
-              والأحكام. تعرف على المزيد حول كيفية استخدامنا وحماية بياناتك في
-              سياسة الخصوصية الخاصة بنا.
+          <div className="p_registerOtp pt-3 pb-3">
+            <p className="text-center   font-light">
+              بامكانك اعادة ارسال الرمز بعد {counter} ثانية
             </p>
+            <div className="d-flex justify-content-center align-items-center">
+              <button onClick={resendOTP} className="btnsendback" disabled={disabled}>
+                اعادة ارسال الرمز
+              </button>
+            </div>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             <button
@@ -79,7 +102,7 @@ export default function RegisterOtpPage() {
             </button>
           </div>
           <div className="d-flex justify-content-center align-items-center">
-            <button type="button" className="follow mt-3">
+            <button type="button" className="follow back mt-3">
               العودة
             </button>
           </div>

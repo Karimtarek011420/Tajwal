@@ -18,14 +18,24 @@
 .registerotp input::placeholder {
   font-size: 12px !important;
 }
+.registerotp .btnsendback{
+  color: #4b87a4 !important;
+  border: none !important;
+  background-color: transparent;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
 .registerotp button.follow {
   background-color: #4b87a4 !important;
   padding: 10px 100px; /* Adjust button padding */
   color: #f1f3f6;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 13px !important;
+  font-weight: 700 !important;
   border-radius: 5px;
   border: none;
+}
+.registerotp button.back {
+  background-color: #626E7B !important;
 }
 .registerotp .p_registerOtp p {
   color: #626e7b !important;
