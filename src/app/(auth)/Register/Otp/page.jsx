@@ -1,22 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import RegisterOtp from "../../../../assets/images/registerOtp.svg";
-import AuthLinks from "@/app/_Compontents/AuthLinks/AuthLinks";
+import RegisterOtp from "../../../../assets/images/registerOtp.svg"; // تأكد من صحة المسار
 import "react-international-phone/style.css";
-import "./otpregister.css";
+import "./otp.css";
 import { useRouter } from "next/navigation";
-import { TailSpin } from "react-loader-spinner";
 
 const RegisterOtpPage = () => {
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState("");
   const [counter, setCounter] = useState(30);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const email = localStorage.getItem("emailotp");
+  const email =
+    typeof window !== "undefined" ? localStorage.getItem("emailotp") : null;
 
-  // Timer to handle countdown
   useEffect(() => {
     if (counter > 0) {
       const timer = setTimeout(() => setCounter((prev) => prev - 1), 1000);
@@ -27,15 +23,18 @@ const RegisterOtpPage = () => {
   }, [counter]);
 
   const handleResendOTP = async () => {
-    setCounter(30);
-    setIsDisabled(true);
-    // Add API call logic here if needed
+    try {
+      setCounter(30);
+      setIsDisabled(true);
+      // Logic for resending OTP
+    } catch (error) {
+      console.error("Error resending OTP:", error);
+    }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    // Add submission logic here
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your logic here
   };
 
   return (
