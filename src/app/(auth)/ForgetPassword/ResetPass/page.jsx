@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import imageResetpassword from "@/assets/images/ChangePassword.svg";
-import "react-international-phone/style.css";
 import "./resetpass.css";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
@@ -20,9 +19,11 @@ const resetPasswordPage = () => {
     typeof window !== "undefined" ? localStorage.getItem("phonepass") : null;
   const otp =
     typeof window !== "undefined" ? localStorage.getItem("passOtp") : null;
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const togglerePasswordVisibility = () => {
     setreShowPassword(!showrePassword);
   };
@@ -40,7 +41,7 @@ const resetPasswordPage = () => {
           },
         }
       );
-      if (data.success === true) {
+      if (data.success) {
         toast.success("تم تغيير كلمة السر بنجاح", {
           duration: 1500,
           style: {
@@ -49,19 +50,16 @@ const resetPasswordPage = () => {
             position: "top-right",
           },
         });
-        localStorage.removeItem("phonepass");
-        localStorage.removeItem("passOtp");
-        localStorage.removeItem("emailotp");
-        localStorage.removeItem("phone_numberotp");
+        localStorage.clear();
         router.push("/Login");
       }
-
-      console.log(data);
     } catch (error) {
-      setErrorMessage(" فشل تغير كلمة السر حاول مرة اخرى");
+      setErrorMessage("فشل تغير كلمة السر حاول مرة اخرى");
+    } finally {
+      setloading(false);
     }
-    setloading(false);
   };
+
   const handleSubmitpass = useFormik({
     initialValues: {
       otp: otp,
@@ -69,20 +67,17 @@ const resetPasswordPage = () => {
       password: "",
       confirm_password: "",
     },
-    onSubmit: apiresetPass,
     validate: (values) => {
       const errors = {};
-      if (values.password !== values.confirm_password) {
-        setErrorMessage("رجاء متطابقة كلمة السر");
-        return;
-      }
-
       if (values.password.length < 8) {
-        setErrorMessage("يجب أن يحتوي الرقم السري على 8 أحرف على الأقل.");
-        return;
+        errors.password = "يجب أن تحتوي كلمة السر على 8 أحرف على الأقل.";
+      }
+      if (values.password !== values.confirm_password) {
+        errors.confirm_password = "كلمة السر وتأكيدها غير متطابقين.";
       }
       return errors;
     },
+    onSubmit: apiresetPass,
   });
 
   return (
@@ -92,7 +87,7 @@ const resetPasswordPage = () => {
           src={imageResetpassword}
           layout="responsive"
           className="imageResetpassword"
-          alt="Register OTP User"
+          alt="Reset Password"
         />
       </div>
       <div className="bg-white shadow-lg rounded-4 px-4 py-5">
@@ -100,13 +95,14 @@ const resetPasswordPage = () => {
           <div className="mb-4 position-relative">
             <input
               type={showPassword ? "text" : "password"}
+              name="password"
               value={handleSubmitpass.values.password}
               onChange={handleSubmitpass.handleChange}
               onBlur={handleSubmitpass.handleBlur}
               className="form-control"
               id="password"
-              placeholder="الرقم السرى"
-              aria-label="Password"
+              placeholder="الرقم السري"
+              aria-label="password"
               required
             />
             <i
@@ -124,20 +120,22 @@ const resetPasswordPage = () => {
           </div>
           {handleSubmitpass.errors.password &&
           handleSubmitpass.touched.password ? (
-            <div className="alert alert-danger my-2" role="alert">
+            <div className="alert alert-danger my-2">
               {handleSubmitpass.errors.password}
             </div>
           ) : null}
+
           <div className="mb-4 position-relative">
             <input
               type={showrePassword ? "text" : "password"}
-              value={handleSubmitpass.values.repassword}
+              name="confirm_password"
+              value={handleSubmitpass.values.confirm_password}
               onChange={handleSubmitpass.handleChange}
               onBlur={handleSubmitpass.handleBlur}
               className="form-control"
-              id="repassword"
-              placeholder="تأكيد الرقم السرى"
-              aria-label="Confirm Password"
+              id="confirm_password"
+              placeholder="تأكيد الرقم السري"
+              aria-label="confirm_password"
               required
             />
             <i
@@ -155,29 +153,21 @@ const resetPasswordPage = () => {
               }}
             ></i>
           </div>
-          {handleSubmitpass.errors.repassword &&
-          handleSubmitpass.touched.repassword ? (
-            <div className="alert alert-danger my-4" role="alert">
-              {handleSubmitpass.errors.repassword}
+          {handleSubmitpass.errors.confirm_password &&
+          handleSubmitpass.touched.confirm_password ? (
+            <div className="alert alert-danger my-2">
+              {handleSubmitpass.errors.confirm_password}
             </div>
           ) : null}
-          <div>
-            <p className=" px-3 text-danger text-center">{errorMessage}</p>
-          </div>
+
+          {errorMessage && (
+            <p className="px-3 text-danger text-center">{errorMessage}</p>
+          )}
 
           <div className="d-flex justify-content-center align-items-center">
             <button type="submit" className="follow mt-3">
               {loading ? (
-                <TailSpin
-                  visible={true}
-                  height="35"
-                  width="35"
-                  color="#fff"
-                  ariaLabel="tail-spin-loading"
-                  radius="1"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                />
+                <TailSpin height="35" width="35" color="#fff" />
               ) : (
                 "متابعة"
               )}
