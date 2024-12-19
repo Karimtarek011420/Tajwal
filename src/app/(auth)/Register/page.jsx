@@ -49,13 +49,14 @@ export default function RegisterPage() {
           },
         });
       }
-      console.log(data)
+      console.log(data);
       localStorage.setItem("emailotp", values.email);
+      localStorage.setItem("phone_numberotp", values.phone_number);
+
       setTimeout(() => {
         router.push("/Register/Otp");
       }, 1000);
     } catch (error) {
-      console.log(error);
       if (error.status === 422) {
         if (
           error.response.data.message ===
@@ -102,8 +103,7 @@ export default function RegisterPage() {
         errors.phone_number = "الرجاء إدخال رقم الجوال بشكل صحيح";
       }
       if (!regexPassword.test(values.password)) {
-        errors.password =
-          "يجب أن يحتوي الرقم السري على 8 أحرف على الأقل.";
+        errors.password = "يجب أن يحتوي الرقم السري على 8 أحرف على الأقل.";
       }
       if (values.repassword !== values.password) {
         errors.repassword = "الرجاء تأكيد الرقم السري بشكل صحيح";

@@ -70,8 +70,8 @@ const LoginPage = () => {
           duration: 1500,
           style: { backgroundColor: "#4b87a4", color: "white" },
         });
-        localStorage.setItem("token", data.token); // Store the token properly
         setTimeout(() => router.push("/"), 1000);
+        localStorage.setItem("token", data.data.token); // Store the token properly
       } else {
         setErrorMessage(data.message || "فشل تسجيل الدخول. حاول مرة أخرى.");
       }
