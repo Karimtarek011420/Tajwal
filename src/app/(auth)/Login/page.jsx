@@ -153,7 +153,7 @@ const LoginPage = () => {
               <p className="px-3 text-danger text-center">{errorMessage}</p>
             )}
             <div className="d-flex justify-content-end">
-              <Link href="/FrogetPassword">
+              <Link href="/ForgetPassword">
                 <p className="loginpass"> نسيت الرقم السرى ؟</p>
               </Link>
             </div>

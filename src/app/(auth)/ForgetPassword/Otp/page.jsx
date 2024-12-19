@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import RegisterOtp from "../../../../assets/images/registerOtp.svg";
 import "react-international-phone/style.css";
-import "./otp.css";
+import "./forgetotp.css";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 
-const RegisterOtpPage = () => {
+const forgetOtpPage = () => {
   const router = useRouter();
   const [counter, setCounter] = useState(30);
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,7 +21,7 @@ const RegisterOtpPage = () => {
     typeof window !== "undefined" ? localStorage.getItem("emailotp") : null;
   const phonenumber =
     typeof window !== "undefined"
-      ? localStorage.getItem("phone_numberotp")
+      ? localStorage.getItem("phonepass")
       : null;
 
   const apiOtp = async (values) => {
@@ -38,7 +38,7 @@ const RegisterOtpPage = () => {
         }
       );
       if (data.success === true) {
-        toast.success(data.message, {
+        toast.success("تم التحقق بنجاح", {
           duration: 1500,
           style: {
             backgroundColor: "#4b87a4",
@@ -46,9 +46,7 @@ const RegisterOtpPage = () => {
             position: "top-right",
           },
         });
-        localStorage.removeItem("phone_numberotp");
-        localStorage.removeItem("emailotp");
-        router.push("/Login");
+        router.push("/ForgetPassword/ResetPass");
       }
 
       console.log(data);
@@ -132,8 +130,8 @@ const RegisterOtpPage = () => {
       <div className="bg-white shadow-lg rounded-4 px-4 py-5">
         <div className="text-center py-3 p_registerOtp">
           <p>
-            لاتمام عملية التسجيل الرجاء ادخال رمز التحقق المرسل للبريد
-            الالكتروني {email}
+            لاتمام عملية إسترجاع  الرقم السرى يرجى إدخال رمز التحقق المرسل للرقم الجوال      
+             {phonenumber}
           </p>
         </div>
         <form onSubmit={handleSubmitotp.handleSubmit}>
@@ -206,4 +204,4 @@ const RegisterOtpPage = () => {
   );
 };
 
-export default RegisterOtpPage;
+export default forgetOtpPage;

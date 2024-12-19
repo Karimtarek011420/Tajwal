@@ -1,0 +1,86 @@
+/* General Styles */
+.forgetpass {
+    width: 100%;
+    max-width: 500px; /* Limit max-width for large screens */
+    margin: 0 auto; /* Center the container */
+  }
+  .forgetpass .forgetpassreset_p {
+    background-color: #F1F3F6 !important;
+    color: #336279 !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+  }
+  .forgetpass .forgetpassimage {
+    width: 240px !important;
+    height: 260px !important;
+  }
+  .forgetpass .phone-input-field {
+    width: 100% !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    background-color: #f9f9f9 !important;
+    border-radius: 5px !important;
+    padding: 10px 12px !important;
+  }
+  .forgetpass input:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 0 transparent !important;
+  }
+  .forgetpass input {
+    background-color: #f9f9f9 !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 15px 20px !important;
+  }
+  .forgetpass input::placeholder {
+    font-size: 12px !important;
+  }
+  .forgetpass .loginpass{
+    color: #4B87A4;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    border-bottom: 1px solid #4B87A4;
+  }
+  .forgetpass button.follow {
+    background-color: #4b87a4 !important;
+    padding: 10px 100px; /* Adjust button padding */
+    color: #f1f3f6;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+  }
+  .forgetpass .p-login p {
+    color: #626e7b !important;
+    font-size: 12px !important;
+  }
+  
+  /* Responsive Adjustments */
+  @media screen and (max-width: 992px) {
+    .forgetpass {
+      padding: 0 15px;
+    }
+    .forgetpass button.follow {
+      padding: 10px 50px;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .forgetpass input,
+    .forgetpass .phone-input-field {
+      padding: 10px 12px !important;
+    }
+    .forgetpass button.follow {
+      font-size: 12px;
+      padding: 10px 40px;
+    }
+    .forgetpass .p-login p {
+      font-size: 11px;
+    }
+    .forgetpass img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  
