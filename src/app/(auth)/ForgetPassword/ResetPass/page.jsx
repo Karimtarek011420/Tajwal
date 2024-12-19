@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import RegisterOtp from "../../../../assets/images/registerOtp.svg";
+import imageResetpassword from "@/assets/images/ChangePassword.svg";
 import "react-international-phone/style.css";
 import "./resetpass.css";
 import { useRouter } from "next/navigation";
@@ -13,17 +13,25 @@ import { TailSpin } from "react-loader-spinner";
 const resetPasswordPage = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showrePassword, setreShowPassword] = useState(false);
   const [loading, setloading] = useState(false);
   const phonenumber =
     typeof window !== "undefined" ? localStorage.getItem("phonepass") : null;
   const otp =
     typeof window !== "undefined" ? localStorage.getItem("passOtp") : null;
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const togglerePasswordVisibility = () => {
+    setreShowPassword(!showrePassword);
+  };
 
-  const apiOtp = async (values) => {
+  const apiresetPass = async (values) => {
     setloading(true);
     try {
       const { data } = await axios.post(
-        "https://api.tajwal.co/api/v1/verify_otp",
+        "https://api.tajwal.co/api/v1/reset_password",
         values,
         {
           headers: {
@@ -33,7 +41,7 @@ const resetPasswordPage = () => {
         }
       );
       if (data.success === true) {
-        toast.success("تم التحقق بنجاح", {
+        toast.success("تم تغيير كلمة السر بنجاح", {
           duration: 1500,
           style: {
             backgroundColor: "#4b87a4",
@@ -41,29 +49,37 @@ const resetPasswordPage = () => {
             position: "top-right",
           },
         });
-        localStorage.setItem("passOtp", values.otp);
-        router.push("/ForgetPassword/ResetPass");
+        localStorage.removeItem("phonepass");
+        localStorage.removeItem("passOtp");
+        localStorage.removeItem("emailotp");
+        localStorage.removeItem("phone_numberotp");
+        router.push("/Login");
       }
 
       console.log(data);
     } catch (error) {
-      setErrorMessage(" رمز التحقق المدخل غير صحيح");
+      setErrorMessage(" فشل تغير كلمة السر حاول مرة اخرى");
     }
     setloading(false);
   };
-  const handleSubmitotp = useFormik({
+  const handleSubmitpass = useFormik({
     initialValues: {
-      otp: "",
+      otp: otp,
       phone_number: phonenumber,
+      password: "",
+      confirm_password: "",
     },
-    onSubmit: apiOtp,
+    onSubmit: apiresetPass,
     validate: (values) => {
       const errors = {};
-      if (values.otp.length !== 4) {
-        errors.otp = "الرجاء إدخال رمز تحقق صحيح";
+      if (values.password !== values.confirm_password) {
+        setErrorMessage("رجاء متطابقة كلمة السر");
+        return;
       }
-      if (values.otp.length === 0) {
-        errors.otp = "الرجاء  ملئ الحقل";
+
+      if (values.password.length < 8) {
+        setErrorMessage("يجب أن يحتوي الرقم السري على 8 أحرف على الأقل.");
+        return;
       }
       return errors;
     },
@@ -73,30 +89,76 @@ const resetPasswordPage = () => {
     <div className="container resetPassword pt-5 pb-4">
       <div className="text-center mb-5">
         <Image
-          src={RegisterOtp}
+          src={imageResetpassword}
           layout="responsive"
-          className="imgcover"
+          className="imageResetpassword"
           alt="Register OTP User"
         />
       </div>
       <div className="bg-white shadow-lg rounded-4 px-4 py-5">
-        <form onSubmit={handleSubmitotp.handleSubmit}>
-          <div className="mb-4">
+        <form onSubmit={handleSubmitpass.handleSubmit}>
+          <div className="mb-4 position-relative">
             <input
-              id="otp"
-              placeholder="رمز التحقق"
-              type="text"
-              name="otp"
+              type={showPassword ? "text" : "password"}
+              value={handleSubmitpass.values.password}
+              onChange={handleSubmitpass.handleChange}
+              onBlur={handleSubmitpass.handleBlur}
               className="form-control"
-              value={handleSubmitotp.values.otp}
-              onChange={handleSubmitotp.handleChange}
-              onBlur={handleSubmitotp.handleBlur}
-              aria-label="otp"
+              id="password"
+              placeholder="الرقم السرى"
+              aria-label="Password"
+              required
             />
+            <i
+              className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+              onClick={togglePasswordVisibility}
+              style={{
+                position: "absolute",
+                left: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "#aaa",
+              }}
+            ></i>
           </div>
-          {handleSubmitotp.errors.otp && handleSubmitotp.touched.otp ? (
+          {handleSubmitpass.errors.password &&
+          handleSubmitpass.touched.password ? (
+            <div className="alert alert-danger my-2" role="alert">
+              {handleSubmitpass.errors.password}
+            </div>
+          ) : null}
+          <div className="mb-4 position-relative">
+            <input
+              type={showrePassword ? "text" : "password"}
+              value={handleSubmitpass.values.repassword}
+              onChange={handleSubmitpass.handleChange}
+              onBlur={handleSubmitpass.handleBlur}
+              className="form-control"
+              id="repassword"
+              placeholder="تأكيد الرقم السرى"
+              aria-label="Confirm Password"
+              required
+            />
+            <i
+              className={`fa-solid ${
+                showrePassword ? "fa-eye-slash" : "fa-eye"
+              }`}
+              onClick={togglerePasswordVisibility}
+              style={{
+                position: "absolute",
+                left: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "#aaa",
+              }}
+            ></i>
+          </div>
+          {handleSubmitpass.errors.repassword &&
+          handleSubmitpass.touched.repassword ? (
             <div className="alert alert-danger my-4" role="alert">
-              {handleSubmitotp.errors.otp}
+              {handleSubmitpass.errors.repassword}
             </div>
           ) : null}
           <div>

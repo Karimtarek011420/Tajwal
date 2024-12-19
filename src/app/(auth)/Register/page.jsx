@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import RegisterUser from "../../../assets/images/RegisterUser.svg";
+import RegisterUser from "@/assets/images/RegisterUser.svg";
 import AuthLinks from "@/app/_Compontents/AuthLinks/AuthLinks";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";

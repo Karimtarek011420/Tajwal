@@ -56,6 +56,10 @@
     padding: 10px 50px;
   }
 }
+.resetPassword .imageResetpassword{
+  width: 215px !important;
+  height: 230px !important;
+}
 
 @media screen and (max-width: 576px) {
   .resetPassword input {
