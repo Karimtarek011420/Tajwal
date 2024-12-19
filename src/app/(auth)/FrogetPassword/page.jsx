@@ -5,7 +5,7 @@ import LoginUser from "../../../assets/images/login.svg";
 import AuthLinks from "@/app/_Compontents/AuthLinks/AuthLinks";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import "./login.css";
+import "./forgetpass.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";

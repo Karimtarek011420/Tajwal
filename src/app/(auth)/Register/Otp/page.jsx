@@ -46,9 +46,9 @@ const RegisterOtpPage = () => {
             position: "top-right",
           },
         });
-        router.push("/Login");
         localStorage.removeItem("phone_numberotp");
         localStorage.removeItem("emailotp");
+        router.push("/Login");
       }
 
       console.log(data);
