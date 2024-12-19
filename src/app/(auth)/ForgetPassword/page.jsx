@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import forgetimage from "../../../assets/images/Forgotpassword.svg";
+import forgetimage from "@/assets/images/Forgotpassword.svg";
 import "./forgetpass.css";
 import axios from "axios";
 import toast from "react-hot-toast";

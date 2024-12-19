@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import RegisterOtp from "../../../../assets/images/registerOtp.svg";
+import RegisterOtp from "@/assets/images/registerOtp.svg";
 import "react-international-phone/style.css";
 import "./forgetotp.css";
 import { useRouter } from "next/navigation";
