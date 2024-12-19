@@ -1,0 +1,75 @@
+/* General Styles */
+.resetPassword {
+  width: 100%;
+  max-width: 500px; /* Limit max-width for large screens */
+  margin: 0 auto; /* Center the container */
+}
+
+.resetPassword input:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+.resetPassword input {
+  background-color: #f9f9f9 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 15px 20px !important;
+}
+.resetPassword input::placeholder {
+  font-size: 12px !important;
+}
+.resetPassword .btnsendback {
+  color: #4b87a4 !important;
+  border: none !important;
+  background-color: transparent;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+.resetPassword button.follow {
+  background-color: #4b87a4 !important;
+  padding: 10px 100px; /* Adjust button padding */
+  color: #f1f3f6;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border-radius: 5px;
+  border: none;
+}
+.resetPassword button.back {
+  background-color: #626e7b !important;
+}
+.resetPassword .p_registerOtp p {
+  color: #626e7b !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+.resetPassword .imgcover {
+  width: 240px !important;
+  height: 260px !important;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 992px) {
+  .resetPassword {
+    padding: 0 15px;
+  }
+  .resetPassword button.follow {
+    padding: 10px 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .resetPassword input {
+    padding: 10px 12px !important;
+  }
+  .resetPassword button.follow {
+    font-size: 12px;
+    padding: 10px 40px;
+  }
+  .resetPassword .p_registerOtp p {
+    font-size: 11px !important;
+  }
+  .resetPassword img {
+    max-width: 100%;
+    height: auto;
+  }
+}

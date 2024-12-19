@@ -46,6 +46,7 @@ const forgetOtpPage = () => {
             position: "top-right",
           },
         });
+        localStorage.setItem("passOtp", values.otp)
         router.push("/ForgetPassword/ResetPass");
       }
 
@@ -118,7 +119,7 @@ const forgetOtpPage = () => {
   };
 
   return (
-    <div className="container registerotp pt-5 pb-4">
+    <div className="container forgetOtp pt-5 pb-4">
       <div className="text-center mb-5">
         <Image
           src={RegisterOtp}

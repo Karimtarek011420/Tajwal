@@ -1,31 +1,31 @@
 /* General Styles */
-.registerotp {
+.forgetOtp {
     width: 100%;
     max-width: 500px; /* Limit max-width for large screens */
     margin: 0 auto; /* Center the container */
   }
   
-  .registerotp input:focus {
+  .forgetOtp input:focus {
     outline: 0 !important;
     box-shadow: 0 0 0 0 transparent !important;
   }
-  .registerotp input {
+  .forgetOtp input {
     background-color: #f9f9f9 !important;
     border: none !important;
     border-radius: 5px !important;
     padding: 15px 20px !important;
   }
-  .registerotp input::placeholder {
+  .forgetOtp input::placeholder {
     font-size: 12px !important;
   }
-  .registerotp .btnsendback{
+  .forgetOtp .btnsendback{
     color: #4b87a4 !important;
     border: none !important;
     background-color: transparent;
     font-size: 12px !important;
     font-weight: 600 !important;
   }
-  .registerotp button.follow {
+  .forgetOtp button.follow {
     background-color: #4b87a4 !important;
     padding: 10px 100px; /* Adjust button padding */
     color: #f1f3f6;
@@ -34,41 +34,41 @@
     border-radius: 5px;
     border: none;
   }
-  .registerotp button.back {
+  .forgetOtp button.back {
     background-color: #626E7B !important;
   }
-  .registerotp .p_registerOtp p {
+  .forgetOtp .p_registerOtp p {
     color: #626e7b !important;
     font-size: 12px !important;
     font-weight: 400 !important;
   }
-  .registerotp .imgcover {
+  .forgetOtp .imgcover {
       width: 240px !important;
       height: 260px !important;
   }
   
   /* Responsive Adjustments */
   @media screen and (max-width: 992px) {
-    .registerotp {
+    .forgetOtp {
       padding: 0 15px;
     }
-    .registerotp button.follow {
+    .forgetOtp button.follow {
       padding: 10px 50px;
     }
   }
   
   @media screen and (max-width: 576px) {
-    .registerotp input {
+    .forgetOtp input {
       padding: 10px 12px !important;
     }
-    .registerotp button.follow {
+    .forgetOtp button.follow {
       font-size: 12px;
       padding: 10px 40px;
     }
-    .registerotp .p_registerOtp p {
+    .forgetOtp .p_registerOtp p {
       font-size: 11px !important;
     }
-    .registerotp img {
+    .forgetOtp img {
       max-width: 100%;
       height: auto;
     }
