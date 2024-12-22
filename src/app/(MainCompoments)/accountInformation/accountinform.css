@@ -1,0 +1,22 @@
+.countryheader {
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+.countryheader .country-list {
+  left: 50%;
+  top: -50px;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.country-list .country-list-links {
+  cursor: pointer;
+  transition-duration: all 2s;
+  border-radius: 5px;
+  padding: 15px 80px;
+  margin: 0 20px;
+  font-size: 17px;
+  font-weight: 500;
+}
+

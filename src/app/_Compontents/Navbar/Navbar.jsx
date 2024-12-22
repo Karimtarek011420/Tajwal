@@ -76,14 +76,65 @@ export default function Navbar() {
             aria-expanded="false"
             style={{ color: "white" }}
           >
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center mx-2">
               <i className="fa-solid fa-user text-white"></i>
-              <span className="mx-2 " style={{fontSize:"20px" , fontWeight:'500'}}>{user?.first_name}</span>
+              <span
+                className="mx-2 "
+                style={{ fontSize: "20px", fontWeight: "500" }}
+              >
+                {user?.first_name}
+              </span>
             </div>
           </Link>
           <ul className="dropdown-menu py-2">
-            <DropdownItem text="معلومات الحساب" />
-            <DropdownItem text="الطلبات السابقة" />
+            <li>
+              <Link
+                className="dropdown-item d-flex justify-content-between align-items-center px-3"
+                href="/accountInformation"
+                style={{
+                  color: "#575050",
+                  padding: "10px",
+                  fontSize: "12px",
+                  fontWeight: "300",
+                  width: "100%",
+                }}
+              >
+                <span className="ps-5">معلومات الحساب</span>
+                <i className="fa-solid fa-chevron-left  pe-lg-5 pe-md-1"></i>
+              </Link>
+              <hr
+                style={{
+                  borderColor: "gray",
+                  margin: 0,
+                  width: "100%",
+                }}
+              />
+            </li>
+
+            <li>
+              <Link
+                className="dropdown-item d-flex justify-content-between align-items-center px-3"
+                href="#"
+                style={{
+                  color: "#575050",
+                  padding: "10px",
+                  fontSize: "12px",
+                  fontWeight: "300",
+                  width: "100%",
+                }}
+              >
+                <span className="ps-5">الطلبات السابقة</span>
+                <i className="fa-solid fa-chevron-left pe-lg-5 pe-md-1"></i>
+              </Link>
+              <hr
+                style={{
+                  borderColor: "gray",
+                  margin: 0,
+                  width: "100%",
+                }}
+              />
+            </li>
+
             <li>
               <Link
                 className="dropdown-item d-flex justify-content-between align-items-center px-3"
@@ -98,7 +149,7 @@ export default function Navbar() {
                 onClick={logoutApi}
               >
                 <span className="ps-5">تسجيل الخروج</span>
-                <i className="fa-solid fa-chevron-left"></i>
+                <i className="fa-solid fa-chevron-left pe-lg-5 pe-md-1"></i>
               </Link>
               <hr style={{ borderColor: "gray", margin: 0, width: "100%" }} />
             </li>
