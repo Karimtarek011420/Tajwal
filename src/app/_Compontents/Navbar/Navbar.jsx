@@ -9,6 +9,7 @@ import logonavbar from "../../../assets/images/logonavbar.svg";
 import { authtoken } from "../Authtoken/Authtoken";
 import "./navbar.css";
 import Swal from "sweetalert2";
+import { logoutApi } from "@/app/Hookshelp/logout";
 
 export default function Navbar() {
   const pathName = usePathname();
@@ -27,49 +28,9 @@ export default function Navbar() {
   }, []);
   console.log(user);
 
-  const logoutApi = async () => {
-    try {
-      const { data } = await axios.get("https://api.tajwal.co/api/v1/logout", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-        },
-      });
-      console.log(data);
-      if (data.success === true) {
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: "تم تسجيل الخروج بنجاح",
-          showConfirmButton: false,
-          timer: 500,
-          toast: true,
-          background: "#4b87a4",
-          color: "white",
-          iconColor: "white",
-          padding: "10px 20px",
-          width: 400,
-          timerProgressBar: true,
-        });
-
-        setTimeout(() => {
-          settoken(null);
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
-        }, 500); // Match the Swal timer
-      }
-    } catch (error) {
-      const errorMessage =
-        error.response?.data?.message || "يرجى المحاولة مرة أخرى لاحقًا";
-      Swal.fire({
-        position: "top",
-        icon: "error",
-        title: "فشل تسجيل الخروج",
-        text: errorMessage,
-        showConfirmButton: true,
-        background: "#E14F72",
-        color: "white",
-      });
+  const handleLogout = () => {
+    if (token) {
+      logoutApi(token, settoken);
     }
   };
 
@@ -155,7 +116,7 @@ export default function Navbar() {
                   fontWeight: "300",
                   width: "100%",
                 }}
-                onClick={logoutApi}
+                onClick={handleLogout}
               >
                 <span className="ps-5">تسجيل الخروج</span>
                 <i className="fa-solid fa-chevron-left pe-lg-5 pe-md-1"></i>
