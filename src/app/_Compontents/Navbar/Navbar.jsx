@@ -56,6 +56,7 @@ export default function Navbar() {
         setTimeout(() => {
           settoken(null);
           localStorage.removeItem("token");
+          localStorage.removeItem("user");
         });
       }
     } catch (error) {
@@ -77,7 +78,7 @@ export default function Navbar() {
           >
             <div className="d-flex align-items-center">
               <i className="fa-solid fa-user text-white"></i>
-              <span className="mx-2">User Name</span>
+              <span className="mx-2 " style={{fontSize:"20px" , fontWeight:'500'}}>{user?.first_name}</span>
             </div>
           </Link>
           <ul className="dropdown-menu py-2">
