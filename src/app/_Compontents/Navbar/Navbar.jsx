@@ -35,32 +35,41 @@ export default function Navbar() {
           Accept: "application/json",
         },
       });
-
-      console.log(data.success);
+      console.log(data);
       if (data.success === true) {
         Swal.fire({
           position: "top",
           icon: "success",
           title: "تم تسجيل الخروج بنجاح",
           showConfirmButton: false,
-          timer: 1000,
-          toast: true, // لجعلها صغيرة وتظهر كـ "Toast"
-          background: "#4b87a4", // لون خلفية أخضر ليتناسب مع النجاح
-          color: "white", // لون النص
-          iconColor: "white", // لون أيقونة النجاح
-          padding: "10px 20px", // تحديد padding للرسالة
-          width: 400, // تحديد عرض الرسالة لتكون صغيرة
-          timerProgressBar: true, // عرض شريط التقدم
+          timer: 500,
+          toast: true,
+          background: "#4b87a4",
+          color: "white",
+          iconColor: "white",
+          padding: "10px 20px",
+          width: 400,
+          timerProgressBar: true,
         });
 
         setTimeout(() => {
           settoken(null);
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-        });
+        }, 500); // Match the Swal timer
       }
     } catch (error) {
-      console.error("Logout error:", error);
+      const errorMessage =
+        error.response?.data?.message || "يرجى المحاولة مرة أخرى لاحقًا";
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "فشل تسجيل الخروج",
+        text: errorMessage,
+        showConfirmButton: true,
+        background: "#E14F72",
+        color: "white",
+      });
     }
   };
 

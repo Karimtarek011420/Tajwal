@@ -9,6 +9,30 @@
   transform: translateX(-50%);
   z-index: 2;
 }
+.cardinfo span {
+  font-size: 12px !important;
+  font-weight: 300 !important;
+  color: #626e7b;
+  margin: 0 0 !important;
+  padding: 0 0 !important;
+}
+.cardinfo h6 {
+  font-weight: 700 !important;
+  color: #626e7b;
+  font-size: 17px !important;
+}
+.cardinfo ul li {
+  padding-bottom: 10px;
+  color: #626e7b;
+  font-size: 17px !important;
+  font-weight: 300 !important;
+  transition: color 0.3s ease, font-weight 0.3s ease; /* تأثير انتقال ناعم */
+}
+/* تضيف نمطًا عندما يكون الرابط نشطًا */
+.cardinfo .active {
+  color: #626e7b !important ;
+  font-weight: 500 !important; /* يجعل النص عريضًا */
+}
 
 .country-list .country-list-links {
   cursor: pointer;
@@ -19,4 +43,3 @@
   font-size: 17px;
   font-weight: 500;
 }
-
