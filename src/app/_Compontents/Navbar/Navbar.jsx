@@ -1,121 +1,231 @@
 "use client";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import logonavbar from "../../../assets/images/logonavbar.svg";
 import Image from "next/image";
-import { useEffect } from "react";
-
-import "./navbar.css";
 import { usePathname } from "next/navigation";
+import axios from "axios";
+import toast from "react-hot-toast";
+import logonavbar from "../../../assets/images/logonavbar.svg";
+import { authtoken } from "../Authtoken/Authtoken";
+import "./navbar.css";
+import Swal from "sweetalert2";
+
 export default function Navbar() {
   const pathName = usePathname();
+  const { token, settoken } = useContext(authtoken);
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser); // تخزين بيانات المستخدم فقط
+    }
+  }, []);
+  console.log(user);
+
+  const logoutApi = async () => {
+    try {
+      const { data } = await axios.get("https://api.tajwal.co/api/v1/logout", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      });
+
+      console.log(data.success);
+      if (data.success === true) {
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "تم تسجيل الخروج بنجاح",
+          showConfirmButton: false,
+          timer: 1000,
+          toast: true, // لجعلها صغيرة وتظهر كـ "Toast"
+          background: "#4b87a4", // لون خلفية أخضر ليتناسب مع النجاح
+          color: "white", // لون النص
+          iconColor: "white", // لون أيقونة النجاح
+          padding: "10px 20px", // تحديد padding للرسالة
+          width: 400, // تحديد عرض الرسالة لتكون صغيرة
+          timerProgressBar: true, // عرض شريط التقدم
+        });
+
+        setTimeout(() => {
+          settoken(null);
+          localStorage.removeItem("token");
+        });
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
+  const renderAuthLinks = () => {
+    if (token) {
+      return (
+        <li className="nav-item dropdown dropacount">
+          <Link
+            className="nav-link dropdown-toggle d-flex align-items-center justify-content-between"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style={{ color: "white" }}
+          >
+            <div className="d-flex align-items-center">
+              <i className="fa-solid fa-user text-white"></i>
+              <span className="mx-2">User Name</span>
+            </div>
+          </Link>
+          <ul className="dropdown-menu py-2">
+            <DropdownItem text="معلومات الحساب" />
+            <DropdownItem text="الطلبات السابقة" />
+            <li>
+              <Link
+                className="dropdown-item d-flex justify-content-between align-items-center px-3"
+                href="#"
+                style={{
+                  color: "#E14F72",
+                  padding: "10px",
+                  fontSize: "12px",
+                  fontWeight: "300",
+                  width: "100%",
+                }}
+                onClick={logoutApi}
+              >
+                <span className="ps-5">تسجيل الخروج</span>
+                <i className="fa-solid fa-chevron-left"></i>
+              </Link>
+              <hr style={{ borderColor: "gray", margin: 0, width: "100%" }} />
+            </li>
+          </ul>
+        </li>
+      );
+    }
+    return (
+      <>
+        <li className="nav-item">
+          <Link className="nav-link text-white" href="/Login">
+            دخول
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            className="nav-link text-white resgister my-1 mx-lg-5 me-lg-4"
+            href="/Register"
+          >
+            تسجيل
+          </Link>
+        </li>
+      </>
+    );
+  };
+
+  const DropdownItem = ({ text }) => (
+    <li>
+      <Link
+        className="dropdown-item d-flex justify-content-between align-items-center px-3"
+        href="#"
+        style={{
+          color: "#575050",
+          padding: "10px",
+          fontSize: "12px",
+          fontWeight: "300",
+          width: "100%",
+        }}
+      >
+        <span className="ps-5">{text}</span>
+        <i className="fa-solid fa-chevron-left pe-lg-5 pe-md-2"></i>
+      </Link>
+      <hr style={{ borderColor: "gray", margin: 0, width: "100%" }} />
+    </li>
+  );
 
   return (
-    <>
-      <nav className="navbar navbar-expand-lg py-1  ">
-        <div className="container-fluid">
-          <Link className="navbar-brand px-lg-5" href="#">
-            <Image
-              className="logo"
-              src={logonavbar}
-              width={200}
-              height={100}
-              alt="Company logo"
-            />{" "}
-          </Link>
+    <nav className="navbar navbar-expand-lg py-1">
+      <div className="container-fluid">
+        <Link className="navbar-brand px-lg-5" href="#">
+          <Image
+            className="logo"
+            src={logonavbar}
+            width={200}
+            height={100}
+            alt="Company logo"
+          />
+        </Link>
 
-          <button
-            className="navbar-toggler toggler-mobile"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
+        <button
+          className="navbar-toggler toggler-mobile"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link
-                  className={`nav-link  text-white ${
-                    pathName === "/" ? "active" : ""
-                  }`}
-                  aria-current="page"
-                  href="/"
-                >
-                  البداية
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link  text-white" href="#">
-                  {" "}
-                  الدول
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link  text-white" href="#">
-                  {" "}
-                  العروض
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link  text-white" href="#">
-                  مركز المساعدة
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link  text-white" href="#">
-                  اتصل بنا
-                </Link>
-              </li>
-              <li className="nav-item">
-                <button
-                  className="nav-link text-white"
-                  aria-label="Switch to English"
-                >
-                  English
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  className="nav-link text-white"
-                  aria-label="Switch currency to SAR"
-                >
-                  ر.س
-                </button>
-              </li>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link
+                className={`nav-link text-white ${
+                  pathName === "/" ? "active" : ""
+                }`}
+                href="/"
+              >
+                البداية
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" href="#">
+                الدول
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" href="#">
+                العروض
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" href="#">
+                مركز المساعدة
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" href="#">
+                اتصل بنا
+              </Link>
+            </li>
+            <li className="nav-item">
+              <button
+                className="nav-link text-white"
+                aria-label="Switch to English"
+              >
+                English
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className="nav-link text-white"
+                aria-label="Switch currency to SAR"
+              >
+                ر.س
+              </button>
+            </li>
+          </ul>
+
+          <div className="d-flex">
+            <ul className="navbar-nav ms-auto mb-2 mx-lg-5 mb-lg-0">
+              {renderAuthLinks()}
             </ul>
-
-            <div className="d-flex">
-              <ul className="navbar-nav ms-auto mb-2 mx-lg-5 mb-lg-0">
-                <li className="nav-item">
-                  <Link
-                    className="nav-link  text-white"
-                    aria-current="page"
-                    href="/Login"
-                  >
-                    دخول
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className="nav-link  text-white resgister"
-                    href="/Register"
-                  >
-                    تسجيل
-                  </Link>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 }

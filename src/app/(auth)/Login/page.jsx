@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import LoginUser from "@/assets/images/login.svg";
 import AuthLinks from "@/app/_Compontents/AuthLinks/AuthLinks";
@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { TailSpin } from "react-loader-spinner";
 import Link from "next/link";
+import { authtoken } from "@/app/_Compontents/Authtoken/Authtoken";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -20,6 +21,7 @@ const LoginPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { settoken } = useContext(authtoken);
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
@@ -60,18 +62,29 @@ const LoginPage = () => {
     try {
       setLoading(true);
       setErrorMessage("");
-      const { data } = await axios.post("https://api.tajwal.co/api/v1/login", {
-        phone_number: phoneNumber,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://api.tajwal.co/api/v1/login",
+        {
+          phone_number: phoneNumber,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
 
       if (data.success) {
         toast.success("تم تسجيل الدخول بنجاح!", {
           duration: 1500,
           style: { backgroundColor: "#4b87a4", color: "white" },
         });
-        setTimeout(() => router.push("/"), 1000);
         localStorage.setItem("token", data.data.token); // Store the token properly
+        settoken(data.data.token);
+        localStorage.setItem("user", JSON.stringify(data.data.user));
+        setTimeout(() => router.push("/"), 1000);
       } else {
         setErrorMessage(data.message || "فشل تسجيل الدخول. حاول مرة أخرى.");
       }

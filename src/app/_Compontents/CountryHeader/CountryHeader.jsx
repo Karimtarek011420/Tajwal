@@ -7,6 +7,8 @@ import china from "../../../assets/images/china.svg";
 import france from "../../../assets/images/france.svg";
 import arrow from "../../../assets/images/arrow.svg";
 import "./countryheader.css";
+import jwt from 'jsonwebtoken';
+
 
 export default function CountryHeader() {
   const list1 = [
@@ -23,6 +25,8 @@ export default function CountryHeader() {
     { name: "فرنسا", flag: france },
     { name: "الصين", flag: china },
   ];
+  
+
   return (
     <div className="countryheader position-relative py-5">
       <div className="position-absolute country-list w-100">
@@ -71,7 +75,9 @@ export default function CountryHeader() {
         </div>
       </div>
       <div className=" d-flex justify-content-center align-items-center pt-5">
-        <Link  href=' ' className=" countryshow text-white  px-5 py-3">عرض جميع الدول</Link>
+        <Link href=" " className=" countryshow text-white  px-5 py-3">
+          عرض جميع الدول
+        </Link>
       </div>
     </div>
   );

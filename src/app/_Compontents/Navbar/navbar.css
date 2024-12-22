@@ -4,9 +4,48 @@
   border-radius: 10px;
 }
 li a.nav-link {
-    font-size: 20px !important;
-    font-weight: 300 !important;
+  font-size: 20px !important;
+  font-weight: 300 !important;
 }
+.dropdown.dropacount {
+  margin-left: 200px !important;
+}
+/* التأكد من عرض القائمة بشكل جيد على الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    width: 100%; /* لجعل القائمة تتكيف مع عرض الشاشة */
+  }
+}
+
+/* ضبط السهم بجانب القائمة */
+.nav-link.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-menu {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* إضافة ظل للقائمة */
+  border-radius: 8px; /* جعل الحواف مستديرة */
+}
+
+.dropdown-item i {
+  font-size: 14px; /* ضبط حجم الأيقونة */
+  color: #999; /* لون الأيقونة بجانب العناصر */
+}
+
+/* تحسين السهم الرئيسي */
+.nav-link .fa-chevron-down {
+  font-size: 12px;
+  color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* عند فتح القائمة - تدوير السهم */
+.nav-item.dropdown.show .nav-link .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
 @media screen and (max-width: 700px) {
   .resgister {
     width: fit-content !important;
@@ -23,5 +62,3 @@ li a.nav-link {
     padding: 10px 2px !important ;
   }
 }
-
-
