@@ -204,7 +204,12 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" href="#">
+              <Link
+                className={`nav-link text-white ${
+                  pathName === "/Countries" ? "active" : ""
+                }`}
+                href="/Countries"
+              >
                 الدول
               </Link>
             </li>

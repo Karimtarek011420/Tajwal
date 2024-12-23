@@ -276,7 +276,7 @@ export default function AccountInformation() {
               />
               <div>
                 <ul className="list-unstyled px-3">
-                  <Link href="/accountInformation">
+                  <Link href="/AccountInformation">
                     <li
                       className={
                         pathName === "/AccountInformation" ? "active" : ""
