@@ -5,6 +5,7 @@ import "./accountinform.css";
 import { usePathname, useRouter } from "next/navigation";
 import { authtoken } from "@/app/_Compontents/Authtoken/Authtoken";
 import { logoutApi } from "@/app/Hookshelp/logout";
+import axios from "axios";
 
 export default function AccountInformation() {
   const [user, setUser] = useState(() => {
@@ -14,6 +15,8 @@ export default function AccountInformation() {
       return {};
     }
   });
+  const [modalData, setModalData] = useState({ field: "", value: "", otp: "" });
+
   const { token, settoken } = useContext(authtoken);
   const router = useRouter();
 
@@ -25,6 +28,81 @@ export default function AccountInformation() {
         router.push("/");
       });
     }
+  };
+  const createPhoneOtp = async (phoneNumber) => {
+    try {
+      const response = await axios.post(
+        "https://api.tajwal.co/api/v1/create_phone_change_otp",
+        { phone_number: phoneNumber },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updatePhoneNumber = async (otp, phoneNumber) => {
+    try {
+      const response = await axios.post(
+        "https://api.tajwal.co/api/v1/update_phone",
+        { otp, phone_number: phoneNumber },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateProfile = async (updatedData) => {
+    try {
+      const response = await axios.patch(
+        "https://api.tajwal.co/api/v1/profile",
+        updatedData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        }
+      );
+      return response.data; // إرجاع البيانات المستجابة عند نجاح الطلب
+    } catch (error) {
+      console.log("error");
+    }
+  };
+  const handleUpdate = async () => {
+    if (modalData.field === "phone_number") {
+      if (!modalData.otp) {
+        // Step 1: Request OTP
+        await createPhoneOtp(modalData.value);
+        alert("OTP sent!");
+        return;
+      } else {
+        // Step 2: Verify OTP and update phone number
+        await updatePhoneNumber(modalData.otp, modalData.value);
+      }
+    } else {
+      // Update email or password
+      await updateProfile({ [modalData.field]: modalData.value });
+    }
+
+    // Update local data
+    const updatedData = { ...user, [modalData.field]: modalData.value };
+    setUser(updatedData);
+    localStorage.setItem("user", JSON.stringify(updatedData));
+    alert("Updated successfully!");
+    setModalData({ field: "", value: "", otp: "" });
   };
 
   return (
@@ -98,7 +176,7 @@ export default function AccountInformation() {
           <div className=" col-md-6 offset-2">
             <div className="changeinfo">
               <div className=" bg-white rounded-4 shadow-sm px-5 py-3">
-                <h6
+                <p
                   style={{
                     color: "#B6BCC3",
                     fontSize: "13px",
@@ -106,26 +184,23 @@ export default function AccountInformation() {
                   }}
                 >
                   الاسم
-                </h6>
-                <h6>
-                  {" "}
-                  <h6
-                    style={{
-                      color: "#575050",
-                      fontSize: "13px",
-                      fontWeight: "300",
-                    }}
-                  >
-                    {user?.first_name}
-                  </h6>
-                </h6>
+                </p>
+                <p
+                  style={{
+                    color: "#575050",
+                    fontSize: "13px",
+                    fontWeight: "300",
+                  }}
+                >
+                  {user?.first_name}
+                </p>
               </div>
               <div
                 className=" boxchange rounded-4 shadow-sm px-5 py-3 my-4 d-flex justify-content-between align-items-center"
                 style={{ backgroundColor: "#F1F3F6" }}
               >
                 <div>
-                  <h6
+                  <p
                     style={{
                       color: "#B6BCC3",
                       fontSize: "13px",
@@ -133,20 +208,33 @@ export default function AccountInformation() {
                     }}
                   >
                     رقم الجوال
-                  </h6>
+                  </p>
 
-                  <h6
+                  <p
                     style={{
                       color: "#575050",
                       fontSize: "13px",
                       fontWeight: "300",
                     }}
+                    dir="ltr"
                   >
-                    <span dir="ltr">{user?.phone_number}</span>
-                  </h6>
+                    {user?.phone_number}
+                  </p>
                 </div>
                 <div>
-                  <button className=" btnchange border-0"> تغيير</button>
+                  <button
+                    onClick={() =>
+                      setModalData({
+                        field: "phone_number",
+                        value: "",
+                        otp: "",
+                      })
+                    }
+                    className=" btnchange border-0"
+                  >
+                    {" "}
+                    تغيير
+                  </button>
                 </div>
               </div>
               <div
@@ -154,7 +242,7 @@ export default function AccountInformation() {
                 style={{ backgroundColor: "#F1F3F6" }}
               >
                 <div>
-                  <h6
+                  <p
                     style={{
                       color: "#B6BCC3",
                       fontSize: "13px",
@@ -162,22 +250,27 @@ export default function AccountInformation() {
                     }}
                   >
                     البريد الإلكترونى
-                  </h6>
-                  <h6>
-                    {" "}
-                    <h6
-                      style={{
-                        color: "#575050",
-                        fontSize: "13px",
-                        fontWeight: "300",
-                      }}
-                    >
-                      <span>{user?.email}</span>
-                    </h6>
+                  </p>{" "}
+                  <h6
+                    style={{
+                      color: "#575050",
+                      fontSize: "13px",
+                      fontWeight: "300",
+                    }}
+                  >
+                    <span>{user?.email}</span>
                   </h6>
                 </div>
                 <div>
-                  <button className=" btnchange border-0"> تغيير</button>
+                  <button
+                    onClick={() =>
+                      setModalData({ field: "email", value: "", otp: "" })
+                    }
+                    className=" btnchange border-0"
+                  >
+                    {" "}
+                    تغيير
+                  </button>
                 </div>
               </div>
               <div
@@ -195,24 +288,53 @@ export default function AccountInformation() {
                     كلمة المرور الحالية
                   </h6>
 
-                  <h6>
-                    {" "}
-                    <h6
-                      style={{
-                        color: "#575050",
-                        fontSize: "13px",
-                        fontWeight: "300",
-                      }}
-                    >
-                      ********
-                    </h6>
+                  <h6
+                    style={{
+                      color: "#575050",
+                      fontSize: "13px",
+                      fontWeight: "300",
+                    }}
+                  >
+                    ********
                   </h6>
                 </div>
                 <div>
-                  <button className=" btnchange border-0"> تغيير</button>
+                  <button
+                    onClick={() =>
+                      setModalData({ field: "password", value: "", otp: "" })
+                    }
+                    className=" btnchange border-0"
+                  >
+                    {" "}
+                    تغيير
+                  </button>
                 </div>
               </div>
             </div>
+            {modalData.field && (
+              <div className="modal">
+                <h2>تغيير {modalData.field}</h2>
+                <input
+                  type="text"
+                  placeholder={`أدخل ${modalData.field}`}
+                  value={modalData.value}
+                  onChange={(e) =>
+                    setModalData({ ...modalData, value: e.target.value })
+                  }
+                />
+                {modalData.field === "phone_number" && (
+                  <input
+                    type="text"
+                    placeholder="أدخل OTP"
+                    value={modalData.otp}
+                    onChange={(e) =>
+                      setModalData({ ...modalData, otp: e.target.value })
+                    }
+                  />
+                )}
+                <button onClick={handleUpdate}>تحديث</button>
+              </div>
+            )}
           </div>
         </div>
       </div>

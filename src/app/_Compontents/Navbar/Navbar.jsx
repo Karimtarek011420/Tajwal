@@ -60,7 +60,7 @@ export default function Navbar() {
             <li>
               <Link
                 className="dropdown-item d-flex justify-content-between align-items-center px-3"
-                href="/accountInformation"
+                href="/AccountInformation"
                 style={{
                   color: "#575050",
                   padding: "10px",
