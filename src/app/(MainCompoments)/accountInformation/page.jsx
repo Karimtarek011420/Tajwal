@@ -6,9 +6,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { authtoken } from "@/app/_Compontents/Authtoken/Authtoken";
 import { logoutApi } from "@/app/Hookshelp/logout";
 import axios from "axios";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { TailSpin } from "react-loader-spinner";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 export default function AccountInformation() {
   const [user, setUser] = useState(() => {
@@ -20,6 +21,9 @@ export default function AccountInformation() {
   });
   const [modalData, setModalData] = useState({ field: "", value: "", otp: "" });
   const [loading, setLoading] = useState(false);
+  const handlePhoneChange = (value, country) => {
+    setModalData({ ...modalData, value }); // تحديث رقم الهاتف في state
+  };
 
   const { token, settoken } = useContext(authtoken);
   const router = useRouter();
@@ -33,6 +37,7 @@ export default function AccountInformation() {
       });
     }
   };
+
   const isValidPhoneNumber = (phoneNumber) => {
     const phonePattern = /\+\d{11,15}/; // Adjust the pattern to fit the phone number format you expect
     return phonePattern.test(phoneNumber);
@@ -41,7 +46,13 @@ export default function AccountInformation() {
   const createPhoneOtp = async (phoneNumber) => {
     setLoading(true);
     if (!isValidPhoneNumber(phoneNumber)) {
-      toast.error("Invalid phone number format.");
+      Swal.fire({
+        icon: "error",
+        title: "خطأ",
+        text: "صيغة رقم الهاتف غير صحيحة.",
+        confirmButtonText: "حسنًا",
+      });
+      setLoading(false);
       return;
     }
     try {
@@ -58,10 +69,15 @@ export default function AccountInformation() {
       return response.data;
     } catch (error) {
       console.error("Error creating OTP:", error);
-      toast.error("Failed to send OTP. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "خطأ",
+        text: "فشل في إرسال OTP. يرجى المحاولة مرة أخرى.",
+        confirmButtonText: "حسنًا",
+      });
       return null;
     } finally {
-      setLoading(false); // Set loading state back to false after the request is done
+      setLoading(false);
     }
   };
 
@@ -81,8 +97,15 @@ export default function AccountInformation() {
       return response.data;
     } catch (error) {
       console.error("Error updating phone number:", error);
+      Swal.fire({
+        icon: "error",
+        title: "خطأ",
+        text: "فشل في تحديث رقم الهاتف. يرجى المحاولة مرة أخرى.",
+        confirmButtonText: "حسنًا",
+      });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const updateProfile = async (updatedData) => {
@@ -100,91 +123,84 @@ export default function AccountInformation() {
       return response.data;
     } catch (error) {
       console.error("Error updating profile:", error);
-      toast.error("Failed to update profile. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "خطأ",
+        text: "فشل في تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
+        confirmButtonText: "حسنًا",
+      });
     }
   };
 
   const handleUpdate = async () => {
     setLoading(true);
+
+    const showError = (message) => {
+      Swal.fire({
+        icon: "error",
+        title: "خطأ",
+        text: message,
+        confirmButtonText: "حسنًا",
+      });
+    };
+
     try {
       if (modalData.field === "phone_number") {
         if (!modalData.otp) {
-          // Step 1: Request OTP
           await createPhoneOtp(modalData.value);
-
           Swal.fire({
             position: "top",
             icon: "success",
-            title: " تم إرسال رمز OTP بنجاح",
+            title: "تم إرسال رمز OTP بنجاح",
             showConfirmButton: false,
-            timer: 500,
+            timer: 2000,
             toast: true,
-            background: "#4b87a4",
-            color: "white",
-            iconColor: "white",
-            padding: "10px 20px",
-            width: 400,
-            timerProgressBar: true,
           });
-
+          setLoading(false);
           return;
         } else {
           await updatePhoneNumber(modalData.otp, modalData.value);
-          Swal.fire({
-            position: "top",
-            icon: "success",
-            title: "تم  التحديث بنجاح  ",
-            showConfirmButton: false,
-            timer: 500,
-            toast: true,
-            background: "#4b87a4",
-            color: "white",
-            iconColor: "white",
-            padding: "10px 20px",
-            width: 400,
-            timerProgressBar: true,
-          });
         }
-      } else {
-        // Update email or password
-        await updateProfile({ [modalData.field]: modalData.value });
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: "تم   التحديث بنجاح",
-          showConfirmButton: false,
-          timer: 500,
-          toast: true,
-          background: "#4b87a4",
-          color: "white",
-          iconColor: "white",
-          padding: "10px 20px",
-          width: 400,
-          timerProgressBar: true,
-        });
       }
 
-      // Update local data
-      const updatedData = { ...user, [modalData.field]: modalData.value };
-      setUser(updatedData);
-      localStorage.setItem("user", JSON.stringify(updatedData));
+      if (modalData.field === "email") {
+        if (
+          !modalData.value ||
+          !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+            modalData.value
+          )
+        ) {
+          showError("يرجى إدخال بريد إلكتروني صحيح.");
+          setLoading(false);
+          return;
+        }
+      }
+
+      if (modalData.field === "password") {
+        if (!modalData.value || modalData.value.length < 8) {
+          showError("كلمة المرور يجب أن تكون 8 حروف على الأقل.");
+          setLoading(false);
+          return;
+        }
+      }
+
+      await updateProfile({ [modalData.field]: modalData.value });
       Swal.fire({
         position: "top",
         icon: "success",
-        title: "تم  التحديث  بنجاح",
+        title: "تم التحديث بنجاح",
         showConfirmButton: false,
-        timer: 500,
+        timer: 2000,
         toast: true,
-        background: "#4b87a4",
-        color: "white",
-        iconColor: "white",
-        padding: "10px 20px",
-        width: 400,
-        timerProgressBar: true,
       });
+
+      const updatedData = { ...user, [modalData.field]: modalData.value };
+      setUser(updatedData);
+      localStorage.setItem("user", JSON.stringify(updatedData));
       setModalData({ field: "", value: "", otp: "" });
     } catch (error) {
       console.error("Error during update:", error);
+      showError("حدث خطأ أثناء التحديث. يرجى المحاولة مرة أخرى.");
     } finally {
       setLoading(false);
     }
@@ -395,48 +411,74 @@ export default function AccountInformation() {
           <div
             className={`modal ${modalData.field ? "modal-visible" : ""}`}
             onClick={(e) => {
+              // إذا تم النقر على منطقة خارجية (مودال فقط)، يتم إغلاق النافذة.
               if (e.target.classList.contains("modal")) {
                 setModalData({ field: "", value: "", otp: "" });
               }
             }}
           >
             <div className="modal-content">
-              <h6 className="">تغيير {modalData.field}</h6>
-              <input
-                type="text"
-                className="changeinput"
-                placeholder={`أدخل ${modalData.field}`}
-                value={modalData.value}
-                onChange={(e) =>
-                  setModalData({ ...modalData, value: e.target.value })
-                }
-              />
-              {modalData.field === "phone_number" && (
+              <h6 className="modal-title">تغيير {modalData.field}</h6>
+
+              {/* عرض إدخال التغيير حسب نوع الحقل */}
+              {modalData.field === "phone_number" ? (
+                <>
+                  {/* إدخال رقم الجوال */}
+                  <PhoneInput
+                    defaultCountry="sa" // تعيين الدولة الافتراضية إلى السعودية
+                    value={modalData.value}
+                    onChange={handlePhoneChange}
+                    placeholder="أدخل رقم الجوال"
+                    containerClassName="custom-phone-input"
+                  />
+
+                  {/* إدخال OTP إذا كان مطلوباً */}
+                  <input
+                    type="text"
+                    className="changeinput my-2"
+                    placeholder="أدخل OTP"
+                    value={modalData.otp}
+                    onChange={(e) =>
+                      setModalData({ ...modalData, otp: e.target.value })
+                    }
+                  />
+                </>
+              ) : (
+                // إدخال نصي للأجزاء الأخرى (البريد الإلكتروني أو كلمة المرور)
                 <input
                   type="text"
-                  className="changeinput my-2"
-                  placeholder="أدخل OTP"
-                  value={modalData.otp}
+                  className="changeinput"
+                  placeholder={`أدخل ${modalData.field}`}
+                  value={modalData.value}
                   onChange={(e) =>
-                    setModalData({ ...modalData, otp: e.target.value })
+                    setModalData({ ...modalData, value: e.target.value })
                   }
                 />
               )}
+
+              {/* زر التحديث */}
               <div className="d-flex justify-content-center align-items-center my-2">
-                <button onClick={handleUpdate} className=" form-control follow">
+                <button
+                  onClick={handleUpdate}
+                  className="form-control follow position-relative"
+                >
                   {loading ? (
-                    <TailSpin
-                      visible={true}
-                      height="35"
-                      width="35"
-                      color="#fff"
-                      ariaLabel="tail-spin-loading"
-                    />
+                    <div className="d-flex justify-content-center align-items-center">
+                      <TailSpin
+                        visible={true}
+                        height="20" // تقليل الحجم ليتناسب مع الزر
+                        width="20"
+                        color="#fff"
+                        ariaLabel="tail-spin-loading"
+                      />
+                    </div>
                   ) : (
                     "تحديث"
                   )}
                 </button>
               </div>
+
+              {/* زر الإغلاق */}
               <div>
                 <button
                   onClick={() =>

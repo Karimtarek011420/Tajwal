@@ -73,7 +73,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
- button.follow {
+button.follow {
   background-color: #4b87a4 !important;
   padding: 10px 100px; /* Adjust button padding */
   color: #f1f3f6;
@@ -86,6 +86,37 @@
   outline: 0 !important;
   box-shadow: 0 0 0 0 transparent !important;
 }
+.swal-small-popup {
+  max-width: 300px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.swal-small-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #336279;
+}
+
+.swal-small-content {
+  font-size: 14px;
+  color: #575050;
+  text-align: center;
+}
+
+.swal-small-button {
+  font-size: 14px;
+  background-color: #336279;
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.swal-small-button:hover {
+  background-color: #285068;
+}
+
 .modal-content input {
   background-color: #f9f9f9 !important;
   border: none !important;
