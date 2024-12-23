@@ -290,7 +290,7 @@ export default function AccountInformation() {
                   <Link href="/accountInformation">
                     <li
                       className={
-                        pathName === "/accountInformation" ? "active" : ""
+                        pathName === "/AccountInformation" ? "active" : ""
                       }
                     >
                       معلومات الحساب
