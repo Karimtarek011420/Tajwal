@@ -39,30 +39,11 @@ export default function AccountInformation() {
     }
   };
 
-  const isValidPhoneNumber = (phoneNumber) => {
-    const phonePattern = /^\+\d{11,15}$/;
-    return phonePattern.test(phoneNumber);
-  };
-
-  const isValidOtp = (otp) => {
-    const otpPattern = /^\d{1,4}$/;
-    return otpPattern.test(otp);
-  };
+  const isValidPhoneNumber = (phoneNumber) => /^\+\d{11,15}$/.test(phoneNumber);
+  const isValidOtp = (otp) => /^\d{1,4}$/.test(otp);
 
   const createPhoneOtp = async (phoneNumber) => {
     setLoading(true);
-    if (!isValidPhoneNumber(phoneNumber)) {
-      Swal.fire({
-        icon: "error",
-        text: "صيغة رقم الهاتف غير صحيحة. يجب أن يتراوح الرقم بين 11 و15 رقمًا.",
-        toast: true,
-        timer: 2000,
-        position: "top",
-        showConfirmButton: false,
-      });
-      setLoading(false);
-      return;
-    }
     try {
       const response = await axios.post(
         "https://api.tajwal.co/api/v1/create_phone_change_otp",
@@ -92,18 +73,6 @@ export default function AccountInformation() {
 
   const updatePhoneNumber = async (otp, phoneNumber) => {
     setLoading(true);
-    if (!isValidOtp(otp)) {
-      Swal.fire({
-        icon: "error",
-        text: "يجب إدخال رمز OTP صحيح.",
-        toast: true,
-        timer: 2000,
-        position: "top",
-        showConfirmButton: false,
-      });
-      setLoading(false);
-      return;
-    }
     try {
       const response = await axios.post(
         "https://api.tajwal.co/api/v1/update_phone",
@@ -157,19 +126,30 @@ export default function AccountInformation() {
 
   const handleUpdate = async () => {
     setLoading(true);
-
     try {
       if (modalData.field === "phone_number") {
         if (!modalData.otp) {
-          if (modalData.value.length === 0) {
+          if (!isValidPhoneNumber(modalData.value)) {
             Swal.fire({
               icon: "error",
-              text: " يرجى مل الحقل.",
+              text: " الرجاء إدخال رقم بشكل صحيح",
               toast: true,
               timer: 2000,
               position: "top",
               showConfirmButton: false,
             });
+            if (modalData.value === 0) {
+              Swal.fire({
+                icon: "error",
+                text: " يرجى مل الحقل.",
+                toast: true,
+                timer: 2000,
+                position: "top",
+                showConfirmButton: false,
+              });
+              setLoading(false);
+              return;
+            }
             setLoading(false);
             return;
           }
@@ -182,9 +162,19 @@ export default function AccountInformation() {
             position: "top",
             showConfirmButton: false,
           });
-          setLoading(false);
           return;
         } else {
+          if (!isValidOtp(modalData.otp)) {
+            Swal.fire({
+              icon: "error",
+              text: " يجب ادخال رمز OTP صحيح",
+              toast: true,
+              timer: 2000,
+              position: "top",
+              showConfirmButton: false,
+            });
+            return;
+          }
           await updatePhoneNumber(modalData.otp, modalData.value);
         }
       } else if (modalData.field === "email") {
@@ -491,11 +481,15 @@ export default function AccountInformation() {
                 <>
                   {/* إدخال رقم الجوال */}
                   <PhoneInput
-                    defaultCountry="sa" // تعيين الدولة الافتراضية إلى السعودية
+                    defaultCountry="sa" // تعيين الدولة الافتراضية إلى السعودية (رمز الدولة)
                     value={modalData.value}
-                    onChange={handlePhoneChange}
+                    onChange={
+                      (value) => setModalData({ ...modalData, value }) // تحديث قيمة رقم الجوال
+                    }
                     placeholder="أدخل رقم الجوال"
-                    containerClassName="custom-phone-input"
+                    containerClassName="custom-phone-input" // كلاس مخصص لتحسين التصميم
+                    inputClassName="custom-phone-input-field" // كلاس مخصص لحقل الإدخال
+                    className="inputchange"
                   />
 
                   {/* إدخال OTP إذا كان مطلوباً */}
@@ -504,8 +498,8 @@ export default function AccountInformation() {
                     className="changeinput my-2"
                     placeholder="أدخل OTP"
                     value={modalData.otp}
-                    onChange={(e) =>
-                      setModalData({ ...modalData, otp: e.target.value })
+                    onChange={
+                      (e) => setModalData({ ...modalData, otp: e.target.value }) // تحديث قيمة OTP
                     }
                   />
                 </>
@@ -514,10 +508,10 @@ export default function AccountInformation() {
                 <input
                   type="text"
                   className="changeinput"
-                  placeholder={`أدخل ${modalData.field}`}
+                  placeholder={`أدخل ${modalData.field}`} // النص التوضيحي بناءً على الحقل
                   value={modalData.value}
-                  onChange={(e) =>
-                    setModalData({ ...modalData, value: e.target.value })
+                  onChange={
+                    (e) => setModalData({ ...modalData, value: e.target.value }) // تحديث القيمة
                   }
                 />
               )}
@@ -544,19 +538,15 @@ export default function AccountInformation() {
                 </button>
               </div>
               <button
-                  onClick={() =>
-                    setModalData({ field: "", value: "", otp: "" })
-                  }
-                  className="follow form-control"
-                >
-                  إغلاق
-                </button>
-              </div>
-
-              
-              {/* زر الإغلاق */}
+                onClick={() => setModalData({ field: "", value: "", otp: "" })}
+                className="follow form-control"
+              >
+                إغلاق
+              </button>
             </div>
-         
+
+            {/* زر الإغلاق */}
+          </div>
         )}
       </div>
     </div>

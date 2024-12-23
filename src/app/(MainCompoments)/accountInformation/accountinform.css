@@ -3,6 +3,10 @@
   background-color: #f9f9f9;
   padding: 20px;
 }
+.cardinfo .active {
+  background-color: blue !important;
+  font-weight: 500;
+}
 
 .countryheader .country-list {
   left: 50%;
@@ -103,7 +107,16 @@ button.follow {
   color: #575050;
   text-align: center;
 }
-
+.inputchange{
+  width: 100% !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  background-color: #f9f9f9 !important;
+  border-radius: 5px !important;
+  padding: 10px 12px !important;
+  margin-top: 10px;
+}
 .swal-small-button {
   font-size: 14px;
   background-color: #336279;
