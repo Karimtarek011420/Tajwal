@@ -138,21 +138,10 @@ export default function AccountInformation() {
               position: "top",
               showConfirmButton: false,
             });
-            if (modalData.value === 0) {
-              Swal.fire({
-                icon: "error",
-                text: " يرجى مل الحقل.",
-                toast: true,
-                timer: 2000,
-                position: "top",
-                showConfirmButton: false,
-              });
-              setLoading(false);
-              return;
-            }
             setLoading(false);
             return;
           }
+
           await createPhoneOtp(modalData.value);
           Swal.fire({
             icon: "success",
