@@ -16,11 +16,12 @@ export default function AccountInformation() {
     }
   });
   const [modalData, setModalData] = useState({ field: "", value: "", otp: "" });
+  const [loading, setLoading] = useState(false);
 
   const { token, settoken } = useContext(authtoken);
   const router = useRouter();
-
   const pathName = usePathname();
+
   const handleLogout = () => {
     if (token) {
       logoutApi(token, settoken);
@@ -29,6 +30,7 @@ export default function AccountInformation() {
       });
     }
   };
+
   const createPhoneOtp = async (phoneNumber) => {
     try {
       const response = await axios.post(
@@ -43,9 +45,11 @@ export default function AccountInformation() {
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.error("Error creating OTP:", error);
+      alert("Failed to send OTP. Please try again.");
     }
   };
+
   const updatePhoneNumber = async (otp, phoneNumber) => {
     try {
       const response = await axios.post(
@@ -60,7 +64,8 @@ export default function AccountInformation() {
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.error("Error updating phone number:", error);
+      alert("Failed to update phone number. Please try again.");
     }
   };
 
@@ -76,33 +81,42 @@ export default function AccountInformation() {
           },
         }
       );
-      return response.data; // إرجاع البيانات المستجابة عند نجاح الطلب
+      return response.data;
     } catch (error) {
-      console.log("error");
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile. Please try again.");
     }
   };
-  const handleUpdate = async () => {
-    if (modalData.field === "phone_number") {
-      if (!modalData.otp) {
-        // Step 1: Request OTP
-        await createPhoneOtp(modalData.value);
-        alert("OTP sent!");
-        return;
-      } else {
-        // Step 2: Verify OTP and update phone number
-        await updatePhoneNumber(modalData.otp, modalData.value);
-      }
-    } else {
-      // Update email or password
-      await updateProfile({ [modalData.field]: modalData.value });
-    }
 
-    // Update local data
-    const updatedData = { ...user, [modalData.field]: modalData.value };
-    setUser(updatedData);
-    localStorage.setItem("user", JSON.stringify(updatedData));
-    alert("Updated successfully!");
-    setModalData({ field: "", value: "", otp: "" });
+  const handleUpdate = async () => {
+    setLoading(true);
+    try {
+      if (modalData.field === "phone_number") {
+        if (!modalData.otp) {
+          // Step 1: Request OTP
+          await createPhoneOtp(modalData.value);
+          alert("OTP sent! Please enter it to proceed.");
+          return;
+        } else {
+          // Step 2: Verify OTP and update phone number
+          await updatePhoneNumber(modalData.otp, modalData.value);
+        }
+      } else {
+        // Update email or password
+        await updateProfile({ [modalData.field]: modalData.value });
+      }
+
+      // Update local data
+      const updatedData = { ...user, [modalData.field]: modalData.value };
+      setUser(updatedData);
+      localStorage.setItem("user", JSON.stringify(updatedData));
+      alert("Updated successfully!");
+      setModalData({ field: "", value: "", otp: "" });
+    } catch (error) {
+      console.error("Error during update:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -126,11 +140,7 @@ export default function AccountInformation() {
                 <span dir="ltr">{user?.phone_number}</span>
               </div>
               <hr
-                style={{
-                  borderColor: "gray",
-                  margin: "10px",
-                  width: "100%",
-                }}
+                style={{ borderColor: "gray", margin: "10px", width: "100%" }}
               />
               <div>
                 <ul className="list-unstyled px-3">
@@ -232,7 +242,6 @@ export default function AccountInformation() {
                     }
                     className=" btnchange border-0"
                   >
-                    {" "}
                     تغيير
                   </button>
                 </div>
@@ -250,7 +259,7 @@ export default function AccountInformation() {
                     }}
                   >
                     البريد الإلكترونى
-                  </p>{" "}
+                  </p>
                   <h6
                     style={{
                       color: "#575050",
@@ -268,7 +277,6 @@ export default function AccountInformation() {
                     }
                     className=" btnchange border-0"
                   >
-                    {" "}
                     تغيير
                   </button>
                 </div>
@@ -305,38 +313,51 @@ export default function AccountInformation() {
                     }
                     className=" btnchange border-0"
                   >
-                    {" "}
                     تغيير
                   </button>
                 </div>
               </div>
             </div>
-            {modalData.field && (
-              <div className="modal">
-                <h2>تغيير {modalData.field}</h2>
-                <input
-                  type="text"
-                  placeholder={`أدخل ${modalData.field}`}
-                  value={modalData.value}
-                  onChange={(e) =>
-                    setModalData({ ...modalData, value: e.target.value })
-                  }
-                />
-                {modalData.field === "phone_number" && (
-                  <input
-                    type="text"
-                    placeholder="أدخل OTP"
-                    value={modalData.otp}
-                    onChange={(e) =>
-                      setModalData({ ...modalData, otp: e.target.value })
-                    }
-                  />
-                )}
-                <button onClick={handleUpdate}>تحديث</button>
-              </div>
-            )}
           </div>
         </div>
+        {modalData.field && (
+          <div
+            className={`modal ${modalData.field ? "modal-visible" : ""}`}
+            onClick={(e) => {
+              if (e.target.classList.contains("modal")) {
+                setModalData({ field: "", value: "", otp: "" });
+              }
+            }}
+          >
+            <div className="modal-content">
+              <h2>تغيير {modalData.field}</h2>
+              <input
+                type="text"
+                placeholder={`أدخل ${modalData.field}`}
+                value={modalData.value}
+                onChange={(e) =>
+                  setModalData({ ...modalData, value: e.target.value })
+                }
+              />
+              {modalData.field === "phone_number" && (
+                <input
+                  type="text"
+                  placeholder="أدخل OTP"
+                  value={modalData.otp}
+                  onChange={(e) =>
+                    setModalData({ ...modalData, otp: e.target.value })
+                  }
+                />
+              )}
+              <button onClick={handleUpdate}>تحديث</button>
+              <button
+                onClick={() => setModalData({ field: "", value: "", otp: "" })}
+              >
+                إغلاق
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
