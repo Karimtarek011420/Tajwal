@@ -21,8 +21,9 @@ export default function AccountInformation() {
   });
   const [modalData, setModalData] = useState({ field: "", value: "", otp: "" });
   const [loading, setLoading] = useState(false);
-  const handlePhoneChange = (value, country) => {
-    setModalData({ ...modalData, value }); // تحديث رقم الهاتف في state
+
+  const handlePhoneChange = (value) => {
+    setModalData({ ...modalData, value });
   };
 
   const { token, settoken } = useContext(authtoken);
@@ -39,8 +40,13 @@ export default function AccountInformation() {
   };
 
   const isValidPhoneNumber = (phoneNumber) => {
-    const phonePattern = /\+\d{11,15}/; // Adjust the pattern to fit the phone number format you expect
+    const phonePattern = /^\+\d{11,15}$/;
     return phonePattern.test(phoneNumber);
+  };
+
+  const isValidOtp = (otp) => {
+    const otpPattern = /^\d{1,4}$/;
+    return otpPattern.test(otp);
   };
 
   const createPhoneOtp = async (phoneNumber) => {
@@ -48,9 +54,11 @@ export default function AccountInformation() {
     if (!isValidPhoneNumber(phoneNumber)) {
       Swal.fire({
         icon: "error",
-        title: "خطأ",
-        text: "صيغة رقم الهاتف غير صحيحة.",
-        confirmButtonText: "حسنًا",
+        text: "صيغة رقم الهاتف غير صحيحة. يجب أن يتراوح الرقم بين 11 و15 رقمًا.",
+        toast: true,
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
       });
       setLoading(false);
       return;
@@ -68,12 +76,13 @@ export default function AccountInformation() {
       );
       return response.data;
     } catch (error) {
-      console.error("Error creating OTP:", error);
       Swal.fire({
         icon: "error",
-        title: "خطأ",
         text: "فشل في إرسال OTP. يرجى المحاولة مرة أخرى.",
-        confirmButtonText: "حسنًا",
+        toast: true,
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
       });
       return null;
     } finally {
@@ -83,6 +92,18 @@ export default function AccountInformation() {
 
   const updatePhoneNumber = async (otp, phoneNumber) => {
     setLoading(true);
+    if (!isValidOtp(otp)) {
+      Swal.fire({
+        icon: "error",
+        text: "يجب إدخال رمز OTP صحيح.",
+        toast: true,
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
+      });
+      setLoading(false);
+      return;
+    }
     try {
       const response = await axios.post(
         "https://api.tajwal.co/api/v1/update_phone",
@@ -96,12 +117,13 @@ export default function AccountInformation() {
       );
       return response.data;
     } catch (error) {
-      console.error("Error updating phone number:", error);
       Swal.fire({
         icon: "error",
-        title: "خطأ",
         text: "فشل في تحديث رقم الهاتف. يرجى المحاولة مرة أخرى.",
-        confirmButtonText: "حسنًا",
+        toast: true,
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
       });
     } finally {
       setLoading(false);
@@ -122,12 +144,13 @@ export default function AccountInformation() {
       );
       return response.data;
     } catch (error) {
-      console.error("Error updating profile:", error);
       Swal.fire({
         icon: "error",
-        title: "خطأ",
         text: "فشل في تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
-        confirmButtonText: "حسنًا",
+        toast: true,
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
       });
     }
   };
@@ -135,50 +158,87 @@ export default function AccountInformation() {
   const handleUpdate = async () => {
     setLoading(true);
 
-    const showError = (message) => {
-      Swal.fire({
-        icon: "error",
-        title: "خطأ",
-        text: message,
-        confirmButtonText: "حسنًا",
-      });
-    };
-
     try {
       if (modalData.field === "phone_number") {
         if (!modalData.otp) {
+          if (modalData.value.length === 0) {
+            Swal.fire({
+              icon: "error",
+              text: " يرجى مل الحقل.",
+              toast: true,
+              timer: 2000,
+              position: "top",
+              showConfirmButton: false,
+            });
+            setLoading(false);
+            return;
+          }
           await createPhoneOtp(modalData.value);
           Swal.fire({
-            position: "top",
             icon: "success",
-            title: "تم إرسال رمز OTP بنجاح",
-            showConfirmButton: false,
-            timer: 2000,
+            text: "تم إرسال رمز OTP بنجاح.",
             toast: true,
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false,
           });
           setLoading(false);
           return;
         } else {
           await updatePhoneNumber(modalData.otp, modalData.value);
         }
-      }
-
-      if (modalData.field === "email") {
+      } else if (modalData.field === "email") {
+        if (modalData.value.length === 0) {
+          Swal.fire({
+            icon: "error",
+            text: "يرجى   ملئ الحقل .",
+            toast: true,
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false,
+          });
+          setLoading(false);
+          return;
+        }
         if (
           !modalData.value ||
           !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
             modalData.value
           )
         ) {
-          showError("يرجى إدخال بريد إلكتروني صحيح.");
+          Swal.fire({
+            icon: "error",
+            text: "يرجى إدخال بريد إلكتروني صحيح.",
+            toast: true,
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false,
+          });
           setLoading(false);
           return;
         }
-      }
-
-      if (modalData.field === "password") {
+      } else if (modalData.field === "password") {
+        if (modalData.value.length === 0) {
+          Swal.fire({
+            icon: "error",
+            text: " يرجى مل الحقل.",
+            toast: true,
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false,
+          });
+          setLoading(false);
+          return;
+        }
         if (!modalData.value || modalData.value.length < 8) {
-          showError("كلمة المرور يجب أن تكون 8 حروف على الأقل.");
+          Swal.fire({
+            icon: "error",
+            text: "كلمة المرور يجب أن تكون 8 حروف على الأقل.",
+            toast: true,
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false,
+          });
           setLoading(false);
           return;
         }
@@ -186,12 +246,12 @@ export default function AccountInformation() {
 
       await updateProfile({ [modalData.field]: modalData.value });
       Swal.fire({
-        position: "top",
         icon: "success",
-        title: "تم التحديث بنجاح",
-        showConfirmButton: false,
-        timer: 2000,
+        text: "تم التحديث بنجاح.",
         toast: true,
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
       });
 
       const updatedData = { ...user, [modalData.field]: modalData.value };
@@ -199,8 +259,14 @@ export default function AccountInformation() {
       localStorage.setItem("user", JSON.stringify(updatedData));
       setModalData({ field: "", value: "", otp: "" });
     } catch (error) {
-      console.error("Error during update:", error);
-      showError("حدث خطأ أثناء التحديث. يرجى المحاولة مرة أخرى.");
+      Swal.fire({
+        icon: "error",
+        text: "حدث خطأ أثناء التحديث. يرجى المحاولة مرة أخرى.",
+        toast: true,
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
+      });
     } finally {
       setLoading(false);
     }
@@ -477,10 +543,7 @@ export default function AccountInformation() {
                   )}
                 </button>
               </div>
-
-              {/* زر الإغلاق */}
-              <div>
-                <button
+              <button
                   onClick={() =>
                     setModalData({ field: "", value: "", otp: "" })
                   }
@@ -489,8 +552,11 @@ export default function AccountInformation() {
                   إغلاق
                 </button>
               </div>
+
+              
+              {/* زر الإغلاق */}
             </div>
-          </div>
+         
         )}
       </div>
     </div>
