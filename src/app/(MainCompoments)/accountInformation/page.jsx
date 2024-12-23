@@ -6,6 +6,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { authtoken } from "@/app/_Compontents/Authtoken/Authtoken";
 import { logoutApi } from "@/app/Hookshelp/logout";
 import axios from "axios";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { TailSpin } from "react-loader-spinner";
 
 export default function AccountInformation() {
   const [user, setUser] = useState(() => {
@@ -30,8 +33,17 @@ export default function AccountInformation() {
       });
     }
   };
+  const isValidPhoneNumber = (phoneNumber) => {
+    const phonePattern = /\+\d{11,15}/; // Adjust the pattern to fit the phone number format you expect
+    return phonePattern.test(phoneNumber);
+  };
 
   const createPhoneOtp = async (phoneNumber) => {
+    setLoading(true);
+    if (!isValidPhoneNumber(phoneNumber)) {
+      toast.error("Invalid phone number format.");
+      return;
+    }
     try {
       const response = await axios.post(
         "https://api.tajwal.co/api/v1/create_phone_change_otp",
@@ -46,11 +58,15 @@ export default function AccountInformation() {
       return response.data;
     } catch (error) {
       console.error("Error creating OTP:", error);
-      alert("Failed to send OTP. Please try again.");
+      toast.error("Failed to send OTP. Please try again.");
+      return null;
+    } finally {
+      setLoading(false); // Set loading state back to false after the request is done
     }
   };
 
   const updatePhoneNumber = async (otp, phoneNumber) => {
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://api.tajwal.co/api/v1/update_phone",
@@ -65,8 +81,8 @@ export default function AccountInformation() {
       return response.data;
     } catch (error) {
       console.error("Error updating phone number:", error);
-      alert("Failed to update phone number. Please try again.");
     }
+    setLoading(false);
   };
 
   const updateProfile = async (updatedData) => {
@@ -84,7 +100,7 @@ export default function AccountInformation() {
       return response.data;
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile. Please try again.");
+      toast.error("Failed to update profile. Please try again.");
     }
   };
 
@@ -95,22 +111,77 @@ export default function AccountInformation() {
         if (!modalData.otp) {
           // Step 1: Request OTP
           await createPhoneOtp(modalData.value);
-          alert("OTP sent! Please enter it to proceed.");
+
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: " تم إرسال رمز OTP بنجاح",
+            showConfirmButton: false,
+            timer: 500,
+            toast: true,
+            background: "#4b87a4",
+            color: "white",
+            iconColor: "white",
+            padding: "10px 20px",
+            width: 400,
+            timerProgressBar: true,
+          });
+
           return;
         } else {
-          // Step 2: Verify OTP and update phone number
           await updatePhoneNumber(modalData.otp, modalData.value);
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "تم  التحديث بنجاح  ",
+            showConfirmButton: false,
+            timer: 500,
+            toast: true,
+            background: "#4b87a4",
+            color: "white",
+            iconColor: "white",
+            padding: "10px 20px",
+            width: 400,
+            timerProgressBar: true,
+          });
         }
       } else {
         // Update email or password
         await updateProfile({ [modalData.field]: modalData.value });
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "تم   التحديث بنجاح",
+          showConfirmButton: false,
+          timer: 500,
+          toast: true,
+          background: "#4b87a4",
+          color: "white",
+          iconColor: "white",
+          padding: "10px 20px",
+          width: 400,
+          timerProgressBar: true,
+        });
       }
 
       // Update local data
       const updatedData = { ...user, [modalData.field]: modalData.value };
       setUser(updatedData);
       localStorage.setItem("user", JSON.stringify(updatedData));
-      alert("Updated successfully!");
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "تم  التحديث  بنجاح",
+        showConfirmButton: false,
+        timer: 500,
+        toast: true,
+        background: "#4b87a4",
+        color: "white",
+        iconColor: "white",
+        padding: "10px 20px",
+        width: 400,
+        timerProgressBar: true,
+      });
       setModalData({ field: "", value: "", otp: "" });
     } catch (error) {
       console.error("Error during update:", error);
@@ -330,9 +401,10 @@ export default function AccountInformation() {
             }}
           >
             <div className="modal-content">
-              <h2>تغيير {modalData.field}</h2>
+              <h6 className="">تغيير {modalData.field}</h6>
               <input
                 type="text"
+                className="changeinput"
                 placeholder={`أدخل ${modalData.field}`}
                 value={modalData.value}
                 onChange={(e) =>
@@ -342,6 +414,7 @@ export default function AccountInformation() {
               {modalData.field === "phone_number" && (
                 <input
                   type="text"
+                  className="changeinput my-2"
                   placeholder="أدخل OTP"
                   value={modalData.otp}
                   onChange={(e) =>
@@ -349,12 +422,31 @@ export default function AccountInformation() {
                   }
                 />
               )}
-              <button onClick={handleUpdate}>تحديث</button>
-              <button
-                onClick={() => setModalData({ field: "", value: "", otp: "" })}
-              >
-                إغلاق
-              </button>
+              <div className="d-flex justify-content-center align-items-center my-2">
+                <button onClick={handleUpdate} className=" form-control follow">
+                  {loading ? (
+                    <TailSpin
+                      visible={true}
+                      height="35"
+                      width="35"
+                      color="#fff"
+                      ariaLabel="tail-spin-loading"
+                    />
+                  ) : (
+                    "تحديث"
+                  )}
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={() =>
+                    setModalData({ field: "", value: "", otp: "" })
+                  }
+                  className="follow form-control"
+                >
+                  إغلاق
+                </button>
+              </div>
             </div>
           </div>
         )}

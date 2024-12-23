@@ -73,10 +73,27 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
-.modal-content button:nth-child(1) {
-  background-color: #007bff;
-  color: white;
+ button.follow {
+  background-color: #4b87a4 !important;
+  padding: 10px 100px; /* Adjust button padding */
+  color: #f1f3f6;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 5px;
+  border: none;
+}
+.modal-content input:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+.modal-content input {
+  background-color: #f9f9f9 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 15px 20px !important;
+}
+.modal-content input::placeholder {
+  font-size: 12px !important;
 }
 
 .modal-content button:nth-child(2) {
