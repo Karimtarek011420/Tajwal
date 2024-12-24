@@ -20,7 +20,23 @@ export default async function CountryHeader() {
   const countries = await getCountry();
 
   return (
-    <div className="countryheader  py-5">
+    <div className="countryheader position-relative  py-5">
+      <div className="position-absolute country-list w-100">
+        <ul className="list-unstyled d-flex justify-content-center align-items-center">
+          <li
+            className="country-list-links bg-white mx-2"
+            style={{ color: "#336279" }}
+          >
+            دولية
+          </li>
+          <Link href="" className="country-list-links text-white mx-2">
+            قارية
+          </Link>
+          <Link href="" className="country-list-links text-white mx-2">
+            عالمية
+          </Link>
+        </ul>
+      </div>
       <div className="px-5">
         <div className="row gy-4">
           {countries?.map((country) => {
