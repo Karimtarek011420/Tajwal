@@ -1,9 +1,10 @@
 .countryheader {
   background-color: #f9f9f9;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .countryheader .country-list {
+  position: absolute;
   left: 50%;
   top: -50px;
   transform: translateX(-50%);
@@ -12,57 +13,103 @@
 
 .country-list .country-list-links {
   cursor: pointer;
-  transition-duration: all 2s;
   border-radius: 5px;
   padding: 15px 80px;
   margin: 0 20px;
   font-size: 17px;
   font-weight: 500;
-}
-.countryname{
-    color: #626E7B !important;
-    font-size: 20px;
-    font-weight: 300;
-}
-.countryshow{
-  background-color:#575050;
-  padding: 15px 100px !important;
-  font-size: 17px !important ;
-  font-weight: 200 !important;
-  border-radius: 10px;
-  color: #FFFFFF !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .country-list .country-list-links:hover {
-  background-color: #f9f9f9 !important;
+  background-color: #f9f9f9;
   color: #336279 !important;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .countryheader .country-list {
-    top: -40px;
+.countryshow {
+  background-color: #575050;
+  padding: 15px 100px;
+  font-size: 17px;
+  font-weight: 200;
+  border-radius: 10px;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.countryshow:hover {
+  background-color: #285060;
+}
+
+.countryname {
+  color: #626e7b;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/* الشاشات الكبيرة */
+@media (min-width: 992px) {
+  .countryname {
+    font-size: 18px;
+  }
+}
+
+/* التابلت */
+@media (max-width: 991px) and (min-width: 768px) {
+  .countryname {
+    font-size: 16px;
   }
 
   .country-list .country-list-links {
     padding: 12px 40px;
     font-size: 14px;
-    margin: 0 10px;
-    background-color: white;
-    color: black !important;
   }
-
- 
 }
 
-@media (max-width: 480px) {
+/* الموبايل */
+@media (max-width: 767px) {
   .countryheader {
     padding: 15px;
+  }
+
+  .country-list {
+    top: -40px;
   }
 
   .country-list .country-list-links {
     padding: 10px 20px;
     font-size: 12px;
-    margin: 5px 0;
+    margin: 5px 10px;
+  }
+
+  .countryshow {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .countryname {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+}
+
+/* الشاشات الصغيرة جدًا (350px أو أقل) */
+@media (max-width: 350px) {
+  .country-list .country-list-links {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+
+  .countryshow {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .countryname {
+    font-size: 12px;
+  }
+
+  .country-flag img {
+    width: 50px;
+    height: 30px;
   }
 }
