@@ -49,7 +49,7 @@ export default async function DetialsCountry({ params }) {
                       className=" mx-2 px-4 rounded-1 py-1 btnesim"
                     >
                       {" "}
-                      {day} أيام
+                      {day} {day <= 10 ? "أيام" : "يوم"}
                     </button>
                   );
                 })}
