@@ -54,6 +54,9 @@ export default async function DetialsCountry({ params }) {
                   );
                 })}
               </div>
+              <div>
+                
+              </div>
             </div>
           </div>
         );
