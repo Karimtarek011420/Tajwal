@@ -1,16 +1,57 @@
 .phone {
-  background-image: url("../../../assets//images/background.svg");
+  background-image: url("../../../assets/images/background.svg");
   background-position: 100% 100%;
   background-size: cover;
+  background-repeat: no-repeat;
 }
+
 .phone .headphone {
-  font-size: 24px !important;
+  font-size: 24px;
   font-weight: 700;
-  color: #626e7b !important;
+  color: #626e7b;
+  margin-bottom: 10px; /* إضافة مسافة بين العناصر */
 }
+
 .phone .phoneusepra {
-  font-size: 18px !important;
+  font-size: 18px;
   font-weight: 700;
-  color: #626E7B !important;
-  
+  color: #626e7b;
+  line-height: 1.5; /* لتحسين قراءة النص */
+}
+
+/* تحسينات الاستجابة للشاشات */
+@media (max-width: 768px) {
+  .phone .headphone {
+    font-size: 20px; /* تقليل حجم الخط للشاشات الصغيرة */
+  }
+
+  .phone .phoneusepra {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone .headphone {
+    font-size: 18px;
+  }
+
+  .phone .phoneusepra {
+    font-size: 14px;
+  }
+}
+@media (min-width: 767px) and (max-width: 995px) {
+  .phone .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .phone .col-md-3 {
+    flex: 0 0 50%; /* عرض العنصر يكون 50% من عرض الحاوية */
+    max-width: 50%;
+  }
+
+  .phone .col-md-3.text-center {
+    text-align: center;
+  }
 }

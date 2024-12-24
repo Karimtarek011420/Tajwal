@@ -11,8 +11,8 @@ export default function Phoneuse() {
     <>
       <div className=" container py-3 phone">
         <h4 className=" headphone py-5 m-0">كيف تستخدم “تجوال”</h4>
-        <div className="row gy-5 ">
-          <div className="col-md-3 text-center">
+        <div className="row gy-5 gx-2 ">
+          <div className="col-md-3  text-center">
             <Image src={layer1} width={200} height={400} alt="phone-download" />
             <h4 className="  py-3 phoneusepra"> حمل التطبيق</h4>
           </div>

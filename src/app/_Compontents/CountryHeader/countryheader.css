@@ -28,7 +28,7 @@
 
 .countryshow {
   background-color: #575050;
-  padding: 15px 100px;
+  padding: 15px 100px !important;
   font-size: 17px;
   font-weight: 200;
   border-radius: 10px;
@@ -100,12 +100,13 @@
   }
 
   .countryshow {
-    padding: 6px 10px;
+    padding: 15px 50px !important;
     font-size: 12px;
   }
 
   .countryname {
     font-size: 12px;
+    
   }
 
   .country-flag img {
