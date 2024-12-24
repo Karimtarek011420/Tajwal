@@ -4,7 +4,6 @@ import Link from "next/link";
 import arrow from "../../../assets/images/arrow.svg";
 import "./country.css";
 import axios from "axios";
-
 export default async function CountryHeader() {
   const getCountry = async () => {
     const { data } = await axios.get(
@@ -18,6 +17,7 @@ export default async function CountryHeader() {
     return data.data;
   };
   const countries = await getCountry();
+  
 
   return (
     <div className="countryheader position-relative  py-5">
@@ -43,7 +43,7 @@ export default async function CountryHeader() {
             return (
               <div key={country.country_code} className="col-md-3">
                 <div className="bg-white shadow-sm text-center">
-                  <Link href="">
+                  <Link href={`/Countries/${country.country_code}`}>
                     <div className="d-flex justify-content-between align-items-center p-3">
                       <div className="country-flag d-flex justify-content-center align-items-center">
                         <Image

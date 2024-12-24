@@ -1,0 +1,25 @@
+/* General Styles */
+.countrydetials {
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+  .cardinfo li.active {
+    font-weight: 500;
+  }
+  
+  .countrydetials .country-list {
+    left: 50%;
+    top: -55px;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  
+  .country-list .country-list-links {
+    cursor: pointer;
+    transition: all 2s; /* Fixed transition shorthand */
+    border-radius: 5px;
+    padding: 15px 80px;
+    margin: 0 20px;
+    font-size: 17px;
+    font-weight: 500;
+  }
