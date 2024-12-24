@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 export default function LoadingSkeleton() {
   return (
-    <div className="container py-5">
+    <div className="px-5 py-5">
       <div className="row gy-4">
         {Array.from({ length: 12 }).map((_, index) => (
           <div key={index} className="col-md-3">
