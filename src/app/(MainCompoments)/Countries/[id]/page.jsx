@@ -31,16 +31,30 @@ export default async function DetialsCountry({ params }) {
                   style={{ color: "#336279" }}
                 >
                   <Image
-                  src={country.image}
-                  width={35}
-                  height={25}
-                  alt={country.title}
+                    src={country.image}
+                    width={35}
+                    height={25}
+                    alt={country.title}
                   />
-                 <span className="mx-3"> {country.title}</span>
+                  <span className="mx-3"> {country.title}</span>
                 </li>
               </ul>
             </div>
-            <div className="country-content text-center"></div>
+            <div className=" container">
+              <div className=" d-flex justify-content-center  align-items-center">
+                {country.days.map((day, index) => {
+                  return (
+                    <button
+                      key={index}
+                      className=" mx-2 px-4 rounded-1 py-1 btnesim"
+                    >
+                      {" "}
+                      {day} أيام
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         );
       })}
