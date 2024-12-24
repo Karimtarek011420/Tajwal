@@ -1,10 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import germany from "../../../assets/images/germany.svg";
-import uk from "../../../assets/images/united-k.svg";
-import china from "../../../assets/images/china.svg";
-import france from "../../../assets/images/france.svg";
 import arrow from "../../../assets/images/arrow.svg";
 import "./countryheader.css";
 import axios from "axios";
