@@ -114,18 +114,19 @@
   }
 }
 @media (min-width: 767px) and (max-width: 1200px) {
-  .countryheader .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    .countryheader .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .countryheader .col-md-3 {
+      flex: 0 0 50%; /* عرض العنصر يكون 50% من عرض الحاوية */
+      max-width: 50%;
+    }
+  
+    .countryheader .col-md-3.text-center {
+      text-align: center;
+    }
   }
-
-  .countryheader .col-md-3 {
-    flex: 0 0 50%; /* عرض العنصر يكون 50% من عرض الحاوية */
-    max-width: 50%;
-  }
-
-  .countryheader .col-md-3.text-center {
-    text-align: center;
-  }
-}
+  

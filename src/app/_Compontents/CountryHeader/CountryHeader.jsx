@@ -4,6 +4,7 @@ import Link from "next/link";
 import arrow from "../../../assets/images/arrow.svg";
 import "./countryheader.css";
 import axios from "axios";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 export default async function CountryHeader() {
   const getCountry = async () => {
@@ -19,6 +20,10 @@ export default async function CountryHeader() {
   };
   const somecountries = await getCountry();
   const somecountriesshow = somecountries.slice(0, 12);
+  if (!somecountriesshow) {
+    // عرض صفحة التحميل أثناء جلب البيانات
+    return <LoadingSkeleton />;
+  }
 
   return (
     <div className="countryheader position-relative py-5">
