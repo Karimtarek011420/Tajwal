@@ -386,7 +386,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           key={country.country_code}
                           className=" py-3"
                           style={{
-                            color: "#575050",
+                            color:
+                              selectedPackage.amount === -1
+                                ? "#fff"
+                                : "#575050",
                             fontSize: "13px",
                             fontWeight: "700",
                           }}
@@ -548,16 +551,6 @@ export default function DetailsCountry({ params: paramsPromise }) {
               </div>
             </div>
 
-            <h2>{selectedPackage.operator.plan_type || "تفاصيل الحزمة"}</h2>
-            <p>عدد الأيام: {selectedPackage.day}</p>
-            <p>السعر: {selectedPackage.price} $</p>
-            <p>
-              البيانات:{" "}
-              {selectedPackage.amount === -1
-                ? "لا محدود"
-                : `${selectedPackage.amount} ميجابايت`}
-            </p>
-            {/* أضف أي تفاصيل إضافية هنا */}
             <button
               style={{
                 marginTop: "20px",
