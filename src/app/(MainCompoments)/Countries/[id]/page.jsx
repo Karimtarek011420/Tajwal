@@ -336,23 +336,218 @@ export default function DetailsCountry({ params: paramsPromise }) {
               background: "#fff",
               borderRadius: "10px",
               padding: "20px",
-              width: "400px",
-              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.7)", // ظل أكبر وأكثر وضوحًا
+              width: "600px",
+              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.7)",
+              position: "relative",
+              background:
+                selectedPackage.amount === -1
+                  ? "linear-gradient(to top, #336279, #5EB5DF)" // تدرج لوني للحزم غير المحدودة
+                  : "white", // تدرج لوني للحزم المحدودة
             }}
           >
-            
             <button
               onClick={closeModal}
               style={{
-                float: "right",
+                float: "left",
                 border: "none",
                 background: "transparent",
                 fontSize: "20px",
                 cursor: "pointer",
+                position: "absolute",
+                right: "87%",
+                top: "-20px",
               }}
             >
-              &times;
+              <i
+                className="fa-solid fa-xmark text-white fs-3 p-3 rounded-2"
+                style={{ backgroundColor: "#336279" }}
+              ></i>
             </button>
+            <div className="row py-5 justify-content-center align-items-center">
+              <div className="  col-md-4">
+                <div className="py-3 text-center">
+                  <div>
+                    {selectedPackage.operator.countries.map((country) => {
+                      return (
+                        <Image
+                          key={country.country_code}
+                          src={country.image}
+                          height={54}
+                          width={75}
+                          alt={country.title}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div>
+                    {selectedPackage.operator.countries.map((country) => {
+                      return (
+                        <p
+                          key={country.country_code}
+                          className=" py-3"
+                          style={{
+                            color: "#575050",
+                            fontSize: "13px",
+                            fontWeight: "700",
+                          }}
+                        >
+                          {country.title}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div className=" col-md-8">
+                <div className="">
+                  <div
+                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    style={{
+                      backgroundColor:
+                        selectedPackage.amount === -1
+                          ? "#F1F3F666"
+                          : "#F1F3F666",
+                      color:
+                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      fontSize: "12px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Image
+                        src={selectedPackage.amount === -1 ? icon1 : icon1dark}
+                        width={16}
+                        height={16}
+                        alt="iconcountry"
+                      />
+                      <p className="mx-2 my-0">التغطية</p>
+                    </div>
+                    <div>
+                      <p className="my-0">
+                        {selectedPackage.operator.coverages
+                          .map((coverage) => coverage.name)
+                          .join(", ")}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    style={{
+                      backgroundColor:
+                        selectedPackage.amount === -1 ? "#F1F3F666" : "#fff",
+                      color:
+                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      fontSize: "12px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Image
+                        src={selectedPackage.amount === -1 ? icon2 : icon2dark}
+                        width={13}
+                        height={16}
+                        alt="iconcountry"
+                        className=" text-white"
+                      />
+                      <p className="mx-2 my-0">البيانات</p>
+                    </div>
+                    <div>
+                      <p className="my-0">
+                        {selectedPackage.amount === -1
+                          ? "لا محدود"
+                          : `${selectedPackage.amount / 1000} غيغا بايت`}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    style={{
+                      backgroundColor:
+                        selectedPackage.amount === -1
+                          ? "#F1F3F666"
+                          : "#F1F3F666",
+                      color:
+                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      fontSize: "12px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Image
+                        src={selectedPackage.amount === -1 ? icon3 : icon3dark}
+                        width={13}
+                        height={16}
+                        alt="iconcountry"
+                        className=" text-white"
+                      />
+                      <p className="mx-2 my-0">الصلاحية</p>
+                    </div>
+                    <div>
+                      <p className="my-0">
+                        {selectedPackage.day}{" "}
+                        {selectedPackage.day <= 10 ? "أيام" : "يوم"}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    style={{
+                      backgroundColor:
+                        selectedPackage.amount === -1 ? "#F1F3F666" : "#fff",
+                      color:
+                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      fontSize: "12px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Image
+                        src={selectedPackage.amount === -1 ? icon4 : icon4dark}
+                        width={13}
+                        height={16}
+                        alt="iconcountry"
+                        className="text-white"
+                      />
+                      <p className="mx-2 my-0">السعر</p>
+                    </div>
+                    <div>
+                      <p className="my-0">{selectedPackage.price} ر.س</p>
+                    </div>
+                  </div>
+                  <div
+                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    style={{
+                      backgroundColor:
+                        selectedPackage.amount === -1
+                          ? "#F1F3F666"
+                          : "#F1F3F666",
+                      color:
+                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      fontSize: "12px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Image
+                        src={selectedPackage.amount === -1 ? icon5 : icon5dark}
+                        width={16}
+                        height={16}
+                        alt="iconcountry"
+                      />
+                      <p className="mx-2 my-0">قابلة للتجديد</p>
+                    </div>
+                    <div>
+                      <p className="my-0">
+                        {selectedPackage.operator.rechargeability === true
+                          ? "نعم"
+                          : "لا"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <h2>{selectedPackage.operator.plan_type || "تفاصيل الحزمة"}</h2>
             <p>عدد الأيام: {selectedPackage.day}</p>
             <p>السعر: {selectedPackage.price} $</p>
