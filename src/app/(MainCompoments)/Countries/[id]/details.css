@@ -14,14 +14,9 @@
     z-index: 2;
   }
   .countrydetials .btnesim{
-    border:1px solid #336279 ;
-    background-color: white;
-    color: #336279 !important;
+    border:1px solid #336279 !important ;
   }
-  .countrydetials .btnesim:hover{
-    color: white !important;
-    background-color: #336279;
-  }
+  
   
   .country-list .country-list-links {
     cursor: pointer;
