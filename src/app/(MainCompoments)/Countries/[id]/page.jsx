@@ -7,6 +7,10 @@ import icon2 from "@/assets/images/Icon2dark.svg";
 import icon2dark from "@/assets/images/Icon2.svg";
 import icon3 from "@/assets/images/icon3.svg";
 import icon3dark from "@/assets/images/icon3dark.svg";
+import icon4dark from "@/assets/images/icon4.svg";
+import icon4 from "@/assets/images/icon4dark.svg";
+import icon5 from "@/assets/images/icon5.svg";
+import icon5dark from "@/assets/images/icon5dark.svg";
 import "./details.css";
 import Image from "next/image";
 
@@ -227,30 +231,82 @@ export default function DetailsCountry({ params: paramsPromise }) {
                               </div>
                               <div>
                                 <p className="my-0">
-                                  {pkg.amount === -1
-                                    ? "لا محدود"
-                                    : `${pkg.amount / 1000} غيغا بايت`}
+                                  {pkg.day} {pkg.day <= 10 ? "أيام" : "يوم"}
                                 </p>
                               </div>
                             </div>
-
-                            <p>السعر: {pkg.price} $</p>
-                            <p>عدد الأيام: {pkg.day}</p>
-
-                            <button
-                              onClick={() => openModal(pkg)}
+                            <div
+                              className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
                               style={{
-                                padding: "10px 20px",
-                                backgroundColor: "#007BFF",
-                                color: "#fff",
-                                border: "none",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                                marginTop: "10px",
+                                backgroundColor:
+                                  pkg.amount === -1 ? "#F1F3F666" : "#fff",
+                                color:
+                                  pkg.amount === -1 ? "#FFFFFF" : "#626E7B",
+                                fontSize: "12px",
+                                fontWeight: "400",
                               }}
                             >
-                              اختيار
-                            </button>
+                              <div className="d-flex align-items-center justify-content-center">
+                                <Image
+                                  src={pkg.amount === -1 ? icon4 : icon4dark}
+                                  width={13}
+                                  height={16}
+                                  alt="iconcountry"
+                                  className="text-white"
+                                />
+                                <p className="mx-2 my-0">السعر</p>
+                              </div>
+                              <div>
+                                <p className="my-0">{pkg.price} ر.س</p>
+                              </div>
+                            </div>
+                            <div
+                              className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                              style={{
+                                backgroundColor:
+                                  pkg.amount === -1 ? "#F1F3F666" : "#F1F3F666",
+                                color:
+                                  pkg.amount === -1 ? "#FFFFFF" : "#626E7B",
+                                fontSize: "12px",
+                                fontWeight: "400",
+                              }}
+                            >
+                              <div className="d-flex align-items-center justify-content-center">
+                                <Image
+                                  src={pkg.amount === -1 ? icon5 : icon5dark}
+                                  width={16}
+                                  height={16}
+                                  alt="iconcountry"
+                                />
+                                <p className="mx-2 my-0">قابلة للتجديد</p>
+                              </div>
+                              <div>
+                                <p className="my-0">
+                                  {operator.rechargeability === true
+                                    ? "نعم"
+                                    : "لا"}
+                                </p>
+                              </div>
+                            </div>
+                            <div className=" d-flex justify-content-center align-items-center">
+                              <button
+                                onClick={() => openModal(pkg)}
+                                style={{
+                                  backgroundColor: "transparent",
+                                  padding: "10px 60px",
+                                  color: pkg.amount === -1 ? "#fff" : "#336279",
+                                  border:
+                                    pkg.amount === -1
+                                      ? "2px #fff solid"
+                                      : "2px #336279 solid",
+                                  borderRadius: "5px",
+                                  cursor: "pointer",
+                                  marginTop: "10px",
+                                }}
+                              >
+                                اختيار
+                              </button>
+                            </div>
                           </div>
                         </div>
                       ))
