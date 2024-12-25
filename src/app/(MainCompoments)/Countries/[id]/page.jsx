@@ -53,7 +53,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
             <div className="position-absolute country-list w-100">
               <ul className="list-unstyled d-flex justify-content-center align-items-center">
                 <li
-                  className="country-list-links bg-white mx-2"
+                  className="country-list-linkslist bg-white mx-lg-2"
                   style={{ color: "#336279" }}
                 >
                   <Image
@@ -67,29 +67,29 @@ export default function DetailsCountry({ params: paramsPromise }) {
               </ul>
             </div>
             <div className="container">
-              <div className="d-flex justify-content-center align-items-center">
+              <div className="d-flex flex-wrap justify-content-center align-items-center pt-2 pb-4">
                 {country?.days?.map((day) => (
                   <button
                     key={day}
                     onClick={() => handleDayClick(day)}
-                    className="mx-2 px-4 rounded-1 py-1 btnesim"
+                    className="btn-day mx-1 my-2 px-3 py-1 rounded-1"
                     style={{
                       backgroundColor:
                         selectedDay === day ? "#336279" : "transparent",
                       color: selectedDay === day ? "#fff" : "#336279",
-                      border: selectedDay === day ? "none" : "1px solid #ccc",
                     }}
                   >
                     {day} {day <= 10 ? "أيام" : "يوم"}
                   </button>
                 ))}
               </div>
-              <div className="row gy-3 py-5">
+
+              <div className="row gy-5 py-5">
                 <div
                   style={{
                     display: "flex",
                     flexWrap: "wrap",
-                    gap: "20px",
+                    gap: "30px",
                     justifyContent: "center",
                   }}
                 >
@@ -100,21 +100,50 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         <div
                           key={pkg.id}
                           style={{
-                            width: "300px",
-                            border: "1px solid #ddd",
+                            width: "400px",
                             borderRadius: "10px",
-                            overflow: "hidden",
-                            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                            boxShadow: "0 5px 5px rgba(0,0,0,0.1)",
+                            background:
+                              pkg.amount === -1
+                                ? "linear-gradient(to top, #336279, #5EB5DF)" // تدرج لوني للحزم غير المحدودة
+                                : "white", // تدرج لوني للحزم المحدودة
                           }}
+                          className=" position-relative"
                         >
-                          <div
-                            style={{
-                              padding: "20px",
-                              backgroundColor: "#007BFF",
-                              color: "#fff",
-                            }}
-                          >
-                            <h3>{operator.plan_type}</h3>
+                          <div className=" countydtailsup d-flex justify-content-around align-items-center position-absolute ">
+                            <div>
+                              {operator.countries.map((country) => {
+                                return (
+                                  <Image
+                                    key={country.country_code}
+                                    src={country.image}
+                                    height={58}
+                                    width={80}
+                                    alt={country.title}
+                                  />
+                                );
+                              })}
+                            </div>
+                            <div>
+                              <span
+                                style={{
+                                  backgroundColor:
+                                    pkg.amount === -1
+                                      ? "#F9F9F9" // تدرج لوني للحزم غير المحدودة
+                                      : "#D9DEE4",
+                                  fontSize: "13px",
+                                  fontWeight: "300",
+                                }}
+                                dir="ltr"
+                                className=" px-4 py-2 rounded-2"
+                              >
+                                {pkg.amount === -1
+                                  ? "لا محدود"
+                                  : `${pkg.amount / 1000}GB`}
+                              </span>
+                            </div>
+                          </div>
+                          <div className=" py-5">
                             <p>التفعيل: {operator.activation_policy}</p>
                             <p>
                               الشبكة:{" "}
@@ -151,14 +180,6 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       ))
                   )}
                 </div>
-                {/* {country?.operators?.map((operator) => (
-                  <div
-                    key={operator.id}
-                    className="col-12 col-xxl-3 col-lg-4 col-sm-6"
-                  >
-                    <div className="cartesim"></div>
-                  </div>
-                ))} */}
               </div>
             </div>
           </div>
