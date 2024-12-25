@@ -1,6 +1,12 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
 import axios from "axios";
+import icon1 from "@/assets/images/Icon1.svg";
+import icon1dark from "@/assets/images/Icon1dark.svg";
+import icon2 from "@/assets/images/Icon2dark.svg";
+import icon2dark from "@/assets/images/Icon2.svg";
+import icon3 from "@/assets/images/icon3.svg";
+import icon3dark from "@/assets/images/icon3dark.svg";
 import "./details.css";
 import Image from "next/image";
 
@@ -127,9 +133,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                               <span
                                 style={{
                                   backgroundColor:
-                                    pkg.amount === -1
-                                      ? "#F9F9F9"
-                                      : "#D9DEE4",
+                                    pkg.amount === -1 ? "#F9F9F9" : "#D9DEE4",
                                   fontSize: "13px",
                                   fontWeight: "300",
                                 }}
@@ -143,28 +147,96 @@ export default function DetailsCountry({ params: paramsPromise }) {
                             </div>
                           </div>
                           <div className="py-5">
-                          <div className=" d-flex  justify-content-between px-3  align-items-center pt-3 m-3 rounded-2"
-                            style={{backgroundColor: pkg.amount === -1 ? "#F1F3F666" : "#F1F3F666", color:pkg.amount === -1 ? "#FFFFFF" : "#626E7B" , fontSize:'12px',fontWeight:"400"  }}>
-                            <div>
-                              <Image/>
-                              <p>التغطية</p>
+                            <div
+                              className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                              style={{
+                                backgroundColor:
+                                  pkg.amount === -1 ? "#F1F3F666" : "#F1F3F666",
+                                color:
+                                  pkg.amount === -1 ? "#FFFFFF" : "#626E7B",
+                                fontSize: "12px",
+                                fontWeight: "400",
+                              }}
+                            >
+                              <div className="d-flex align-items-center justify-content-center">
+                                <Image
+                                  src={pkg.amount === -1 ? icon1 : icon1dark}
+                                  width={16}
+                                  height={16}
+                                  alt="iconcountry"
+                                />
+                                <p className="mx-2 my-0">التغطية</p>
+                              </div>
+                              <div>
+                                <p className="my-0">
+                                  {operator.coverages
+                                    .map((coverage) => coverage.name)
+                                    .join(", ")}
+                                </p>
+                              </div>
                             </div>
-                            <div>
-                              <p>
-                                {operator.coverages
-                                  .map((coverage) => coverage.name)
-                                  .join(", ")}
-                              </p>
+                            <div
+                              className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                              style={{
+                                backgroundColor:
+                                  pkg.amount === -1 ? "#F1F3F666" : "#fff",
+                                color:
+                                  pkg.amount === -1 ? "#FFFFFF" : "#626E7B",
+                                fontSize: "12px",
+                                fontWeight: "400",
+                              }}
+                            >
+                              <div className="d-flex align-items-center justify-content-center">
+                                <Image
+                                  src={pkg.amount === -1 ? icon2 : icon2dark}
+                                  width={13}
+                                  height={16}
+                                  alt="iconcountry"
+                                  className=" text-white"
+                                />
+                                <p className="mx-2 my-0">البيانات</p>
+                              </div>
+                              <div>
+                                <p className="my-0">
+                                  {pkg.amount === -1
+                                    ? "لا محدود"
+                                    : `${pkg.amount / 1000} غيغا بايت`}
+                                </p>
+                              </div>
                             </div>
-                          </div>
+                            <div
+                              className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                              style={{
+                                backgroundColor:
+                                  pkg.amount === -1 ? "#F1F3F666" : "#F1F3F666",
+                                color:
+                                  pkg.amount === -1 ? "#FFFFFF" : "#626E7B",
+                                fontSize: "12px",
+                                fontWeight: "400",
+                              }}
+                            >
+                              <div className="d-flex align-items-center justify-content-center">
+                                <Image
+                                  src={pkg.amount === -1 ? icon3 : icon3dark}
+                                  width={13}
+                                  height={16}
+                                  alt="iconcountry"
+                                  className=" text-white"
+                                />
+                                <p className="mx-2 my-0">الصلاحية</p>
+                              </div>
+                              <div>
+                                <p className="my-0">
+                                  {pkg.amount === -1
+                                    ? "لا محدود"
+                                    : `${pkg.amount / 1000} غيغا بايت`}
+                                </p>
+                              </div>
+                            </div>
+
                             <p>السعر: {pkg.price} $</p>
                             <p>عدد الأيام: {pkg.day}</p>
-                            <p>
-                              البيانات:{" "}
-                              {pkg.amount === -1
-                                ? "لا محدود"
-                                : `${pkg.amount} ميجابايت`}
-                            </p>
+
                             <button
                               onClick={() => openModal(pkg)}
                               style={{
