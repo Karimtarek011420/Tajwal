@@ -335,7 +335,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
             style={{
               background: "#fff",
               borderRadius: "10px",
-              padding: "20px",
+              padding: "15px",
               width: "600px",
               boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.7)",
               position: "relative",
@@ -549,6 +549,19 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   </div>
                 </div>
               </div>
+            </div>
+            <div
+              className=" row py-4 justify-content-center align-items-center"
+              style={{ backgroundColor: "#F9F9F9" }}
+            >
+              <div className=" col-md-6  ">
+                <p style={{color:'#575050' , fontSize:'14px', fontWeight:'400'}}>
+                  دول التغطية{" "}
+                  <span className="mx-1"> ({selectedPackage.operator.coverages.length}دولة) </span>
+                </p>
+                
+              </div>
+              <div className=" col-md-6">kk</div>
             </div>
 
             <button
