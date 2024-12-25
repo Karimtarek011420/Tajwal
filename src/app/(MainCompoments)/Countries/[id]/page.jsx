@@ -9,9 +9,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
   const { id } = params;
   const [data, setData] = useState(null);
   const [selectedDay, setSelectedDay] = useState("1");
-  const [selectedPackage, setSelectedPackage] = useState(null); // الحزمة المختارة
-  const [isModalOpen, setIsModalOpen] = useState(false); // حالة المودال
-
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const getCountryDetails = async () => {
     try {
       const response = await axios.get(
@@ -129,7 +128,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                                 style={{
                                   backgroundColor:
                                     pkg.amount === -1
-                                      ? "#F9F9F9" // تدرج لوني للحزم غير المحدودة
+                                      ? "#F9F9F9"
                                       : "#D9DEE4",
                                   fontSize: "13px",
                                   fontWeight: "300",
@@ -143,16 +142,21 @@ export default function DetailsCountry({ params: paramsPromise }) {
                               </span>
                             </div>
                           </div>
-                          <div className=" py-5">
-                            <p>التفعيل: {operator.activation_policy}</p>
-                            <p>
-                              الشبكة:{" "}
-                              {operator.coverages
-                                .map((coverage) => coverage.name)
-                                .join(", ")}
-                            </p>
+                          <div className="py-5">
+                          <div className=" d-flex  justify-content-between px-3  align-items-center pt-3 m-3 rounded-2"
+                            style={{backgroundColor: pkg.amount === -1 ? "#F1F3F666" : "#F1F3F666", color:pkg.amount === -1 ? "#FFFFFF" : "#626E7B" , fontSize:'12px',fontWeight:"400"  }}>
+                            <div>
+                              <Image/>
+                              <p>التغطية</p>
+                            </div>
+                            <div>
+                              <p>
+                                {operator.coverages
+                                  .map((coverage) => coverage.name)
+                                  .join(", ")}
+                              </p>
+                            </div>
                           </div>
-                          <div style={{ padding: "20px" }}>
                             <p>السعر: {pkg.price} $</p>
                             <p>عدد الأيام: {pkg.day}</p>
                             <p>
