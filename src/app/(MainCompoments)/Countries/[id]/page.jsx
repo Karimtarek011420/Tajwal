@@ -11,6 +11,7 @@ import icon4dark from "@/assets/images/icon4.svg";
 import icon4 from "@/assets/images/icon4dark.svg";
 import icon5 from "@/assets/images/icon5.svg";
 import icon5dark from "@/assets/images/icon5dark.svg";
+import icon6m from "@/assets/images/icon6m.svg";
 import "./details.css";
 import Image from "next/image";
 
@@ -402,7 +403,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 </div>
               </div>
               <div className=" col-md-8">
-                <div className="">
+                <div>
                   <div
                     className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
                     style={{
@@ -551,17 +552,124 @@ export default function DetailsCountry({ params: paramsPromise }) {
               </div>
             </div>
             <div
-              className=" row py-4 justify-content-center align-items-center"
+              className="row py-4 px-4 justify-content-center align-items-center"
               style={{ backgroundColor: "#F9F9F9" }}
             >
-              <div className=" col-md-6  ">
-                <p style={{color:'#575050' , fontSize:'14px', fontWeight:'400'}}>
+              <div className="col-md-6 d-flex flex-column align-items-center text-center">
+                <p
+                  style={{
+                    color: "#575050",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                  }}
+                >
                   دول التغطية{" "}
-                  <span className="mx-1"> ({selectedPackage.operator.coverages.length}دولة) </span>
+                  <span className="mx-1">
+                    ({selectedPackage.operator.coverages.length} دولة)
+                  </span>
                 </p>
-                
+                <div className="d-flex justify-content-between align-items-center w-100  rounded-2 bg-white shadow-sm p-3">
+                  <p
+                    style={{
+                      color: "#575050",
+                      fontSize: "10px",
+                      fontWeight: "300",
+                    }}
+                    className="text-center mb-0"
+                  >
+                    {selectedPackage.operator.coverages
+                      .map((c) => c.name)
+                      .join(", ")}
+                  </p>
+                  <span className="d-flex">
+                    {selectedPackage.operator.countries.map((country) => (
+                      <Image
+                        key={country.country_code}
+                        src={country.image}
+                        height={20}
+                        width={28}
+                        alt={country.title}
+                      />
+                    ))}
+                  </span>
+                </div>
+                <hr />
               </div>
-              <div className=" col-md-6">kk</div>
+              <div className="col-md-6 d-flex flex-column align-items-center text-center">
+                <p
+                  style={{
+                    color: "#575050",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                  }}
+                >
+                  معلومات إضافية
+                </p>
+                <div
+                  className=" w-100  rounded-2 bg-white shadow-sm"
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: "400",
+                    color: "#626E7B",
+                  }}
+                >
+                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 m-3">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Image
+                        src={icon6m}
+                        width={13}
+                        height={16}
+                        alt="iconcountry"
+                        className=" text-white"
+                      />
+                      <p className="mx-2 my-0">الشبكة</p>
+                    </div>
+                    <div>
+                      <p className="my-0">
+                        {selectedPackage.operator.coverages.map((coverage) => (
+                          <span key={coverage.name}>
+                            {coverage.networks
+                              .map((network) => network.name)
+                              .join(", ")}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className=" w-100  rounded-2 bg-white shadow-sm"
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: "400",
+                    color: "#626E7B",
+                  }}
+                >
+                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 m-3">
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Image
+                        src={icon6m}
+                        width={13}
+                        height={16}
+                        alt="iconcountry"
+                        className=" text-white"
+                      />
+                      <p className="mx-2 my-0">نوع الباقة</p>
+                    </div>
+                    <div>
+                      <p className="my-0">
+                        {selectedPackage.operator.coverages.map((coverage) => (
+                          <span key={coverage.name}>
+                            {coverage.networks
+                              .map((network) => network.name)
+                              .join(", ")}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <button
