@@ -12,6 +12,7 @@ import icon4 from "@/assets/images/icon4dark.svg";
 import icon5 from "@/assets/images/icon5.svg";
 import icon5dark from "@/assets/images/icon5dark.svg";
 import icon6m from "@/assets/images/icon6m.svg";
+import iconip from "@/assets/images/iconip.svg";
 import "./details.css";
 import Image from "next/image";
 
@@ -605,73 +606,169 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 >
                   معلومات إضافية
                 </p>
-                <div
-                  className=" w-100  rounded-2 bg-white shadow-sm"
-                  style={{
-                    fontSize: "10px",
-                    fontWeight: "400",
-                    color: "#626E7B",
-                  }}
-                >
-                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 m-3">
-                    <div className="d-flex align-items-center justify-content-center">
-                      <Image
-                        src={icon6m}
-                        width={13}
-                        height={16}
-                        alt="iconcountry"
-                        className=" text-white"
-                      />
-                      <p className="mx-2 my-0">الشبكة</p>
-                    </div>
-                    <div>
-                      <p className="my-0">
-                        {selectedPackage.operator.coverages.map((coverage) => (
-                          <span key={coverage.name}>
-                            {coverage.networks
-                              .map((network) => network.name)
-                              .join(", ")}
-                          </span>
-                        ))}
-                      </p>
+                <div className=" w-100  rounded-2 bg-white shadow-sm">
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: "400",
+                      color: "#626E7B",
+                    }}
+                  >
+                    <div className="d-flex justify-content-between align-items-center text-center  rounded-2 m-3">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Image
+                          src={icon6m}
+                          width={11}
+                          height={11}
+                          alt="iconcountry"
+                          className=" text-white"
+                        />
+                        <p className="mx-2 my-0">الشبكة</p>
+                      </div>
+                      <div>
+                        <p className="my-0">
+                          {selectedPackage.operator.coverages.map(
+                            (coverage) => (
+                              <span key={coverage.name}>
+                                {coverage.networks
+                                  .map((network) => network.name)
+                                  .join(", ")}
+                              </span>
+                            )
+                          )}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  className=" w-100  rounded-2 bg-white shadow-sm"
-                  style={{
-                    fontSize: "10px",
-                    fontWeight: "400",
-                    color: "#626E7B",
-                  }}
-                >
-                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 m-3">
-                    <div className="d-flex align-items-center justify-content-center">
-                      <Image
-                        src={icon6m}
-                        width={13}
-                        height={16}
-                        alt="iconcountry"
-                        className=" text-white"
-                      />
-                      <p className="mx-2 my-0">نوع الباقة</p>
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: "400",
+                      color: "#626E7B",
+                    }}
+                    className=" my-4"
+                  >
+                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Image
+                          src={icon6m}
+                          width={11}
+                          height={11}
+                          alt="iconcountry"
+                          className=" text-white"
+                        />
+                        <p className="mx-2 my-0">نوع الباقة</p>
+                      </div>
+                      <div>
+                        <p className="my-0">
+                          {selectedPackage.operator.plan_type}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="my-0">
-                        {selectedPackage.operator.coverages.map((coverage) => (
-                          <span key={coverage.name}>
-                            {coverage.networks
-                              .map((network) => network.name)
-                              .join(", ")}
-                          </span>
-                        ))}
-                      </p>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: "400",
+                      color: "#626E7B",
+                    }}
+                    className=" my-4"
+                  >
+                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Image
+                          src={icon6m}
+                          width={11}
+                          height={11}
+                          alt="iconcountry"
+                          className=" text-white"
+                        />
+                        <p className="mx-2 my-0">سياسة التفعيل</p>
+                      </div>
+                      <div>
+                        <p className="my-0">
+                          {selectedPackage.operator.activation_policy}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: "400",
+                      color: "#626E7B",
+                    }}
+                    className=" my-4"
+                  >
+                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Image
+                          src={icon5dark}
+                          width={10}
+                          height={10}
+                          alt="iconcountry"
+                          className=" text-white"
+                        />
+                        <p className="mx-2 my-0">امكانية شحن الرصيد</p>
+                      </div>
+                      <div>
+                        <p className="my-0">
+                          {selectedPackage.operator.rechargeability === true
+                            ? "نعم "
+                            : " لا"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: "400",
+                      color: "#626E7B",
+                    }}
+                    className=" my-4"
+                  >
+                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Image
+                          src={iconip}
+                          width={11}
+                          height={11}
+                          alt="iconcountry"
+                          className=" text-white"
+                        />
+                        <p className="mx-2 my-0">توجيه IP</p>
+                      </div>
+                      <div>
+                        <p className="my-0">لا</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: "400",
+                      color: "#626E7B",
+                    }}
+                    className=" my-4"
+                  >
+                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Image
+                          src={icon6m}
+                          width={11}
+                          height={11}
+                          alt="iconcountry"
+                          className=" text-white"
+                        />
+                        <p className="mx-2 my-0">معلومات اخرى</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
+            <div className="">
             <button
               style={{
                 marginTop: "20px",
@@ -685,6 +782,12 @@ export default function DetailsCountry({ params: paramsPromise }) {
             >
               شراء
             </button>
+            <div>
+              <p>{selectedPackage.price} ر.س</p>
+            </div>
+
+            </div>
+
           </div>
         </div>
       )}
