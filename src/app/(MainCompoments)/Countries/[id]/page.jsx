@@ -44,8 +44,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
     setSelectedDay(day);
   };
 
-  const openModal = (pkg) => {
-    setSelectedPackage(pkg);
+  const openModal = (pkg, operator) => {
+    setSelectedPackage({ ...pkg, operator });
     setIsModalOpen(true);
   };
 
@@ -290,7 +290,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                             </div>
                             <div className=" d-flex justify-content-center align-items-center">
                               <button
-                                onClick={() => openModal(pkg)}
+                                onClick={() => openModal(pkg, operator)}
                                 style={{
                                   backgroundColor: "transparent",
                                   padding: "10px 60px",
@@ -316,6 +316,68 @@ export default function DetailsCountry({ params: paramsPromise }) {
             </div>
           </div>
         ))}
+      {isModalOpen && selectedPackage && (
+        <div
+          style={{
+            position: "fixed",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: "1000",
+          }}
+        >
+          <div
+            style={{
+              background: "#fff",
+              borderRadius: "10px",
+              padding: "20px",
+              width: "400px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+            }}
+          >
+            <button
+              onClick={closeModal}
+              style={{
+                float: "right",
+                border: "none",
+                background: "transparent",
+                fontSize: "20px",
+                cursor: "pointer",
+              }}
+            >
+              &times;
+            </button>
+            <h2>{selectedPackage.operator.plan_type || "تفاصيل الحزمة"}</h2>
+            <p>عدد الأيام: {selectedPackage.day}</p>
+            <p>السعر: {selectedPackage.price} $</p>
+            <p>
+              البيانات:{" "}
+              {selectedPackage.amount === -1
+                ? "لا محدود"
+                : `${selectedPackage.amount} ميجابايت`}
+            </p>
+            {/* أضف أي تفاصيل إضافية هنا */}
+            <button
+              style={{
+                marginTop: "20px",
+                padding: "10px 20px",
+                backgroundColor: "#007BFF",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              شراء
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
