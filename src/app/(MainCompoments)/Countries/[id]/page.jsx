@@ -338,7 +338,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
               background: "#fff",
               borderRadius: "10px",
               padding: "15px",
-              width: "600px",
+              maxWidth: "600px",
+              width: "90%",
               boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.7)",
               position: "relative",
               background:
@@ -367,7 +368,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
             </button>
             <div className="row py-5 justify-content-center align-items-center">
               <div className="  col-md-4">
-                <div className="py-3 text-center">
+                <div className=" text-center">
                   <div>
                     {selectedPackage.operator.countries.map((country) => {
                       return (
@@ -768,26 +769,31 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 </div>
               </div>
             </div>
-            <div className="">
-            <button
-              style={{
-                marginTop: "20px",
-                padding: "10px 20px",
-                backgroundColor: "#007BFF",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              شراء
-            </button>
-            <div>
-              <p>{selectedPackage.price} ر.س</p>
+            <div className="  bg-info">
+              <button
+                style={{
+                  padding: "10px 20px",
+                  backgroundColor: "#007BFF",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+                className="p-4"
+              >
+                شراء
+              </button>
+              <div
+                className="p-4"
+                style={{
+                  color: "#575050",
+                  fontSize: "17px",
+                  fontWeight: "700",
+                }}
+              >
+                <p>{selectedPackage.price} ر.س</p>
+              </div>
             </div>
-
-            </div>
-
           </div>
         </div>
       )}
