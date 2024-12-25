@@ -337,9 +337,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
               borderRadius: "10px",
               padding: "20px",
               width: "400px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.7)", // ظل أكبر وأكثر وضوحًا
             }}
           >
+            
             <button
               onClick={closeModal}
               style={{
