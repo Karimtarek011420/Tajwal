@@ -15,6 +15,7 @@ import icon6m from "@/assets/images/icon6m.svg";
 import iconip from "@/assets/images/iconip.svg";
 import "./details.css";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function DetailsCountry({ params: paramsPromise }) {
   const params = use(paramsPromise);
@@ -315,6 +316,14 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   )}
                 </div>
               </div>
+            </div>
+            <div className=" d-flex justify-content-center align-items-center pt-5">
+              <Link
+                href="/Countries "
+                className=" countryshow text-white  px-5 py-3"
+              >
+                عرض جميع الدول
+              </Link>
             </div>
           </div>
         ))}
