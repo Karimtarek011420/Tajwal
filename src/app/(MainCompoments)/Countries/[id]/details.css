@@ -70,16 +70,24 @@
   top: -20px;
 }
 .countrydetials .modal-content .contentsimmodel {
+  background-color: #f1f3f666;
+  padding: 11px;
+}
+.countrydetials .modal-content .contentsimmodelp {
   color: #626e7b;
   font-size: 12px;
   font-weight: 400;
-  padding: 11px;
-  background-color: #f1f3f666;
 }
+
 .countrydetials .textmodelp {
   color: #575050;
   font-size: 14px;
   font-weight: 400;
+}
+.countrydetials .textmodelpsecond {
+  font-size: 10px;
+  font-weight: 400;
+  color: #626e7b;
 }
 
 @media screen and (max-width: 600px) {
@@ -95,7 +103,7 @@
     right: 80% !important;
     top: -9px !important;
   }
-  .countrydetials .modal-content .contentsimmodel {
+  .countrydetials .modal-content .contentsimmodelp {
     font-size: 10px !important;
     font-weight: 300 !important ;
     padding: 6px !important;
@@ -128,16 +136,22 @@
   .modal-content {
     width: 300px !important;
   }
-  .countrydetials .modal-content .contentsimmodel {
+  .countrydetials .modal-content .contentsimmodelp {
     font-size: 10px !important;
     font-weight: 200 !important ;
     padding: 10px !important;
-    margin: 3px !important;
+    margin: 1px !important;
+    padding: 1px !important;
   }
   .modal-contentmedia {
     margin: 1px !important;
     font-size: 8px !important;
     padding: 1px !important;
+  }
+  .countrydetials .textmodelpsecond {
+    font-size: 10px !important;
+    font-weight: 400;
+    color: #626e7b;
   }
 }
 
@@ -146,5 +160,9 @@
     font-size: 10px !important;
     font-weight: 300 !important ;
     padding: 5px !important;
+  }
+  .countrydetials .textmodelpsecond {
+    font-size: 10px !important;
+    color: #626e7b;
   }
 }

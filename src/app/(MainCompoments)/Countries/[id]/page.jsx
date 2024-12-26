@@ -327,7 +327,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 style={{ backgroundColor: "#336279" }}
               ></i>
             </button>
-            {/* <div className="row gy-1 py-lg-3 justify-content-center align-items-center modal-contentmedia">
+            <div className="row gy-1 py-lg-3 justify-content-center align-items-center modal-contentmedia">
               <div className="  col-md-4">
                 <div className=" text-center">
                   <div>
@@ -372,10 +372,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         height={16}
                         alt="iconcountry"
                       />
-                      <p className="mx-2 my-0">التغطية</p>
+                      <p className="mx-2 my-0 contentsimmodelp">التغطية</p>
                     </div>
                     <div>
-                      <p className="my-0">
+                      <p className="my-0 contentsimmodelp">
                         {selectedPackage.operator.coverages
                           .map((coverage) => coverage.name)
                           .join(", ")}
@@ -391,10 +391,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         alt="iconcountry"
                         className=" text-white"
                       />
-                      <p className="mx-2 my-0">البيانات</p>
+                      <p className="mx-2 my-0 contentsimmodelp">البيانات</p>
                     </div>
                     <div>
-                      <p className="my-0">
+                      <p className="my-0 contentsimmodelp">
                         {selectedPackage.amount === -1
                           ? "لا محدود"
                           : `${selectedPackage.amount / 1000} غيغا بايت`}
@@ -410,10 +410,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         alt="iconcountry"
                         className=" text-white"
                       />
-                      <p className="mx-2 my-0">الصلاحية</p>
+                      <p className="mx-2 my-0 contentsimmodelp">الصلاحية</p>
                     </div>
                     <div>
-                      <p className="my-0">
+                      <p className="my-0 contentsimmodelp">
                         {selectedPackage.day}{" "}
                         {selectedPackage.day <= 10 ? "أيام" : "يوم"}
                       </p>
@@ -428,10 +428,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         alt="iconcountry"
                         className="text-white"
                       />
-                      <p className="mx-2 my-0">السعر</p>
+                      <p className="mx-2 my-0 contentsimmodelp">السعر</p>
                     </div>
                     <div>
-                      <p className="my-0">{selectedPackage.price} ر.س</p>
+                      <p className="my-0 contentsimmodelp">{selectedPackage.price} ر.س</p>
                     </div>
                   </div>
                   <div className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2 contentsimmodel">
@@ -442,10 +442,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         height={16}
                         alt="iconcountry"
                       />
-                      <p className="mx-2 my-0">قابلة للتجديد</p>
+                      <p className="mx-2 my-0 contentsimmodelp">قابلة للتجديد</p>
                     </div>
                     <div>
-                      <p className="my-0">
+                      <p className="my-0 contentsimmodelp">
                         {selectedPackage.operator.rechargeability === true
                           ? "نعم"
                           : "لا"}
@@ -454,9 +454,9 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
             <div
-              className="row gy-1 py-lg-2 mt-lg-2"
+              className="row gy-1 py-lg-2 mt-lg-2 mt-1 pt-1"
               style={{ backgroundColor: "#F9F9F9" }}
             >
               <div className="col-md-4">
@@ -469,6 +469,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 <div className="d-flex justify-content-between align-items-center w-100  rounded-2 bg-white shadow-sm p-lg-3 p-2">
                   <p
                     style={{
+                      fontSize: "10px",
                     }}
                     className="text-center mb-0 textmodelp"
                   >
@@ -492,14 +493,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
               <div className="col-md-8 ">
                 <p className="textmodelp">معلومات إضافية</p>
                 <div className=" w-100  rounded-2 bg-white shadow-sm p-1">
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: "400",
-                      color: "#626E7B",
-                    }}
-                  >
-                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center text-center px-lg-3 px-1 py-lg-1  mt-lg-2">
                       <div className="d-flex align-items-center justify-content-center ">
                         <Image
                           src={icon6m}
@@ -508,10 +503,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           alt="iconcountry"
                           className=" text-white"
                         />
-                        <p className="mx-2 my-0">الشبكة</p>
+                        <p className="mx-2 my-0 textmodelpsecond">الشبكة</p>
                       </div>
                       <div>
-                        <p className="my-0">
+                        <p className="my-0 textmodelpsecond">
                           {selectedPackage.operator.coverages.map(
                             (coverage) => (
                               <span key={coverage.name}>
@@ -525,14 +520,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       </div>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: "400",
-                      color: "#626E7B",
-                    }}
-                  >
-                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1   mt-2">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center text-center px-lg-3 px-1 py-1  mt-lg-2">
                       <div className="d-flex align-items-center justify-content-center ">
                         <Image
                           src={icon6m}
@@ -541,23 +530,17 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           alt="iconcountry"
                           className=" text-white"
                         />
-                        <p className="mx-2 my-0">نوع الباقة</p>
+                        <p className="mx-2 my-0 textmodelpsecond">نوع الباقة</p>
                       </div>
                       <div>
-                        <p className="my-0">
+                        <p className="my-0 textmodelpsecond">
                           {selectedPackage.operator.plan_type}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: "400",
-                      color: "#626E7B",
-                    }}
-                  >
-                    <div className="d-flex justify-content-between align-items-center text-center  px-3 py-1  mt-2">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center text-center  px-lg-3 px-1 py-1  mt-lg-2">
                       <div className="d-flex align-items-center justify-content-center">
                         <Image
                           src={icon6m}
@@ -566,24 +549,20 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           alt="iconcountry"
                           className=" text-white"
                         />
-                        <p className="mx-2 my-0">سياسة التفعيل</p>
+                        <p className="mx-2 my-0 textmodelpsecond">
+                          سياسة التفعيل
+                        </p>
                       </div>
                       <div>
-                        <p className="my-0">
+                        <p className="my-0 textmodelpsecond">
                           {selectedPackage.operator.activation_policy}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: "400",
-                      color: "#626E7B",
-                    }}
-                  >
-                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
-                      <div className="d-flex align-items-center justify-content-center">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center text-center px-lg-3 px-1 py-1  mt-lg-2">
+                      <div className="d-flex align-items-center justify-content-center textmodelpsecond">
                         <Image
                           src={icon5dark}
                           width={10}
@@ -591,10 +570,12 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           alt="iconcountry"
                           className=" text-white"
                         />
-                        <p className="mx-2 my-0">امكانية شحن الرصيد</p>
+                        <p className="mx-2 my-0 textmodelpsecond">
+                          امكانية شحن الرصيد
+                        </p>
                       </div>
                       <div>
-                        <p className="my-0">
+                        <p className="my-0 textmodelpsecond">
                           {selectedPackage.operator.rechargeability === true
                             ? "نعم "
                             : " لا"}
@@ -602,14 +583,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       </div>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: "400",
-                      color: "#626E7B",
-                    }}
-                  >
-                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center text-center px-lg-3 px-1 py-1  mt-lg-2">
                       <div className="d-flex align-items-center justify-content-center">
                         <Image
                           src={iconip}
@@ -618,21 +593,15 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           alt="iconcountry"
                           className=" text-white"
                         />
-                        <p className="mx-2 my-0">توجيه IP</p>
+                        <p className="mx-2 my-0 textmodelpsecond">توجيه IP</p>
                       </div>
                       <div>
-                        <p className="my-0">لا</p>
+                        <p className="my-0 textmodelpsecond">لا</p>
                       </div>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: "400",
-                      color: "#626E7B",
-                    }}
-                  >
-                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
+                  <div>
+                    <div className="d-flex justify-content-between align-items-center text-center px-lg-3 px-1 py-1  mt-lg-2">
                       <div className="d-flex align-items-center justify-content-center">
                         <Image
                           src={icon6m}
@@ -641,7 +610,9 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           alt="iconcountry"
                           className=" text-white"
                         />
-                        <p className="mx-2 my-0">معلومات اخرى</p>
+                        <p className="mx-2 my-0 textmodelpsecond">
+                          معلومات اخرى
+                        </p>
                       </div>
                     </div>
                   </div>
