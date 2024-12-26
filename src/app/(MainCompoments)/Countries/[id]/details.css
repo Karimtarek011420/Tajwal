@@ -38,7 +38,51 @@
 .countrydetials .btn-day .d-flex.flex-wrap {
   gap: 0.5rem; /* مسافات بين العناصر */
 }
-@media screen and (max-width: 700px) {
+.countrydetials .modelopen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.countrydetials .modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+.countrydetials .modal-content .closeModal {
+  float: left;
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  cursor: pointer;
+  position: absolute;
+  right: 87%;
+  top: -20px;
+}
+.countrydetials .modal-content .contentsimmodel {
+  color: #626e7b;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 11px;
+  background-color: #f1f3f666;
+}
+.countrydetials .textmodelp {
+  color: #575050;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 600px) {
   .modal-content {
     width: 320px !important;
   }
@@ -47,17 +91,14 @@
     font-size: 8px !important;
     padding: 2px !important;
   }
-}
-
-@media (max-width: 576px) {
-  .country-list-linkslist {
-    font-size: 0.85rem; /* تقليل حجم النص للشاشات الصغيرة */
-    min-width: 120px; /* تقليل العرض الأدنى */
-    padding: 0.5rem; /* تقليل الحشو */
+  .countrydetials .modal-content .closeModal {
+    right: 80% !important;
+    top: -9px !important;
   }
-
-  .country-list {
-    padding: 1rem 0; /* تحسين المسافات للشاشات الصغيرة */
+  .countrydetials .modal-content .contentsimmodel {
+    font-size: 10px !important;
+    font-weight: 300 !important ;
+    padding: 6px !important;
   }
 }
 
@@ -74,5 +115,36 @@
     margin: 0 5px;
     font-size: 17px;
     font-weight: 300;
+  }
+  .country-list-linkslist {
+    font-size: 0.85rem; /* تقليل حجم النص للشاشات الصغيرة */
+    min-width: 120px; /* تقليل العرض الأدنى */
+    padding: 0.5rem; /* تقليل الحشو */
+  }
+
+  .country-list {
+    padding: 1rem 0; /* تحسين المسافات للشاشات الصغيرة */
+  }
+  .modal-content {
+    width: 300px !important;
+  }
+  .countrydetials .modal-content .contentsimmodel {
+    font-size: 10px !important;
+    font-weight: 200 !important ;
+    padding: 10px !important;
+    margin: 3px !important;
+  }
+  .modal-contentmedia {
+    margin: 1px !important;
+    font-size: 8px !important;
+    padding: 1px !important;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .countrydetials .modal-content .contentsimmodel {
+    font-size: 10px !important;
+    font-weight: 300 !important ;
+    padding: 5px !important;
   }
 }

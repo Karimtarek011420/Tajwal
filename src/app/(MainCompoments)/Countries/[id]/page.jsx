@@ -319,52 +319,15 @@ export default function DetailsCountry({ params: paramsPromise }) {
           </div>
         ))}
       {isModalOpen && selectedPackage && (
-        <div
-          style={{
-            position: "fixed",
-            top: "0",
-            left: "0",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: "1000",
-          }}
-        >
-          <div
-            style={{
-              background: "#fff",
-              borderRadius: "10px",
-              padding: "15px",
-              maxWidth: "600px",
-              width: "90%",
-              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.7)",
-              position: "relative",
-              backgroundColor: "#fff",
-            }}
-            className="modal-content"
-          >
-            <button
-              onClick={closeModal}
-              style={{
-                float: "left",
-                border: "none",
-                background: "transparent",
-                fontSize: "13px",
-                cursor: "pointer",
-                position: "absolute",
-                right: "87%",
-                top: "-20px",
-              }}
-            >
+        <div className="modelopen">
+          <div className="modal-content">
+            <button className="closeModal" onClick={closeModal}>
               <i
                 className="fa-solid fa-xmark text-white fs-6 p-3 rounded-2"
                 style={{ backgroundColor: "#336279" }}
               ></i>
             </button>
-            <div className="row gy-1 py-3 justify-content-center align-items-center modal-contentmedia">
+            {/* <div className="row gy-1 py-lg-3 justify-content-center align-items-center modal-contentmedia">
               <div className="  col-md-4">
                 <div className=" text-center">
                   <div>
@@ -385,7 +348,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       return (
                         <p
                           key={country.country_code}
-                          className=" py-3"
+                          className=" py-lg-3 "
                           style={{
                             color: "#575050",
                             fontSize: "13px",
@@ -399,18 +362,9 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   </div>
                 </div>
               </div>
-              <div className=" col-md-8">
+              <div className="col-md-8">
                 <div>
-                  <div
-                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-3"
-                    style={{
-                      backgroundColor: "#F1F3F666",
-                      color: "#626E7B",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      padding: "11px",
-                    }}
-                  >
+                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-3 contentsimmodel ">
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
                         src={icon1dark}
@@ -428,16 +382,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       </p>
                     </div>
                   </div>
-                  <div
-                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
-                    style={{
-                      backgroundColor: "#fff",
-                      color: "#626E7B",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      padding: "11px",
-                    }}
-                  >
+                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2 bg-white contentsimmodel">
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
                         src={icon2dark}
@@ -456,16 +401,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       </p>
                     </div>
                   </div>
-                  <div
-                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
-                    style={{
-                      backgroundColor: "#F1F3F666",
-                      color: "#626E7B",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      padding: "11px",
-                    }}
-                  >
+                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2 contentsimmodel">
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
                         src={icon3dark}
@@ -483,16 +419,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       </p>
                     </div>
                   </div>
-                  <div
-                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
-                    style={{
-                      backgroundColor: "#fff",
-                      color: "#626E7B",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      padding: "11px",
-                    }}
-                  >
+                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2 bg-white contentsimmodel">
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
                         src={icon4dark}
@@ -507,16 +434,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       <p className="my-0">{selectedPackage.price} ر.س</p>
                     </div>
                   </div>
-                  <div
-                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
-                    style={{
-                      backgroundColor: "#F1F3F666",
-                      color: "#626E7B",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      padding: "11px",
-                    }}
-                  >
+                  <div className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2 contentsimmodel">
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
                         src={icon5dark}
@@ -536,32 +454,23 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div
-              className="row gy-1 py-2 mt-2"
+              className="row gy-1 py-lg-2 mt-lg-2"
               style={{ backgroundColor: "#F9F9F9" }}
             >
               <div className="col-md-4">
-                <p
-                  style={{
-                    color: "#575050",
-                    fontSize: "14px",
-                    fontWeight: "400",
-                  }}
-                >
+                <p className="textmodelp">
                   دول التغطية{" "}
                   <span className="mx-1">
                     ({selectedPackage.operator.coverages.length} دولة)
                   </span>
                 </p>
-                <div className="d-flex justify-content-between align-items-center w-100  rounded-2 bg-white shadow-sm p-3">
+                <div className="d-flex justify-content-between align-items-center w-100  rounded-2 bg-white shadow-sm p-lg-3 p-2">
                   <p
                     style={{
-                      color: "#575050",
-                      fontSize: "10px",
-                      fontWeight: "300",
                     }}
-                    className="text-center mb-0"
+                    className="text-center mb-0 textmodelp"
                   >
                     {selectedPackage.operator.coverages
                       .map((c) => c.name)
@@ -581,15 +490,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 </div>
               </div>
               <div className="col-md-8 ">
-                <p
-                  style={{
-                    color: "#575050",
-                    fontSize: "14px",
-                    fontWeight: "400",
-                  }}
-                >
-                  معلومات إضافية
-                </p>
+                <p className="textmodelp">معلومات إضافية</p>
                 <div className=" w-100  rounded-2 bg-white shadow-sm p-1">
                   <div
                     style={{
@@ -747,7 +648,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 </div>
               </div>
             </div>
-            <div className="   bg-white d-flex justify-content-between  align-items-center">
+            {/* <div className="   bg-white d-flex justify-content-between  align-items-center">
               <button
                 style={{
                   padding: "10px ",
@@ -771,7 +672,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               >
                 <p>{selectedPackage.price} ر.س</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
