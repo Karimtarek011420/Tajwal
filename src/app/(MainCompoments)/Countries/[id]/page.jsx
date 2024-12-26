@@ -326,7 +326,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
             left: "0",
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -344,8 +344,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
               position: "relative",
               background:
                 selectedPackage.amount === -1
-                  ? "linear-gradient(to top, #336279, #5EB5DF)" // تدرج لوني للحزم غير المحدودة
-                  : "white", // تدرج لوني للحزم المحدودة
+                  ? "linear-gradient(to top, #336279, #5EB5DF)"   
+                  : "white", 
             }}
           >
             <button
@@ -354,7 +354,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 float: "left",
                 border: "none",
                 background: "transparent",
-                fontSize: "20px",
+                fontSize: "13px",
                 cursor: "pointer",
                 position: "absolute",
                 right: "87%",
@@ -362,11 +362,11 @@ export default function DetailsCountry({ params: paramsPromise }) {
               }}
             >
               <i
-                className="fa-solid fa-xmark text-white fs-3 p-3 rounded-2"
+                className="fa-solid fa-xmark text-white fs-6 p-3 rounded-2"
                 style={{ backgroundColor: "#336279" }}
               ></i>
             </button>
-            <div className="row py-5 justify-content-center align-items-center">
+            {/* <div className="row gy-3 py-3 justify-content-center align-items-center">
               <div className="  col-md-4">
                 <div className=" text-center">
                   <div>
@@ -407,7 +407,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               <div className=" col-md-8">
                 <div>
                   <div
-                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-3"
                     style={{
                       backgroundColor:
                         selectedPackage.amount === -1
@@ -417,6 +417,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
+                      padding:'11px'
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
@@ -437,7 +438,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                     </div>
                   </div>
                   <div
-                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
                       backgroundColor:
                         selectedPackage.amount === -1 ? "#F1F3F666" : "#fff",
@@ -445,6 +446,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
+                      padding:'11px'
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
@@ -466,7 +468,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                     </div>
                   </div>
                   <div
-                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
                       backgroundColor:
                         selectedPackage.amount === -1
@@ -476,6 +478,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
+                      padding:'11px'
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
@@ -496,7 +499,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                     </div>
                   </div>
                   <div
-                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
                       backgroundColor:
                         selectedPackage.amount === -1 ? "#F1F3F666" : "#fff",
@@ -504,6 +507,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
+                      padding:'11px'
+
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
@@ -521,7 +526,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                     </div>
                   </div>
                   <div
-                    className="d-flex justify-content-between align-items-center text-center p-3 rounded-2 m-3"
+                    className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
                       backgroundColor:
                         selectedPackage.amount === -1
@@ -531,6 +536,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
+                      padding:'11px'
+
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
@@ -552,12 +559,12 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div
-              className="row py-4 px-4 justify-content-center align-items-center"
+              className="row gy-3 py-2 mt-2"
               style={{ backgroundColor: "#F9F9F9" }}
             >
-              <div className="col-md-6 d-flex flex-column align-items-center text-center">
+              <div className="col-md-4">
                 <p
                   style={{
                     color: "#575050",
@@ -595,9 +602,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                     ))}
                   </span>
                 </div>
-                <hr />
               </div>
-              <div className="col-md-6 d-flex flex-column align-items-center text-center">
+              <div className="col-md-8 ">
                 <p
                   style={{
                     color: "#575050",
@@ -607,7 +613,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 >
                   معلومات إضافية
                 </p>
-                <div className=" w-100  rounded-2 bg-white shadow-sm">
+                <div className=" w-100  rounded-2 bg-white shadow-sm p-1">
                   <div
                     style={{
                       fontSize: "10px",
@@ -769,7 +775,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 </div>
               </div>
             </div>
-            <div className="  bg-info">
+            {/* <div className="  bg-info">
               <button
                 style={{
                   padding: "10px 20px",
@@ -793,7 +799,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               >
                 <p>{selectedPackage.price} ر.س</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
