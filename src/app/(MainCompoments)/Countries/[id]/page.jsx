@@ -619,7 +619,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 </div>
               </div>
             </div>
-            {/* <div className="   bg-white d-flex justify-content-between  align-items-center">
+            <div className="   bg-white d-flex justify-content-between  align-items-center">
               <button
                 style={{
                   padding: "10px ",
@@ -629,12 +629,12 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   borderRadius: "5px",
                   cursor: "pointer",
                 }}
-                className=" px-5 py-2 mx-3"
+                className=" px-5 py-lg-2 py-1 mx-3"
               >
                 شراء
               </button>
               <div
-                className="p-2"
+                className="p-lg-2 p-1"
                 style={{
                   color: "#575050",
                   fontSize: "17px",
@@ -643,7 +643,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               >
                 <p>{selectedPackage.price} ر.س</p>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       )}
