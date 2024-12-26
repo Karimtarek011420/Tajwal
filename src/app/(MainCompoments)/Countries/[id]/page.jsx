@@ -342,10 +342,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               width: "90%",
               boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.7)",
               position: "relative",
-              background:
-                selectedPackage.amount === -1
-                  ? "linear-gradient(to top, #336279, #5EB5DF)"   
-                  : "white", 
+              backgroundColor: "#fff",
             }}
           >
             <button
@@ -366,7 +363,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 style={{ backgroundColor: "#336279" }}
               ></i>
             </button>
-            {/* <div className="row gy-3 py-3 justify-content-center align-items-center">
+            <div className="row gy-3 py-3 justify-content-center align-items-center">
               <div className="  col-md-4">
                 <div className=" text-center">
                   <div>
@@ -389,10 +386,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                           key={country.country_code}
                           className=" py-3"
                           style={{
-                            color:
-                              selectedPackage.amount === -1
-                                ? "#fff"
-                                : "#575050",
+                            color: "#575050",
                             fontSize: "13px",
                             fontWeight: "700",
                           }}
@@ -409,20 +403,16 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   <div
                     className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-3"
                     style={{
-                      backgroundColor:
-                        selectedPackage.amount === -1
-                          ? "#F1F3F666"
-                          : "#F1F3F666",
-                      color:
-                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      backgroundColor: "#F1F3F666",
+                      color: "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
-                      padding:'11px'
+                      padding: "11px",
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
-                        src={selectedPackage.amount === -1 ? icon1 : icon1dark}
+                        src={icon1dark}
                         width={16}
                         height={16}
                         alt="iconcountry"
@@ -440,18 +430,16 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   <div
                     className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
-                      backgroundColor:
-                        selectedPackage.amount === -1 ? "#F1F3F666" : "#fff",
-                      color:
-                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      backgroundColor: "#fff",
+                      color: "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
-                      padding:'11px'
+                      padding: "11px",
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
-                        src={selectedPackage.amount === -1 ? icon2 : icon2dark}
+                        src={icon2dark}
                         width={13}
                         height={16}
                         alt="iconcountry"
@@ -470,20 +458,16 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   <div
                     className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
-                      backgroundColor:
-                        selectedPackage.amount === -1
-                          ? "#F1F3F666"
-                          : "#F1F3F666",
-                      color:
-                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      backgroundColor: "#F1F3F666",
+                      color: "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
-                      padding:'11px'
+                      padding: "11px",
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
-                        src={selectedPackage.amount === -1 ? icon3 : icon3dark}
+                        src={icon3dark}
                         width={13}
                         height={16}
                         alt="iconcountry"
@@ -501,19 +485,16 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   <div
                     className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
-                      backgroundColor:
-                        selectedPackage.amount === -1 ? "#F1F3F666" : "#fff",
-                      color:
-                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      backgroundColor: "#fff",
+                      color: "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
-                      padding:'11px'
-
+                      padding: "11px",
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
-                        src={selectedPackage.amount === -1 ? icon4 : icon4dark}
+                        src={icon4dark}
                         width={13}
                         height={16}
                         alt="iconcountry"
@@ -528,21 +509,16 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   <div
                     className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2"
                     style={{
-                      backgroundColor:
-                        selectedPackage.amount === -1
-                          ? "#F1F3F666"
-                          : "#F1F3F666",
-                      color:
-                        selectedPackage.amount === -1 ? "#FFFFFF" : "#626E7B",
+                      backgroundColor: "#F1F3F666",
+                      color: "#626E7B",
                       fontSize: "12px",
                       fontWeight: "400",
-                      padding:'11px'
-
+                      padding: "11px",
                     }}
                   >
                     <div className="d-flex align-items-center justify-content-center">
                       <Image
-                        src={selectedPackage.amount === -1 ? icon5 : icon5dark}
+                        src={icon5dark}
                         width={16}
                         height={16}
                         alt="iconcountry"
@@ -559,7 +535,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
             <div
               className="row gy-3 py-2 mt-2"
               style={{ backgroundColor: "#F9F9F9" }}
@@ -621,8 +597,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       color: "#626E7B",
                     }}
                   >
-                    <div className="d-flex justify-content-between align-items-center text-center  rounded-2 m-3">
-                      <div className="d-flex align-items-center justify-content-center">
+                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
+                      <div className="d-flex align-items-center justify-content-center ">
                         <Image
                           src={icon6m}
                           width={11}
@@ -653,10 +629,9 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       fontWeight: "400",
                       color: "#626E7B",
                     }}
-                    className=" my-4"
                   >
-                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
-                      <div className="d-flex align-items-center justify-content-center">
+                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1   mt-2">
+                      <div className="d-flex align-items-center justify-content-center ">
                         <Image
                           src={icon6m}
                           width={11}
@@ -679,9 +654,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       fontWeight: "400",
                       color: "#626E7B",
                     }}
-                    className=" my-4"
                   >
-                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                    <div className="d-flex justify-content-between align-items-center text-center  px-3 py-1  mt-2">
                       <div className="d-flex align-items-center justify-content-center">
                         <Image
                           src={icon6m}
@@ -705,9 +679,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       fontWeight: "400",
                       color: "#626E7B",
                     }}
-                    className=" my-4"
                   >
-                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
                       <div className="d-flex align-items-center justify-content-center">
                         <Image
                           src={icon5dark}
@@ -733,9 +706,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       fontWeight: "400",
                       color: "#626E7B",
                     }}
-                    className=" my-4"
                   >
-                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
                       <div className="d-flex align-items-center justify-content-center">
                         <Image
                           src={iconip}
@@ -757,9 +729,8 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       fontWeight: "400",
                       color: "#626E7B",
                     }}
-                    className=" my-4"
                   >
-                    <div className="d-flex justify-content-between align-items-center text-center   m-3">
+                    <div className="d-flex justify-content-between align-items-center text-center px-3 py-1  mt-2">
                       <div className="d-flex align-items-center justify-content-center">
                         <Image
                           src={icon6m}
@@ -775,22 +746,22 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 </div>
               </div>
             </div>
-            {/* <div className="  bg-info">
+            <div className="   bg-white d-flex justify-content-between  align-items-center">
               <button
                 style={{
-                  padding: "10px 20px",
-                  backgroundColor: "#007BFF",
+                  padding: "10px ",
+                  backgroundColor: "#626E7B",
                   color: "#fff",
                   border: "none",
                   borderRadius: "5px",
                   cursor: "pointer",
                 }}
-                className="p-4"
+                className=" px-5 py-2 mx-3"
               >
                 شراء
               </button>
               <div
-                className="p-4"
+                className="p-2"
                 style={{
                   color: "#575050",
                   fontSize: "17px",
@@ -799,7 +770,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               >
                 <p>{selectedPackage.price} ر.س</p>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       )}
