@@ -431,7 +431,9 @@ export default function DetailsCountry({ params: paramsPromise }) {
                       <p className="mx-2 my-0 contentsimmodelp">السعر</p>
                     </div>
                     <div>
-                      <p className="my-0 contentsimmodelp">{selectedPackage.price} ر.س</p>
+                      <p className="my-0 contentsimmodelp">
+                        {selectedPackage.price} ر.س
+                      </p>
                     </div>
                   </div>
                   <div className="d-flex justify-content-between align-items-center text-center  rounded-2 mt-2 contentsimmodel">
@@ -442,7 +444,9 @@ export default function DetailsCountry({ params: paramsPromise }) {
                         height={16}
                         alt="iconcountry"
                       />
-                      <p className="mx-2 my-0 contentsimmodelp">قابلة للتجديد</p>
+                      <p className="mx-2 my-0 contentsimmodelp">
+                        قابلة للتجديد
+                      </p>
                     </div>
                     <div>
                       <p className="my-0 contentsimmodelp">

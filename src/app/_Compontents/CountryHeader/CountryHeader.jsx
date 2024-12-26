@@ -49,7 +49,7 @@ export default async function CountryHeader() {
             return (
               <div key={country.country_code} className="col-md-3">
                 <div className="bg-white shadow-sm text-center">
-                  <Link href="">
+                  <Link href={`/Countries/${country.country_code}`}>
                     <div className="d-flex justify-content-between align-items-center p-3">
                       <div className="country-flag d-flex justify-content-center align-items-center">
                         <Image
