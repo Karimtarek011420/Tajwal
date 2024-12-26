@@ -344,6 +344,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               position: "relative",
               backgroundColor: "#fff",
             }}
+            className="modal-content"
           >
             <button
               onClick={closeModal}
@@ -363,7 +364,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 style={{ backgroundColor: "#336279" }}
               ></i>
             </button>
-            <div className="row gy-3 py-3 justify-content-center align-items-center">
+            <div className="row gy-1 py-3 justify-content-center align-items-center modal-contentmedia">
               <div className="  col-md-4">
                 <div className=" text-center">
                   <div>
@@ -537,7 +538,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
               </div>
             </div>
             <div
-              className="row gy-3 py-2 mt-2"
+              className="row gy-1 py-2 mt-2"
               style={{ backgroundColor: "#F9F9F9" }}
             >
               <div className="col-md-4">
