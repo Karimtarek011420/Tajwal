@@ -67,7 +67,7 @@
   cursor: pointer;
   position: absolute;
   right: 87%;
-  top: -20px;
+  top: -20px !important;
 }
 .countrydetials .modal-content .contentsimmodel {
   background-color: #f1f3f666;
