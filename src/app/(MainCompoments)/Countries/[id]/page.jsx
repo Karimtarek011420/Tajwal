@@ -644,7 +644,7 @@ export default function DetailsCountry({ params: paramsPromise }) {
                 }}
                 className=" px-5 py-lg-2 py-1 mx-3"
               >
-                شراء
+                <Link href="/Purchase">شراء</Link>
               </button>
               <div
                 className="p-lg-2 p-1"
