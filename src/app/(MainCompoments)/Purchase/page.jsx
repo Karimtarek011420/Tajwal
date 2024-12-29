@@ -203,6 +203,11 @@ export default function page() {
                 </div>
               </div>
             </div>
+            <div className=" col-md-4">
+                <div className="bg-white shadow-lg rounded-2">
+kk
+                </div>
+            </div>
           </div>
         </div>
       </div>
