@@ -1,28 +1,28 @@
 .Purchasedateils {
-    background-color: #f9f9f9;
-    padding: 20px;
-  }
-  .Purchasedateils .country-list-linkslist {
-    cursor: pointer;
-    transition: all 2s; /* Fixed transition shorthand */
-    border-radius: 5px;
-    padding: 15px 80px;
-    margin: 0 20px;
-    font-size: 17px;
-    font-weight: 500;
-  }
-  .selectedPackagereturn {
-    min-height: 100vh !important;
-  }
-  .Purchasedateils .country-list {
-    left: 50%;
-    top: -55px;
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  .cardpurchase .countydtailsup {
-    top: -20px;
-    width: 95%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+.Purchasedateils .country-list-linkslist {
+  cursor: pointer;
+  transition: all 2s; /* Fixed transition shorthand */
+  border-radius: 5px;
+  padding: 15px 80px;
+  margin: 0 20px;
+  font-size: 17px;
+  font-weight: 500;
+}
+.selectedPackagereturn {
+  min-height: 50vh !important;
+}
+.Purchasedateils .country-list {
+  left: 50%;
+  top: -55px;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.cardpurchase .countydtailsup {
+  top: -20px;
+  width: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+}
