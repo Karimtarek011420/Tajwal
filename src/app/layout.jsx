@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import "./globals.css";
 import { readex } from "@/assets/font";
-import Authtoken from "./_Compontents/Authtoken/Authtoken";
+import AuthTokenProvider from "./_Compontents/Authtoken/Authtoken";
 
 export const metadata = {
   title: "Tajwal",
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/footerHero.svg" />
       </head>
       <body className={`${readex.className} antialiased`}>
-        <Authtoken>{children}</Authtoken>
+        <AuthTokenProvider>{children}</AuthTokenProvider>
       </body>
     </html>
   );

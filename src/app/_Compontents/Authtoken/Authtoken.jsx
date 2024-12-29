@@ -1,9 +1,8 @@
 "use client";
 import { createContext, useEffect, useState } from "react";
 export const authtoken = createContext();
-export default function Authtoken({ children }) {
-  const [token, settoken] = useState(null);
-
+export default function AuthTokenProvider({ children }) {
+  const [token, settoken] = useState(() => localStorage.getItem("token"));
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
