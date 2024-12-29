@@ -1,10 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
 import "./globals.css";
 import { readex } from "@/assets/font";
 import AuthTokenProvider from "./_Compontents/Authtoken/Authtoken";
+import { PackageProvider } from "./_Compontents/PackageContext/PackageContext";
 
 export const metadata = {
   title: "Tajwal",
@@ -18,7 +17,9 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/footerHero.svg" />
       </head>
       <body className={`${readex.className} antialiased`}>
-        <AuthTokenProvider>{children}</AuthTokenProvider>
+        <AuthTokenProvider>
+          <PackageProvider>{children}</PackageProvider>
+        </AuthTokenProvider>
       </body>
     </html>
   );

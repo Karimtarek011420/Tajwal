@@ -16,14 +16,19 @@ import iconip from "@/assets/images/iconip.svg";
 import "./details.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { usePackage } from "@/app/_Compontents/PackageContext/PackageContext";
 
 export default function DetailsCountry({ params: paramsPromise }) {
   const params = use(paramsPromise);
   const { id } = params;
+  const router = useRouter();
   const [data, setData] = useState(null);
   const [selectedDay, setSelectedDay] = useState("1");
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setSelectedPackagepur } = usePackage(); // استخدام السياق
+
   const getCountryDetails = async () => {
     try {
       const response = await axios.get(
@@ -55,6 +60,10 @@ export default function DetailsCountry({ params: paramsPromise }) {
   const closeModal = () => {
     setSelectedPackage(null);
     setIsModalOpen(false);
+  };
+  const handlePurchase = () => {
+    setSelectedPackagepur(selectedPackage);
+    router.push("/Purchase");
   };
 
   return (
@@ -643,8 +652,9 @@ export default function DetailsCountry({ params: paramsPromise }) {
                   cursor: "pointer",
                 }}
                 className=" px-5 py-lg-2 py-1 mx-3"
+                onClick={handlePurchase}
               >
-                <Link href="/Purchase">شراء</Link>
+                شراء
               </button>
               <div
                 className="p-lg-2 p-1"
