@@ -10,14 +10,25 @@ li a.nav-link {
 .dropdown.dropacount {
   margin-left: 200px !important;
 }
-/* التأكد من عرض القائمة بشكل جيد على الشاشات الصغيرة */
+
+@media (max-width: 992px) {
+  .offcanvas .nav-item a,
+  .nav-item button,
+  .nav-item .iconoffcen {
+    color: black !important
+    ;
+  }
+  .offcanvas .nav-item a {
+    font-size: 15px !important;
+  }
+}
+
 @media (max-width: 768px) {
   .dropdown-menu {
     width: 100%; /* لجعل القائمة تتكيف مع عرض الشاشة */
   }
 }
 
-/* ضبط السهم بجانب القائمة */
 .nav-link.dropdown-toggle {
   display: flex;
   align-items: center;
