@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
-  padding: 8px  ;
+  padding: 8px;
   border-radius: 10px;
   width: 100%;
   max-width: 550px;
@@ -71,10 +71,6 @@
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
   .search-bar {
     width: 90%;
   }
@@ -85,14 +81,11 @@
   }
 }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.2rem;
+@media (max-width: 500px) {
+  .content-center h1 {
+    font-size: 35px !important ;
   }
 
-  p {
-    font-size: 0.9rem;
-  }
 
   .search-bar button {
     font-size: 12px;
