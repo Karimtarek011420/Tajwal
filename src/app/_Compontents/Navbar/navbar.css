@@ -1,69 +1,110 @@
-.resgister {
-  background-color: #336279 !important;
-  padding: 6px 30px !important;
-  border-radius: 10px;
+:root {
+  --primary-color: #336279;
+  --secondary-color: #333;
+  --hover-bg-color: #f8f9fa;
+  --hover-text-color: var(--primary-color);
+  --active-text-color: red;
+  --shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 10px;
+  --font-small: 12px;
+  --font-medium: 14px;
+  --font-large: 20px;
 }
+
+.resgister {
+  background-color: var(--primary-color) !important;
+  padding: 6px 30px !important;
+  border-radius: var(--border-radius);
+}
+
 li a.nav-link {
-  font-size: 20px !important;
+  font-size: var(--font-large) !important;
   font-weight: 300 !important;
 }
+
 .dropdown.dropacount {
   margin-left: 200px !important;
 }
 
+.dropdown-menu {
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+}
+
+.nav-link.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-item {
+  font-size: var(--font-small) !important;
+  padding: 8px;
+  color: var(--secondary-color);
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: var(--hover-bg-color);
+  color: var(--hover-text-color);
+}
+
+.dropdown-item:active,
+.dropdown-item.active {
+  background-color: transparent !important;
+  color: var(--active-text-color) !important;
+  font-weight: bold;
+}
+
+.nav-link .fa-chevron-down {
+  font-size: 12px;
+  color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.nav-item.dropdown.show .nav-link .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
 @media (max-width: 992px) {
   .offcanvas {
-    width: 320px !important;
+    width: 260px !important;
   }
+
   .navbar-nav {
     display: flex;
-    justify-content: center; /* تمركز العناصر أفقيًا */
-    align-items: center; /* تمركز العناصر عموديًا */
+    justify-content: center;
+    align-items: center;
     width: 100%;
   }
 
   .offnecmedia {
-    display: flex; /* لجعل العنصر مرن */
-    flex-direction: column; /* ترتيب العناصر عموديًا */
-    align-items: center; /* تمركز العناصر أفقيًا */
-    margin: 0 auto; /* إضافة محاذاة تلقائية */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
     width: 100%;
   }
 
   .offnecmedia .dropdown-menu {
-    position: absolute !important; /* تمكين التحكم في موقع القائمة */
-    top: 100%; /* وضع القائمة أسفل الأيقونة واسم المستخدم */
-    left: 0; /* تأكد من أنها تحت الأيقونة */
-    transform: translateY(10px); /* إضافة مسافة صغيرة */
-    width: auto; /* السماح للقائمة بتحديد عرضها تلقائيًا */
-    text-align: center; /* محاذاة النص في المنتصف */
-    margin-top: 10px; /* مسافة إضافية فوق القائمة */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* تحسين المظهر */
-    border-radius: 10px; /* حواف مستديرة */
-    z-index: 1050; /* تأكد من أنها فوق العناصر الأخرى */
+    position: absolute !important;
+    top: 100%;
+    left: 0;
+    transform: translateY(10px);
+    width: auto;
+    text-align: center;
+    margin-top: 10px;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    z-index: 1050;
   }
 
-  .offnecmedia .dropdown-item {
-    font-size: 12px !important; /* تصغير حجم النص داخل القائمة */
-    padding: 8px; /* تحسين المسافات الداخلية */
-    color: #333; /* لون النص الأساسي */
-    transition: color 0.3s, background-color 0.3s; /* تحسين التحول عند التفاعل */
-  }
-
-  .offnecmedia .dropdown-item:hover {
-    background-color: #f8f9fa; /* لون الخلفية عند التمرير */
-    color: #336279; /* لون النص عند التمرير */
-  }
-
-  .offnecmedia .dropdown-item:active,
-  .offnecmedia .dropdown-item.active {
-    background-color: transparent !important; /* إزالة لون الخلفية */
-    color: red !important; /* لون النص عند الاختيار */
-    font-weight: bold; /* إبراز النص عند التفعيل */
+  .dropdown-menu .btnlist {
+    font-size: var(--font-medium) !important;
   }
 
   .resgister {
-    font-size: 14px !important;
+    font-size: var(--font-medium) !important;
     padding: 6px 20px !important;
   }
 
@@ -78,57 +119,31 @@ li a.nav-link {
   }
 
   .offcanvas .nav-item a:active {
-    color: #336279 !important;
+    color: var(--primary-color) !important;
   }
 }
 
 @media (max-width: 768px) {
   .dropdown-menu {
-    width: 100%; /* لجعل القائمة تتكيف مع عرض الشاشة */
+    width: 100%;
   }
-}
-
-.nav-link.dropdown-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.dropdown-menu {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* إضافة ظل للقائمة */
-  border-radius: 8px; /* جعل الحواف مستديرة */
-}
-
-.dropdown-item i {
-  font-size: 14px; /* ضبط حجم الأيقونة */
-  color: #999; /* لون الأيقونة بجانب العناصر */
-}
-
-/* تحسين السهم الرئيسي */
-.nav-link .fa-chevron-down {
-  font-size: 12px;
-  color: #fff;
-  transition: transform 0.2s ease-in-out;
-}
-
-/* عند فتح القائمة - تدوير السهم */
-.nav-item.dropdown.show .nav-link .fa-chevron-down {
-  transform: rotate(180deg);
 }
 
 @media screen and (max-width: 700px) {
   .resgister {
     width: fit-content !important;
-    font-size: 14px !important;
+    font-size: var(--font-medium) !important;
   }
 }
+
 @media screen and (max-width: 600px) {
   .navbar-brand .logo {
     width: 100px !important;
     height: 50px !important;
   }
+
   nav.navbar {
     margin: 10px 2px !important;
-    padding: 10px 2px !important ;
+    padding: 10px 2px !important;
   }
 }

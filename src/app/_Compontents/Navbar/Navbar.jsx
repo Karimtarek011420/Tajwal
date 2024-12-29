@@ -77,12 +77,13 @@ export default function Navbar() {
           </div>
         </Link>
         <ul className="dropdown-menu py-2 ">
-          <DropdownItem href="/AccountInformation" text="معلومات الحساب" />
-          <DropdownItem href="#" text="الطلبات السابقة" />
+          <DropdownItem href="/AccountInformation" text="معلومات الحساب" className="btnlist" />
+          <DropdownItem href="#" text="الطلبات السابقة" className="btnlist" />
           <DropdownItem
             text="تسجيل الخروج"
             customColor="#E14F72"
             onClick={handleLogout}
+            className="btnlist"
           />
         </ul>
       </li>
