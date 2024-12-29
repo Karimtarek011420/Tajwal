@@ -12,19 +12,74 @@ li a.nav-link {
 }
 
 @media (max-width: 992px) {
+  .offcanvas {
+    width: 320px !important;
+  }
+  .navbar-nav {
+    display: flex;
+    justify-content: center; /* تمركز العناصر أفقيًا */
+    align-items: center; /* تمركز العناصر عموديًا */
+    width: 100%;
+  }
+
+  .offnecmedia {
+    display: flex; /* لجعل العنصر مرن */
+    flex-direction: column; /* ترتيب العناصر عموديًا */
+    align-items: center; /* تمركز العناصر أفقيًا */
+    margin: 0 auto; /* إضافة محاذاة تلقائية */
+    width: 100%;
+  }
+
+  .offnecmedia .dropdown-menu {
+    position: absolute !important; /* تمكين التحكم في موقع القائمة */
+    top: 100%; /* وضع القائمة أسفل الأيقونة واسم المستخدم */
+    left: 0; /* تأكد من أنها تحت الأيقونة */
+    transform: translateY(10px); /* إضافة مسافة صغيرة */
+    width: auto; /* السماح للقائمة بتحديد عرضها تلقائيًا */
+    text-align: center; /* محاذاة النص في المنتصف */
+    margin-top: 10px; /* مسافة إضافية فوق القائمة */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* تحسين المظهر */
+    border-radius: 10px; /* حواف مستديرة */
+    z-index: 1050; /* تأكد من أنها فوق العناصر الأخرى */
+  }
+
+  .offnecmedia .dropdown-item {
+    font-size: 12px !important; /* تصغير حجم النص داخل القائمة */
+    padding: 8px; /* تحسين المسافات الداخلية */
+    color: #333; /* لون النص الأساسي */
+    transition: color 0.3s, background-color 0.3s; /* تحسين التحول عند التفاعل */
+  }
+
+  .offnecmedia .dropdown-item:hover {
+    background-color: #f8f9fa; /* لون الخلفية عند التمرير */
+    color: #336279; /* لون النص عند التمرير */
+  }
+
+  .offnecmedia .dropdown-item:active,
+  .offnecmedia .dropdown-item.active {
+    background-color: transparent !important; /* إزالة لون الخلفية */
+    color: red !important; /* لون النص عند الاختيار */
+    font-weight: bold; /* إبراز النص عند التفعيل */
+  }
+
+  .resgister {
+    font-size: 14px !important;
+    padding: 6px 20px !important;
+  }
+
   .offcanvas .nav-item a,
   .nav-item button,
   .nav-item .iconoffcen {
-    color: black !important
-    ;
+    color: black !important;
   }
+
   .offcanvas .nav-item a {
     font-size: 17px !important;
   }
+
   .offcanvas .nav-item a:active {
-    color: #336279  !important;
+    color: #336279 !important;
   }
-  
 }
 
 @media (max-width: 768px) {

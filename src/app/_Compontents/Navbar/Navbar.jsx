@@ -57,7 +57,7 @@ export default function Navbar() {
   // روابط المستخدم المسجل
   const renderAuthLinks = () =>
     token ? (
-      <li className="nav-item dropdown dropacount">
+      <li className="nav-item dropdown dropacount offnecmedia">
         <Link
           className="nav-link dropdown-toggle d-flex align-items-center justify-content-between"
           href="#"
@@ -76,7 +76,7 @@ export default function Navbar() {
             </span>
           </div>
         </Link>
-        <ul className="dropdown-menu py-2">
+        <ul className="dropdown-menu py-2 ">
           <DropdownItem href="/AccountInformation" text="معلومات الحساب" />
           <DropdownItem href="#" text="الطلبات السابقة" />
           <DropdownItem
@@ -88,7 +88,7 @@ export default function Navbar() {
       </li>
     ) : (
       <>
-        <li className="nav-item">
+        <li className="nav-item offnecmedia">
           <Link className="nav-link text-white" href="/Login">
             دخول
           </Link>
