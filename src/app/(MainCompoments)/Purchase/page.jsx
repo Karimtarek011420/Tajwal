@@ -14,9 +14,11 @@ export default function page() {
   const { selectedPackage } = usePackage();
   if (!selectedPackage) {
     return (
-      <p>
-        لم يتم اختيار أي باقة. الرجاء العودة إلى الصفحة السابقة واختيار باقة.
-      </p>
+      <div className=" d-flex justify-content-center align-items-center py-5 selectedPackagereturn ">
+        <p>
+          لم يتم اختيار أي باقة. الرجاء العودة إلى الصفحة السابقة واختيار باقة.
+        </p>
+      </div>
     );
   }
 

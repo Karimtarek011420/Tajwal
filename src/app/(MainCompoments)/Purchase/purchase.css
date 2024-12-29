@@ -11,6 +11,9 @@
     font-size: 17px;
     font-weight: 500;
   }
+  .selectedPackagereturn {
+    min-height: 100vh !important;
+  }
   .Purchasedateils .country-list {
     left: 50%;
     top: -55px;
