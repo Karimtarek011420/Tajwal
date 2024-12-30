@@ -10,22 +10,25 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 
-const forgetOtpPage = () => {
+const ForgetOtpPage = () => {
   const router = useRouter();
   const [counter, setCounter] = useState(30);
   const [errorMessage, setErrorMessage] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [phonenumber, setPhonenumber] = useState(null);
 
-  const email =
-    typeof window !== "undefined" ? localStorage.getItem("emailotp") : null;
-  const phonenumber =
-    typeof window !== "undefined"
-      ? localStorage.getItem("phonepass")
-      : null;
+  // Fetch data from localStorage after component mounts
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setEmail(localStorage.getItem("emailotp"));
+      setPhonenumber(localStorage.getItem("phonepass"));
+    }
+  }, []);
 
   const apiOtp = async (values) => {
-    setloading(true);
+    setLoading(true);
     try {
       const { data } = await axios.post(
         "https://api.tajwal.co/api/v1/verify_otp",
@@ -43,19 +46,17 @@ const forgetOtpPage = () => {
           style: {
             backgroundColor: "#4b87a4",
             color: "white",
-            position: "top-right",
           },
         });
-        localStorage.setItem("passOtp", values.otp)
+        localStorage.setItem("passOtp", values.otp);
         router.push("/ForgetPassword/ResetPass");
       }
-
-      console.log(data);
     } catch (error) {
-      setErrorMessage(" رمز التحقق المدخل غير صحيح");
+      setErrorMessage("رمز التحقق المدخل غير صحيح");
     }
-    setloading(false);
+    setLoading(false);
   };
+
   const handleSubmitotp = useFormik({
     initialValues: {
       otp: "",
@@ -68,7 +69,7 @@ const forgetOtpPage = () => {
         errors.otp = "الرجاء إدخال رمز تحقق صحيح";
       }
       if (values.otp.length === 0) {
-        errors.otp = "الرجاء  ملئ الحقل";
+        errors.otp = "الرجاء ملء الحقل";
       }
       return errors;
     },
@@ -82,6 +83,7 @@ const forgetOtpPage = () => {
       setIsDisabled(false);
     }
   }, [counter]);
+
   const handleResendOTP = async () => {
     try {
       setCounter(30);
@@ -97,12 +99,11 @@ const forgetOtpPage = () => {
         }
       );
       if (data.success === true) {
-        toast.success("تم إرسال رمز التحقق  مرة أخرى", {
+        toast.success("تم إرسال رمز التحقق مرة أخرى", {
           duration: 1500,
           style: {
             backgroundColor: "#4b87a4",
             color: "white",
-            position: "top-right",
           },
         });
       }
@@ -112,7 +113,6 @@ const forgetOtpPage = () => {
         style: {
           backgroundColor: "#4b87a4",
           color: "white",
-          position: "top-right",
         },
       });
     }
@@ -131,8 +131,7 @@ const forgetOtpPage = () => {
       <div className="bg-white shadow-lg rounded-4 px-4 py-5">
         <div className="text-center py-3 p_registerOtp">
           <p>
-            لاتمام عملية إسترجاع  الرقم السرى يرجى إدخال رمز التحقق المرسل للرقم الجوال      
-             {phonenumber}
+            لاتمام عملية استرجاع الرقم السري يرجى إدخال رمز التحقق المرسل للرقم الجوال {phonenumber}
           </p>
         </div>
         <form onSubmit={handleSubmitotp.handleSubmit}>
@@ -155,11 +154,11 @@ const forgetOtpPage = () => {
             </div>
           ) : null}
           <div>
-            <p className=" px-3 text-danger text-center">{errorMessage}</p>
+            <p className="px-3 text-danger text-center">{errorMessage}</p>
           </div>
           <div className="p_registerOtp pt-3 pb-3">
             <p className="text-center font-light">
-              بامكانك اعادة ارسال الرمز بعد {counter} ثانية
+              بإمكانك إعادة إرسال الرمز بعد {counter} ثانية
             </p>
             <div className="d-flex justify-content-center align-items-center">
               <button
@@ -168,7 +167,7 @@ const forgetOtpPage = () => {
                 className="btnsendback"
                 disabled={isDisabled}
               >
-                اعادة ارسال الرمز
+                إعادة إرسال الرمز
               </button>
             </div>
           </div>
@@ -181,9 +180,6 @@ const forgetOtpPage = () => {
                   width="35"
                   color="#fff"
                   ariaLabel="tail-spin-loading"
-                  radius="1"
-                  wrapperStyle={{}}
-                  wrapperClass=""
                 />
               ) : (
                 "متابعة"
@@ -205,4 +201,4 @@ const forgetOtpPage = () => {
   );
 };
 
-export default forgetOtpPage;
+export default ForgetOtpPage;
