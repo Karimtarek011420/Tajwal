@@ -10,6 +10,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 
+// تعطيل التصيير المسبق
+export const dynamic = "force-dynamic";
+
 const ForgetOtpPage = () => {
   const router = useRouter();
   const [counter, setCounter] = useState(30);
@@ -19,7 +22,6 @@ const ForgetOtpPage = () => {
   const [email, setEmail] = useState(null);
   const [phonenumber, setPhonenumber] = useState(null);
 
-  // Fetch data from localStorage after component mounts
   useEffect(() => {
     if (typeof window !== "undefined") {
       setEmail(localStorage.getItem("emailotp"));
@@ -131,7 +133,7 @@ const ForgetOtpPage = () => {
       <div className="bg-white shadow-lg rounded-4 px-4 py-5">
         <div className="text-center py-3 p_registerOtp">
           <p>
-            لاتمام عملية استرجاع الرقم السري يرجى إدخال رمز التحقق المرسل للرقم الجوال {phonenumber}
+            لإتمام عملية استرجاع الرقم السري يرجى إدخال رمز التحقق المرسل للرقم الجوال {phonenumber}
           </p>
         </div>
         <form onSubmit={handleSubmitotp.handleSubmit}>
@@ -158,7 +160,7 @@ const ForgetOtpPage = () => {
           </div>
           <div className="p_registerOtp pt-3 pb-3">
             <p className="text-center font-light">
-              بإمكانك إعادة إرسال الرمز بعد {counter} ثانية
+              يمكنك إعادة إرسال الرمز بعد {counter} ثانية
             </p>
             <div className="d-flex justify-content-center align-items-center">
               <button

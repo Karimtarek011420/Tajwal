@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import imageResetpassword from "@/assets/images/ChangePassword.svg";
 import "./resetpass.css";
@@ -9,16 +10,25 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 
-const resetPasswordPage = () => {
+// تعطيل التصيير الاستباقي
+export const dynamic = "force-dynamic";
+
+const ResetPasswordPage = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showrePassword, setreShowPassword] = useState(false);
-  const [loading, setloading] = useState(false);
-  const phonenumber =
-    typeof window !== "undefined" ? localStorage.getItem("phonepass") : null;
-  const otp =
-    typeof window !== "undefined" ? localStorage.getItem("passOtp") : null;
+  const [loading, setLoading] = useState(false);
+  const [phonenumber, setPhoneNumber] = useState(null);
+  const [otp, setOtp] = useState(null);
+
+  // قراءة البيانات من localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPhoneNumber(localStorage.getItem("phonepass"));
+      setOtp(localStorage.getItem("passOtp"));
+    }
+  }, []);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -29,7 +39,7 @@ const resetPasswordPage = () => {
   };
 
   const apiresetPass = async (values) => {
-    setloading(true);
+    setLoading(true);
     try {
       const { data } = await axios.post(
         "https://api.tajwal.co/api/v1/reset_password",
@@ -47,7 +57,6 @@ const resetPasswordPage = () => {
           style: {
             backgroundColor: "#4b87a4",
             color: "white",
-            position: "top-right",
           },
         });
         localStorage.clear();
@@ -56,7 +65,7 @@ const resetPasswordPage = () => {
     } catch (error) {
       setErrorMessage("فشل تغير كلمة السر حاول مرة اخرى");
     } finally {
-      setloading(false);
+      setLoading(false);
     }
   };
 
@@ -78,6 +87,7 @@ const resetPasswordPage = () => {
       return errors;
     },
     onSubmit: apiresetPass,
+    enableReinitialize: true, // يسمح بإعادة التهيئة عند تحديث القيم
   });
 
   return (
@@ -188,4 +198,4 @@ const resetPasswordPage = () => {
   );
 };
 
-export default resetPasswordPage;
+export default ResetPasswordPage;
